@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <style>
+	a {
+		text-decoration: none;
+		color: grey;
+		font-family: monospace;
+		font-size: 20pt;
+	}
+
 	#main-container {
 		position: relative;
 		width: 800px;
@@ -43,15 +50,6 @@
 		color: black;
 	}
 
-	#buttons {
-		position: absolute;
-		padding: 4px;
-		width: 400px;
-		left: 600px;
-		top: 200px;
-		border: thin solid lightgrey;
-	}
-
 	input {
 		font-size: 32pt;
 		padding: 8px;
@@ -60,17 +58,12 @@
 </style>
 </head>
 <body onLoad="onBodyLoad()">
+	<p><a href="../index.html"><-- back to index</a></p>
 	<div id="main-container">
 		<div id="cell-container">
 			<div id="spinner">loading</div>
 			<iframe id="cell-view" scrolling="no"></iframe>
 			<div id="cell-case"></div>
-		</div>
-		<div id="buttons">
-			<input type="button" value="prev" onClick="onPrev();">
-			<input type="button" value="next" onClick="onNext();">
-			<br>
-			<input type="button" value="x" onClick="onX();">
 		</div>
 	</div>
 <script src="preloader.js"></script>
@@ -98,9 +91,6 @@ function onPrev() {
 
 function onNext() {
 	setView(views_index + 1);
-}
-
-function onX() {
 }
 
 function onViewEvent(name) {
