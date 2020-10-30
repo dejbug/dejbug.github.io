@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<style>
+	#main-container {
+		position: relative;
+		width: 800px;
+		height: 1200px;
+		margin: auto;
+	}
+
+	#cell-container {
+		position: absolute;
+		width: 505px;
+		height: 1100px;
+	}
+
+	#cell-case {
+		position: absolute;
+		width: 506px;
+		height: 1101px;
+		background: url("images/case.png") no-repeat;
+		pointer-events: none;
+	}
+
+	#cell-view {
+		position: absolute;
+		width: 505px;
+		height: 1100px;
+		border: 0px dotted white;
+		outline: none;
+		overflow: hidden;
+	}
+
+	#spinner {
+		position: absolute;
+		top: 300px;
+		left: 140px;
+		border: 0px dotted white;
+		font-family: monospace;
+		font-size: 33pt;
+		color: black;
+	}
+
+	#buttons {
+		position: absolute;
+		padding: 4px;
+		width: 400px;
+		left: 600px;
+		top: 200px;
+		border: thin solid lightgrey;
+	}
+
+	input {
+		font-size: 32pt;
+		padding: 8px;
+		margin: 5px;
+	}
+</style>
+</head>
+<body onLoad="onBodyLoad()">
+	<div id="main-container">
+		<div id="cell-container">
+			<div id="spinner">loading</div>
+			<iframe id="cell-view" scrolling="no"></iframe>
+			<div id="cell-case"></div>
+		</div>
+		<div id="buttons">
+			<input type="button" value="prev" onClick="onPrev();">
+			<input type="button" value="next" onClick="onNext();">
+			<br>
+			<input type="button" value="x" onClick="onX();">
+		</div>
+	</div>
+<script src="preloader.js"></script>
+<script>
+var views_count = 3;
+var views_index = 0;
+var image_urls = [
+	"images/case.png",
+	"views/images/views/tankgirl.jpg",
+	"views/images/views/schild.jpg"
+];
+var spinning = false;
+
+function onBodyLoad() {
+	startSpinner();
+	preload(image_urls, 0, function() {
+		stopSpinner();
+		setView(0);
+	});
+}
+
+function onPrev() {
+	setView(views_index - 1);
+}
+
+function onNext() {
+	setView(views_index + 1);
+}
+
+function onX() {
+}
+
+function onViewEvent(name) {
+	switch (views_index) {
+	case 0:
+		if (name == "on")
+			onNext();
+		break;
+	case 1: case 2:
+		if (name == "prev-btn") onPrev();
+		else if (name == "next-btn") onNext();
+		break;
+	}
+}
+
+function setView(index) {
+	if (index >= 0 && index < views_count) {
+		views_index = index;
+		name = "views/" + views_index + ".html";
+		document.getElementById("cell-view").src = name;
+	}
+}
+
+function doSpinning(delay) {
+	if (!spinning) return;
+	var spinner = document.getElementById("spinner");
+	spinner.style.display = "block";
+	if (spinner.textContent.length > "loading...".length)
+		spinner.textContent = "loading.";
+	else
+		spinner.textContent += ".";
+	setTimeout(doSpinning, delay || 500);
+}
+
+function startSpinner(delay) {
+	if (spinning) return;
+	spinning = true;
+	setTimeout(doSpinning, delay || 500);
+}
+
+function stopSpinner() {
+	spinning = false;
+	spinner.style.display = "none";
+}
+
+</script>
+</body>
+</html>

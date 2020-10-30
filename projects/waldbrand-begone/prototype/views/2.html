@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	#main-container {
+		position: relative;
+		width: 505px;
+		height: 1100px;
+		background-color: black;
+	}
+
+	#background {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: url("images/views/schild.jpg") no-repeat;
+	}
+	#prev-btn {
+		position: absolute;
+		left: 0px;
+		top: 950px;
+		width: 128px;
+		height: 128px;
+		background: url("images/icons/left-btn.png") no-repeat;
+		filter: invert(80%);
+	}
+
+	#prev-btn:hover {
+		filter: invert(100%);
+	}
+
+	#next-btn {
+		position: absolute;
+		left: 380px;
+		top: 950px;
+		width: 128px;
+		height: 128px;
+		background: url("images/icons/right-btn.png") no-repeat;
+		filter: invert(80%);
+	}
+
+	#next-btn:hover {
+		filter: invert(100%);
+	}
+</style>
+</head>
+<body>
+	<div id="main-container">
+	<div id="background">
+	<div id="prev-btn" onClick="parent.onViewEvent('prev-btn')"></div>
+	<!--<div id="next-btn" onClick="parent.onViewEvent('next-btn')"></div>-->
+	</div>	
+	</div>
+</body>
+</html>

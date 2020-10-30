@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<title>readme.md</title>
+<link rel="stylesheet" href="../../css/w3.css">
+<style>
+a { text-decoration: none; color: magenta; }
+em { text-decoration: underline; font-style: normal; }
+</style>
+</head>
+<body>
+<div class="w3-content w3-container w3-padding">
+<h1>This Document</h1>
+<p>This is a living document collecting some of the research done by the PunchOut.Tech group "Keine Waldbrände Mehr". Its current purpose is to help design a <a href="prototype/index.html">first prototype</a> for the forestry/wildfire-prevention app by Sunday.</p>
+<hr />
+<h1>The Ideal User</h1>
+<p>A lengthy quote from a <a href="https://www.careers.govt.nz/jobs-database/farming-fishing-forestry-and-mining/forestry/forest-manager/">New Zealand government page</a> (emphasis added):</p>
+<p>Forest managers may do some or all of the following:</p>
+<ul>
+<li>plan and direct forest operations or new forest <strong>develop</strong>ments, including planting, pruning, forest growth <strong>measure</strong>ment and tree harvesting</li>
+<li><strong>manage</strong> forestry contractors carrying out forest operations</li>
+<li>manage the business and financial side of forest operations</li>
+<li><strong>market and negotiate</strong> log sales to domestic and export log processors</li>
+<li><strong>analyse</strong> financial decisions and work out the cost-benefit of forest operations and make <strong>recommend</strong>ations</li>
+<li><strong>ensure</strong> health, safety and environmental minimum standards are met or exceeded</li>
+<li><strong>monitor</strong> forest growth and health, security, fire prevention, and other maintenance activities.</li>
+</ul>
+<p>Your day-to-day tasks may include:</p>
+<ul>
+<li><strong>clearing</strong> undergrowth for planting</li>
+<li><strong>planting</strong> new tree seedlings</li>
+<li><strong>digging</strong> drainage systems</li>
+<li><strong>thinning</strong> out densely wooded areas</li>
+<li><strong>felling</strong> trees, stripping branches and chopping up tree trunks</li>
+<li><strong>protecting</strong> the forest against insect pests and disease</li>
+<li>clearing footpaths and nature trails, and <strong>maintaining</strong> car parks</li>
+<li>putting up fences, gates, signs and <strong>public information</strong> notices</li>
+<li>checking and maintaining tools and equipment</li>
+<li><strong>preventing</strong> forest fires</li>
+</ul>
+<p>Here's another useful <a href="https://www.cfr.msstate.edu/jobs/sort.asp?id=forestry">job description</a></p>
+<hr />
+<h1>Vision to Design</h1>
+<p>Ingress could be attempted from an enumeration of the hard constraints to what is possible. In the context of an (Android) app, this comprehensive <a href="https://developer.android.com/reference/android/Manifest.permission">list of Android permissions</a> might prove a good starting point.</p>
+<hr />
+<h1>The Major Modalities</h1>
+<ul>
+<li>Sensors</li>
+<li>Satellites</li>
+<li>Maps</li>
+<li>Communication</li>
+</ul>
+<hr />
+<h1>Sensors</h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Environmental_Defense_Fund">Environmental Defence Fund</a> has an article <a href="https://www.edf.org/card/8-ways-sensor-technology-addressed-environmental-problems">on sensors</a>. There are paywalled comparisons of moisture sensors galore (<a href="https://www.sciencedirect.com/science/article/abs/pii/S0022169412000844">like this one</a>). <strong>TODO</strong>: find reputable open access alternatives.</p>
+<p><strong>Topic</strong>: <a href="https://en.wikipedia.org/wiki/Energy_harvesting">Energy Harvesting</a>. An important consideration will be their energy efficiency. Solar radiation should be scarce in forests so a <a href="https://en.wikipedia.org/wiki/Piezoelectricity">piezoelectric</a> approach must be investigated. There seems to be a <a href="http://voltreepower.com">company</a> that targets "tree-energy". Interesting articles mentioned in the wikis:</p>
+<ul>
+<li><a href="http://www.linear.com/docs/29984">"Robust Energy Harvesting System for Wireless Sensors"</a></li>
+<li><a href="http://neuro.sfc.keio.ac.jp/publications/pdf/rail.pdf">"And if public transport does not consume more of energy?"</a> [PDF]</li>
+<li><a href="http://resolver.tudelft.nl/uuid:3ebce2f3-e2d8-433c-bbcd-684e0835c14b">"Analysis and experimental validation of the figure of merit for piezoelectric energy harvesters"</a> [PDF]</li>
+<li><a href="https://www.wired.com/2015/03/goodyear-trying-make-electricity-generating-tire/">"Goodyear Is Trying to Make an Electricity-Generating Tire"</a></li>
+</ul>
+<p>The design of cheap DIY "<a href="https://www.instructables.com/Esay-IoT-Weather-Station-With-Multiple-Sensors/">weather station</a>" prototypes is not the problem. It is that the transmission of data over wide ranges (globally, actually) would be done via <a href="https://store.arduino.cc/arduino-gsm-shield-2-integrated-antenna">GSM</a> if it weren't for the forbidding energy requirements. Wifi or optical transmission will instead have to be collected by more powerful hubs. The battery life can be extended by <a href="https://www.instructables.com/Meteorino-Extend-Battery-Life-on-NodeMCU-Just-Swit/">limiting the duty cycle</a> of the more expensive components (the wifi and the ADC). There are networks of environmental monitoring hobbyist <a href="https://thingspeak.com/channels/public">like this</a> and <a href="https://sensor.community/en">this</a>.</p>
+<p>We should be thinking about indirect measurements which could be done with more energy-efficient technology. That means answering the question: what are the possible predictive correlates, an impending wildfire's unmistakeable harbingers? <a href="https://www.osa.org/en-us/about_osa/newsroom/news_releases/2020/researchers_develop_simple_way_to_capture_high_qua/">Here's</a> a new way to take 3D imagery from organic tissue in a single scan. We should be aiming to do something less ambitious but with leaves instead of the direct approach via the soil. The reason being that optical measurements may require fewer Amperes than <a href="https://en.wikipedia.org/wiki/Soil_moisture_sensor">soil-moisture sensors</a> (which are often resistor-ladders).</p>
+<blockquote>
+<p>An irrefutable correlation emerged, helping to break the policy logjam in Washington. In 1990, Congress passed a law to cut acid rain pollution in half. To do this analysis in the 1980s, the scientists needed to take over EDF’s entire computer system. “Today,” one of the scientists said, “I could do it all on my phone!” <a href="https://www.edf.org/card/8-ways-sensor-technology-addressed-environmental-problems">[src: EDF]</a></p>
+</blockquote>
+<hr />
+<h1>Satellites</h1>
+<p>"Data acquisition and (quasi-) real-time production" <a href="https://sentinel.esa.int/web/sentinel/missions/collaborative">[src]</a> are certainly the gold standard here. So what we should be dreaming about is a <a href="https://en.wikipedia.org/wiki/List_of_satellites_in_geosynchronous_orbit">geostationary</a> Earth-observation <a href="https://en.wikipedia.org/wiki/List_of_Earth_observation_satellites">satellite</a> with Europe in its nadir. Here's <a href="https://earthobservatory.nasa.gov/features/OrbitsCatalog">NASA's catalogue</a>. Here's <a href="https://www.goes.noaa.gov/">NOAA's GOES</a>.</p>
+<p>The section "Why Study Soil Moisture?" on page 17 of the <a href="https://www.jpl.nasa.gov/news/press_kits/smaplaunch.pdf">SMAP Launch Press Kit</a> [PDF] is a good overview.</p>
+<p><a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2;jsessionid=4A7A1CEE96C1AD176ECC8B90FCC240D1.jvm2">Sentinel-2</a> is probably the work-horse on which to focus here but the other four are interesting too. Sentinel <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-1">one</a> can "acquire imagery regardless of the weather" with its synthetic aperture radar. Sentinel <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2">two</a> "aims at monitoring variability in land surface conditions". Sentinel <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-3">three</a> measures land surface temperature and color. Sentinels <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-4">four</a> and <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-5">five</a> are interesting as well due to their, respectively, hourly and daily measures of stratospheric/atmospheric ozone and surface UV levels which we could perhaps utilize to make chance-of-wildfire-pertinent deductions.</p>
+<p>Here's a great explanation of <a href="http://repairfaq.cis.upenn.edu/sam/icets/satellte.htm">polarization</a>. The purpose is simply to double the throughput. <a href="https://www.qsl.net/sv1bsx/antenna-pol/polarization.html">Here</a>'s one with animated pictures. <a href="https://en.wikipedia.org/wiki/Polarization_(waves)">Here</a>'s the wiki.</p>
+<hr />
+<h1>Older Research</h1>
+<hr />
+<h2>Open Data</h2>
+<p>Die Mainzer Hochschule hat <a href="http://tweetmap.fh-mainz.de/">hier ein Portal</a> das sich aber eher wie ein Mockup ausnimmt. <strong>Unbrauchbar</strong></p>
+<p>Auf der <a href="https://data.europa.eu/euodp/en/data/">Europäischen Seite</a> gibts massig Daten. Was davon wäre auch nur annähernd zu gebrauchen?</p>
+<p>Programmable Web hat <a href="https://www.programmableweb.com/category/all/apis?keyword=forest">ein paar interessante APIs</a> zum Thema Wald, alle aber für die Staaten. <em>Vielleicht gibt es Parallelen zwischen hiesigen und dortigen Zuständen (Trockenheit und Wetter) die man als groben Indikator nutzen könnte?</em></p>
+<p>Die NOAA (National Oceanic and Atmospheric Administration) hat real-zeit Bildmaterial und halbstündig-aktuelle Auswertungen insbesondere zur <a href="https://www.ospo.noaa.gov/Products/land/fire.html">Feuergefahr</a>. <strong>Interessant</strong></p>
+<p>Eine <a href="https://en.wikipedia.org/wiki/List_of_Earth_observation_satellites">Wikipedia Liste relevanter Satelliten</a>.</p>
+<p>Die ESA könnte <a href="https://www.esa.int/Applications/Observing_the_Earth/ESA_for_Earth">hier</a> speziell für den Europäischen Kontinent was haben. Besonders der <a href="https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-2">Sentinel-2</a> Satellit sieht vielversprechend aus.</p>
+<ul>
+<li><a href="https://www.esa.int/Applications/Observing_the_Earth/Space_helps_forests_regenerate">Space helps forests regenerate</a></li>
+<li><a href="https://www.esa.int/Applications/Observing_the_Earth/Tackling_drought_issues_for_food_security">Tackling drought issues for food security</a></li>
+<li><a href="https://www.esa.int/Applications/Observing_the_Earth/Satellites_and_machine_learning_for_water_management">Satellites and machine learning for water management</a></li>
+<li><a href="https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-2/Land-cover_maps_of_Europe_from_the_Cloud">Land-cover maps of Europe from the Cloud</a></li>
+</ul>
+<p><a href="https://land.copernicus.eu/">Hier</a> und <a href="https://www.eea.europa.eu/highlights/eu-satellite-data-to-be">hier</a> sind zwei weitere Wege zum selben <strong>Copernicus Projekt</strong>.</p>
+<h2>Lokales</h2>
+<p>Rheinland-Pfälzer Wald-Seite; Artikel speziell zum Klimawandel:
+<a href="http://www.wald.rlp.de/de/klimawandelwald-rlpde">http://www.wald.rlp.de/de/klimawandelwald-rlpde</a></p>
+<p>Klimawandel Infos:
+<a href="http://www.kwis-rlp.de/de/start">http://www.kwis-rlp.de/de/start</a></p>
+<p>Ditto Klimawandel:
+<a href="http://www.klimawandel-rlp.de/de/start">http://www.klimawandel-rlp.de/de/start</a></p>
+<p>Helmholz Zentrum für Umweltforschung:
+<a href="https://www.ufz.de">https://www.ufz.de</a></p>
+<p>TErrestrial ENvironmental Observation:
+<a href="https://www.tereno.net">https://www.tereno.net</a></p>
+<p>UFZ's Data Discovery Portal:
+<a href="https://moses-data.gfz-potsdam.de">https://moses-data.gfz-potsdam.de</a></p>
+<p>Forschungszentren-Verbund REKLIM (Regionale Klimaänderungen):
+<a href="https://www.reklim.de">https://www.reklim.de</a></p>
+</div>
+<div class="w3-right">
+Last update was on 2020-10-30 at 12:26:31 (UTC)
+</div>
+</body>
+</html>
