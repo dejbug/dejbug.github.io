@@ -48,11 +48,14 @@ jobs:
         run: |
           uname -a
           ls -F /
-          env
-          which python gcc bison flex make m4 pandoc
-          bash --version | head -n1
-          make --version | head -n2
-          python --version
+          env bash --version | head -n1 && which bash
+          env python --version && which python
+          env gcc --version | head -n1 && which gcc
+          env bison --version | head -n1 && which bison
+          env flex --version && which flex
+          env make --version | head -n2 && which make
+          env m4 --version | head -n1 && which m4
+          env pandoc --version && which pandoc
       - name: "Info: Filesystem Layout"
         run: |
           find / > fs.layout
