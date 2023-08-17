@@ -28,12 +28,16 @@
 		--color-blue: #ccddee;
 		--color-pink: #eecce9; */ }
 	body {
-		font-family: monospace; font-size: 200%; line-height: 200%;
+		font-family: monospace; font-size: calc(1rem + 100vw / 72); line-height: 200%;
  		background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
 		color: var(--color-body-fg);
+/*		filter: contrast(.9);*/
 		padding: 1.3em;
 		padding-right: 5em;
-		text-align: justify; }
+		text-align: justify;
+		hyphens: auto;
+/*		word-break: break-all;*/
+	}
 	footer {
 		margin-top: 1.2em;
 		color: lightslategray;
@@ -43,15 +47,22 @@
 		align-items: baseline;
 	}
 	strong {
-		color: tomato; }
-	a, a:visited { margin-right: .4em;
-		color: var(--color-link); text-decoration: none; }
+		color: tomato;
+	}
+	a, a:visited {
+/*		hyphens: none;*/
+/*		word-break: keep-all;*/
+		margin-right: .4em;
+		color: var(--color-link); text-decoration: none;
+	}
 	.known-uri {
 		border-right: thin solid crimson;
 		padding-right: .3em;
-		color: var(--color-link-known); font-weight: bold; }
+		color: var(--color-link-known); font-weight: bold;
+	}
 	.known-uri:visited {
-		color: var(--color-link-known-visited); }
+		color: var(--color-link-known-visited);
+	}
 	.glow {
 		box-shadow: 3px 2px 10px navajowhite;
 		border-radius: 15px;
@@ -67,7 +78,6 @@
 	}
 	#meta {
 		color: var(--color-meta);
-/*		transform: translate(94vw,3vh) rotate(90deg);*/
 		transform-origin: top left;
 		transform: rotate(90deg);
 		position: absolute;
@@ -75,22 +85,27 @@
 		left: calc(100svw - 24pt);
 		width: max-content;
 	}
-	.noise {
-	}
-	@media (max-width: 640px) {
-		body {
-			font-size: 10pt !important;
-		}
-	}
+	.noise { }
 	@media (max-width: 800px) {
 		body {
+/*			background: hotpink;*/
+/*			font-size: calc(1rem + 100vw / 144);*/
+			font-size: 12pt;
 			padding: 1em;
+			word-break: break-all;
+			hyphens: manual;
 		}
 		.noise {
 			display: none;
 		}
 		footer {
 			justify-content: flex-end;
+		}
+	}
+	@media (max-width: 640px) {
+		body {
+/*			background: pink;*/
+			font-size: 10pt;
 		}
 	}
 </style>
