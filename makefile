@@ -6,10 +6,16 @@ GrammarFiles := $(wildcard *.g4)
 GrammarNames := $(GrammarFiles:%.g4=%)
 ParserFiles =
 
-.PHONY : all clean reset
-all : ; python blog.py blog.md index.template index.html
-clean : ; rm -f parsers/*/*.interp parsers/*/*.tokens
+.PHONY : all clean reset run
+all : build/index.html
+clean :
+	rm -f parsers/*/*.interp parsers/*/*.tokens
+	rm -rf build
 reset : | clean ; rm -rf parsers
+run : build/index.html ; cd build && php -S localhost:8000
+
+build/index.html : blog.py blog.md index.template | build/ ; python $^ $@
+build/ : ; mkdir build
 
 .PHONY : awk gawk
 awk gawk : ; @gawk -f blog.awk -- blog.md
