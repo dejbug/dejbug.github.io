@@ -14,6 +14,7 @@ name: /link/dump by dejbug
 # Based on <https://github.com/actions/starter-workflows/tree/main/pages>
 
 # TODO: Refine this. Don't launch on *every* push. Just on changes to a VERSION file.
+#   See: <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onevent_nametypes>
 on:
   push:
     branches: [$default-branch]
@@ -45,6 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Info: Environment"
+        continue-on-error: true
         run: |
           uname -a
           ls -F /
@@ -57,6 +59,7 @@ jobs:
           env m4 --version | head -n1 && which m4
           env pandoc --version && which pandoc
       - name: "Info: Filesystem Layout"
+        continue-on-error: true
         run: |
           find / > fs.layout
           grep '.*python.*' fs.layout
