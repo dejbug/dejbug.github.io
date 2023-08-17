@@ -1,6 +1,7 @@
 # make reset
 # make awk
-# make parse ; make parse blog
+# make parse ; make parse blog ; make blog parse
+# make tokens ; make tokens blog ; make blog tokens
 
 GrammarFiles := $(wildcard *.g4)
 GrammarNames := $(GrammarFiles:%.g4=%)
@@ -14,15 +15,17 @@ clean :
 reset : | clean ; rm -rf parsers
 run : build/index.html ; cd build && php -S localhost:8000
 
-build/index.html : index.template render.py tools.py | build/ ; python render.py -do $@ $< ACTOR=makefile
+build/index.html : index.template *.md *.py | build/ ; python render.py -do $@ $< ACTOR=makefile
 build/ : ; mkdir build
 
 .PHONY : awk gawk
 awk gawk : ; @gawk -f blog.awk -- blog.md
 
-.PHONY : parse
+.PHONY : parse tokens
 
-ifneq (,$(filter parse,$(MAKECMDGOALS)))
+ifneq (,$(filter parse tokens,$(MAKECMDGOALS)))
+
+parse tokens : $(ParserFiles) ; @echo -n
 
 define deriveParserFiles
 parsers/$1/$1Listener.py parsers/$1/$1Lexer.py parsers/$1/$1Parser.py
@@ -31,14 +34,27 @@ endef
 define makeParserRule
 $(eval ParserFiles += $(call deriveParserFiles,$1))
 $(call deriveParserFiles,$1) : $1.g4 ; antlr4 -o parsers/$1 -Dlanguage=Python3 $$<
+endef
+
+define makeParseCommand
 .PHONY : $1
-$1 : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start -- ../../blog.md
-$1-tokens : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start --tokens -- ../../blog.md
+$1 : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start -at -- ../../blog.md
+endef
+
+define makeTokensCommand
+.PHONY : $1
+$1 : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start --tokens -- ../../blog.md
 endef
 
 # $(foreach name,$(GrammarNames),$(info $(call makeParserRule,$(name))))
 $(foreach name,$(GrammarNames),$(eval $(call makeParserRule,$(name))))
 
-parse : $(ParserFiles)
+ifneq (,$(filter parse,$(MAKECMDGOALS)))
+$(foreach name,$(GrammarNames),$(eval $(call makeParseCommand,$(name))))
+endif
+
+ifneq (,$(filter tokens,$(MAKECMDGOALS)))
+$(foreach name,$(GrammarNames),$(eval $(call makeTokensCommand,$(name))))
+endif
 
 endif
