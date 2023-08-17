@@ -1,0 +1,123 @@
+# My OCD is triggered by committing autogens; so let's try something like this.
+
+# NOTES:
+#
+# The build server specs:
+#   <https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md>
+#
+# Watch out. The server has an older Python pre-installed and as default:
+#   TODO: It also has v3.11.4. Find out the filesystem layout.
+#   TODO: Use "dependency caching" to install my local version on the server.
+#
+
+name: /link/dump by dejbug
+# Based on <https://github.com/actions/starter-workflows/tree/main/pages>
+
+# TODO: Refine this. Don't launch on *every* push. Just on changes to a VERSION file.
+on:
+  push:
+    branches: [$default-branch]
+  workflow_dispatch: # Add manual deploy button.
+
+# "Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages" # Force queueing of new jobs.
+  cancel-in-progress: false # Force completion of queued jobs.
+
+# NOTE: Trying alternate syntax.
+defaults: { run: { shell: bash } }
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Configure GitHub Pages
+#         uses: actions/configure-pages@v3
+
+# TODO: Clean this up (after keeping it as a syntax tutorial/reminder).
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Info: Environment"
+        run: |
+          uname -a
+          ls -F /
+          env
+          which python gcc bison flex make m4 pandoc
+          bash --version | head -n1
+          make --version | head -n2
+          python --version
+      - name: "Info: Filesystem Layout"
+        run: |
+          find / > fs.layout
+          grep '.*python.*' fs.layout
+          grep '.*gcc.*' fs.layout
+          cat -n fs.layout
+      - name: Checkout
+        uses: actions/checkout@v3
+      # - name: Detect package manager
+      #   id: detect-package-manager
+      #   run: |
+      #     if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+      #       echo "manager=yarn" >> $GITHUB_OUTPUT
+      #       echo "command=install" >> $GITHUB_OUTPUT
+      #       exit 0
+      #     elif [ -f "${{ github.workspace }}/package.json" ]; then
+      #       echo "manager=npm" >> $GITHUB_OUTPUT
+      #       echo "command=ci" >> $GITHUB_OUTPUT
+      #       exit 0
+      #     else
+      #       echo "Unable to determine package manager"
+      #       exit 1
+      #     fi
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "18"
+      #     cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+      #   with:
+      #     # Automatically inject pathPrefix in your Gatsby configuration file.
+      #     #
+      #     # You may remove this line if you want to manage the configuration yourself.
+      #     static_site_generator: gatsby
+      # - name: Restore cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       public
+      #       .cache
+      #     key: ${{ runner.os }}-gatsby-build-${{ hashFiles('public') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gatsby-build-
+      # - name: Install dependencies
+      #   run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      # - name: Build with Gatsby
+      #   env:
+      #     PREFIX_PATHS: 'true'
+      #   run: ${{ steps.detect-package-manager.outputs.manager }} run build
+      - name: Build artifact
+        run: make
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./build
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
