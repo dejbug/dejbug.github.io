@@ -38,7 +38,9 @@
 		margin-top: 1.2em;
 		color: lightslategray;
 		display: flex;
+		flex-flow: row wrap;
 		justify-content: space-between;
+		align-items: baseline;
 	}
 	strong {
 		color: tomato; }
@@ -55,7 +57,7 @@
 		border-radius: 15px;
 	}
 	.petokraka {
-		font-size: 200%;
+		font-size: 160%;
 	}
 	#pill {
 		color: var(--color-pubtime);
@@ -73,14 +75,32 @@
 		left: calc(100svw - 24pt);
 		width: max-content;
 	}
+	.noise {
+	}
+	@media (max-width: 640px) {
+		body {
+			font-size: 10pt !important;
+		}
+	}
+	@media (max-width: 800px) {
+		body {
+			padding: 1em;
+		}
+		.noise {
+			display: none;
+		}
+		footer {
+			justify-content: flex-end;
+		}
+	}
 </style>
 <body>
-<div id="meta">
+<div id="meta" class="noise">
 	<div id="pill" class="glow">Fermyon!</div>
 	2023-08-17 &nbsp; dejbug's /link/dump &nbsp; &lt;linkdump.dejbug.de&gt;</div>
 # HERE
 <footer>
-<span>Look Ma... no cookies!</span>
+<span class="noise">Look Ma... no cookies!</span>
 <span>Copyleft (<strong class="petokraka">&#x2605</strong>) Dejan Budimir.</span>
 </footer>
 </body>
