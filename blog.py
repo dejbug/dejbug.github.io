@@ -24,24 +24,37 @@ KNOWN = {
 	}
 }
 
+KNOWN_SUBS = {
+	'org': {
+		'wikipedia': {
+			'en': '',
+		},
+	},
+}
+
 def transloc(text):
 	text = text.lower()
 	x = text.split('.')
+	assert len(x) >= 2, "invalid netloc?"
 
-	sub = x[-3] if len(x) >= 3 else ""
-	if sub:
-		if sub in ('www'): sub = ""
-		elif sub in ('developer'): sub = "dev"
+	a = ".".join(x[:-2]) if len(x) >= 3 else ""
+	b = x[-2]
+	c = x[-1]
+
+	if a and a == 'www': a = ""
 
 	known = False
-	s = x[-2]
-	if x[-1] in KNOWN:
-		if s in KNOWN[x[-1]]:
-			s = KNOWN[x[-1]][s]
+	if c in KNOWN:
+		if b in KNOWN[c]:
 			known = True
+			if c in KNOWN_SUBS:
+				if b in KNOWN_SUBS[c]:
+					if a in KNOWN_SUBS[c][b]:
+						a = KNOWN_SUBS[c][b][a]
+			b = KNOWN[c][b]
 
-	if sub: s = f'{sub}:{s}'
-	return s, known
+	if a: b = f'{a}:{b}'
+	return b, known
 
 
 def transuri(m):

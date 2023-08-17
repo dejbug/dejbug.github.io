@@ -28,7 +28,7 @@
 		--color-blue: #ccddee;
 		--color-pink: #eecce9; */ }
 	body {
-		font-family: monospace; font-size: calc(1rem + 100vw / 72); line-height: 200%;
+		font-family: monospace; font-size: 24pt; line-height: 200%;
  		background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
 		color: var(--color-body-fg);
 /*		filter: contrast(.9);*/
@@ -94,6 +94,9 @@
 			padding: 1em;
 			word-break: break-all;
 			hyphens: manual;
+		}
+		a, a:visited {
+/*			border-right: thin solid crimson;*/
 		}
 		.noise {
 			display: none;
