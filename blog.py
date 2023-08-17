@@ -9,6 +9,7 @@ KNOWN = {
 		'google': 'G',
 		'stackexchange': 'Sx',
 		'stackoverflow': 'So',
+		'sublimetext': 'st',
 	},
 	'dev': {
 		'wasmtime': 'wt',
@@ -24,6 +25,7 @@ KNOWN = {
 	},
 	'io': {
 		'github': 'gh',
+		'sublimetext': 'st',
 	}
 }
 
@@ -78,6 +80,7 @@ def transtit(m):
 def parse(text, file = sys.stdout):
 	text = re.sub(r'^\s*((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	text = re.sub(r'\s*(https?://\S+)\s*', transuri, text, flags = re.S)
+	text = re.sub(r'/a>\s+([.:,;!?])', r'/a>\1', text, flags = re.S)
 	file.write(text)
 
 

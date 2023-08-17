@@ -1,5 +1,9 @@
 #! /bin/gawk -f
 
+BEGIN {
+	SEP = "\n"
+}
+
 function trim(text) {
 	gsub(/^\s+|\s+$/,"", text)
 	return text
@@ -10,12 +14,12 @@ function collapse(text) {
 	return trim(text)
 }
 
-/#/ { printf "TITLE " }
-/https?:\/\// { printf "URI " }
-/\S+/ { printf "TEXT |%s| ", collapse($0) }
-/[ \t]/ { printf "WS " }
-/./ { printf "EOL " }
+/#/ { printf "TITLE" SEP }
+/https?:\/\// { printf "URI" SEP }
+/\S+/ { printf "TEXT |%s|" SEP, collapse($0) }
+/[ \t]/ { printf "WS" SEP }
+/./ { printf "EOL" SEP }
 
 END {
-	print
+	if (SEP !~ "[\r\n]") printf "\n"
 }

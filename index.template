@@ -52,8 +52,12 @@
 	a, a:visited {
 /*		hyphens: none;*/
 /*		word-break: keep-all;*/
-		margin-right: .4em;
+/*		margin-right: .4em;*/
 		color: var(--color-link); text-decoration: none;
+	}
+	a + a {
+/*		This seems to see through naked text!*/
+/*		margin-left: 3.4em;*/
 	}
 	.known-uri {
 		border-right: thin solid crimson;
