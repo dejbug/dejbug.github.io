@@ -14,7 +14,7 @@ clean :
 reset : | clean ; rm -rf parsers
 run : build/index.html ; cd build && php -S localhost:8000
 
-build/index.html : blog.py blog.md index.template | build/ ; python $^ $@
+build/index.html : index.template render.py tools.py | build/ ; python render.py -do $@ $< ACTOR=makefile
 build/ : ; mkdir build
 
 .PHONY : awk gawk

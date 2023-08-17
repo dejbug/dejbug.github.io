@@ -1,5 +1,8 @@
 import sys, re, io, urllib.parse
 
+DEFAULT_INPUT_FILEPATH = "blog.md"
+DEFAULT_OUTPUT_FILEPATH = None
+
 KNOWN = {
 	'com': {
 		'github': 'gh',
@@ -69,7 +72,7 @@ def transuri(m):
 def transtit(m):
 	text = m.group(3).strip()
 	level = len(m.group(2))
-	return f'\n\n<strong title-level="{level}">{text}</strong>\n\n'
+	return f' <strong title-level="{level}">{text}</strong> '
 
 
 def parse(text, file = sys.stdout):
@@ -78,31 +81,20 @@ def parse(text, file = sys.stdout):
 	file.write(text)
 
 
-def bluegender(text, fin, fout = sys.stdout):
-	for line in fin:
-		if line == '# HERE\n':
-			fout.write(text)
-		else:
-			fout.write(line)
-
-
 def main(args = sys.argv[1:]):
-	s = io.StringIO()
-	if len(args) > 0:
-		with open(args[0]) as file:
-			parse(file.read(), s)
+	ipath = args[0] if len(args) >= 1 else DEFAULT_INPUT_FILEPATH
+	opath = args[1] if len(args) >= 2 else DEFAULT_OUTPUT_FILEPATH
+	mfile = io.StringIO()
 
-		if len(args) > 1:
-			text = s.getvalue()
-			s = io.StringIO()
-			with open(args[1]) as file:
-				bluegender(text, file, s)
+	if ipath:
+		with open(ipath) as ifile:
+			parse(ifile.read(), mfile)
 
-			if len(args) > 2:
-				with open(args[2], 'w') as file:
-					file.write(s.getvalue())
-			else:
-				print(s.getvalue())
+		if opath:
+			with open(opath, 'w') as ofile:
+				ofile.write(mfile.getvalue())
+		else:
+			print(mfile.getvalue())
 
 
 if __name__ == '__main__':

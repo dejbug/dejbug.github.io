@@ -114,9 +114,9 @@
 </style>
 <body>
 <div id="meta" class="noise">
-	<div id="pill" class="glow">Fermyon!</div>
+	<div id="pill" class="glow">{{ sed -nE '/^\s*#\s*(.*?)/{ s/^\s*#\s*//p ; q }' blog.md }}</div>
 	2023-08-17 &nbsp; dejbug's /link/dump &nbsp; &lt;linkdump.dejbug.de&gt;</div>
-# HERE
+{{ python blog.py }}
 <footer>
 <span class="noise">Look Ma... no cookies!</span>
 <span>Copyleft (<strong class="petokraka">&#x2605</strong>) Dejan Budimir.</span>

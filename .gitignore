@@ -1,3 +1,6 @@
 /build/
 .local/
 *.pyc
+*.log
+/parsers/*/*.interp
+/parsers/*/*.tokens
