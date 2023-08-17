@@ -1,23 +1,158 @@
-<!doctype html>
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="UTF-8">
-<title>dejbug.github.io/</title>
-<link rel="stylesheet" href="css/w3.css">
+<title>dejbug's /link/dump</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="vendor/w3/w3.css"> -->
+<!-- <script src="vendor/w3/w3.js"></script> -->
 <style>
-a { text-decoration: none; color: magenta; }
-em { text-decoration: underline; font-style: normal; }
+	:root {
+		--color-pubtime: hotpink;
+		--color-body-bg: #14453a; /* aliceblue */
+		--color-body-bg-top: #14453a;
+		--color-body-bg-bottom: #4b0f44;
+		--color-body-fg: #fff016;
+		--color-link-known-visited: #a9dfff;
+		--color-link-known: #3affbe; /* teal */
+		--color-link: #1d959b; /* #f3f4f2; */
+		--color-meta: #b76e93; /* hotpink; */
+		/*
+		--color-1: #5e8fbb;
+		--color-2: #cb8aa6;
+		--color-3: #ab3e6d;
+		--color-4: #14453a;
+		--color-5: #189dff;
+		--color-6: #a3f8c0;
+		--color-7: #c3ff87;
+		--color-8: #189dff;
+		--color-blue: #ccddee;
+		--color-pink: #eecce9; */ }
+	body {
+		font-family: monospace; font-size: 200%; line-height: 200%;
+ 		background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
+		color: var(--color-body-fg);
+		padding: 1.3em;
+		padding-right: 5em;
+		text-align: justify; }
+	footer {
+		margin-top: 1.2em;
+		color: lightslategray;
+		display: flex;
+		justify-content: space-between;
+	}
+	strong {
+		color: tomato; }
+	a, a:visited { margin-right: .4em;
+		color: var(--color-link); text-decoration: none; }
+	.known-uri {
+		border-right: thin solid crimson;
+		padding-right: .3em;
+		color: var(--color-link-known); font-weight: bold; }
+	.known-uri:visited {
+		color: var(--color-link-known-visited); }
+	.glow {
+		box-shadow: 3px 2px 10px navajowhite;
+		border-radius: 15px;
+	}
+	.petokraka {
+		font-size: 200%;
+	}
+	#pill {
+		color: var(--color-pubtime);
+		padding: 0 1em;
+		margin: 0 2em 0 0;
+		float: left;
+	}
+	#meta {
+		color: var(--color-meta);
+/*		transform: translate(94vw,3vh) rotate(90deg);*/
+		transform-origin: top left;
+		transform: rotate(90deg);
+		position: absolute;
+		top: 2em;
+		left: calc(100svw - 24pt);
+		width: max-content;
+	}
 </style>
-</head>
 <body>
-<div class="w3-content w3-container w3-padding-64">
-<h1>dejbug.github.io</h1>
-<hr>
-<p>I'm currently involved with the <a href="projects/waldbrand-begone/index.html">Keine Waldbrände Mehr</a> group.</p>
-</div>
-<hr>
-<div class="w3-right w3-padding">
-Last update was on 2020-10-30 at 12:26:31 (UTC)
-</div>
+<div id="meta">
+	<div id="pill" class="glow">Fermyon!</div>
+	2023-08-17 &nbsp; dejbug's /link/dump &nbsp; &lt;linkdump.dejbug.de&gt;</div>
+
+
+<strong title-level="1">Fermyon!</strong> <a href="https://github.com/mbasso/awesome-wasm" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/architecture.md" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/writing_modules.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-overview.md" class="known-uri">gh</a>  <a href="https://wasi.dev/">wasi</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-intro.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-documents.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-background.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-rationale.md" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/WASI/blob/main/legacy/application-abi.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-some-possible-changes.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-possible-future-features.md" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-tutorial.md" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-libc/tree/main/libc-bottom-half" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-libc/tree/main/libc-top-half" class="known-uri">gh</a>  <a href="https://wasmtime.dev/" class="known-uri">wt</a>  <a href="https://docs.wasmtime.dev/c-api/" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/api/wasmtime/" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/examples-c-embed.html" class="known-uri">docs:wt</a>  <a href="https://bytecodealliance.zulipchat.com/#narrow/stream/217126-wasmtime">bytecodealliance:zulipchat</a>  <a href="https://bytecodealliance.zulipchat.com/#narrow/stream/217117-cranelift">bytecodealliance:zulipchat</a>  <a href="https://github.com/bytecodealliance/meetings" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/labels/good%20first%20issue" class="known-uri">gh</a>  <a href="https://github.com/bytecodealliance/wasmtime/labels/help%20wanted" class="known-uri">gh</a>  <a href="https://lld.llvm.org/WebAssembly.html">lld:llvm</a>  <a href="https://www.fermyon.com/wasm-languages/about-examples">fermyon</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/architecture.md" class="known-uri">gh</a>  <a href="https://www.infoworld.com/article/3537535/kubernetes-meets-webassembly-in-microsofts-krustlet.html">infoworld</a>  <a href="https://github.com/wasm3/wasm3" class="known-uri">gh</a>  <a href="https://github.com/wasm3/wasm3/blob/main/docs/Cookbook.md" class="known-uri">gh</a>  <a href="https://wasmer.io/">wasmer</a>  <a href="https://wasmer.io/posts">wasmer</a>  <a href="https://wasmer.io/posts/wapm-revamp">wasmer</a>  <a href="https://wasmer.io/posts/markdown-playgrounds-powered-by-wasm">wasmer</a>  <a href="https://wasmer.io/posts/is-not-about-wasm-is-about-what-you-can-build-with-it">wasmer</a>  <a href="https://github.com/webassembly/spec" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/WASI/blob/main/Proposals.md" class="known-uri">gh</a>  <a href="https://www.infoworld.com/article/3632865/understanding-wagi-the-webassembly-gateway-interface.html">infoworld</a>  <a href="https://wiki.archlinux.org/title/Rust" class="known-uri">wiki:arch</a>  <a href="https://www.rust-lang.org/" class="known-uri">rs</a>  <a href="https://blog.rust-lang.org/2022/09/14/cargo-cves.html" class="known-uri">blog:rs</a>  <a href="https://groups.google.com/g/rustlang-security-announcements/c/ldvsemwk_VY" class="known-uri">groups:G</a>  <a href="https://www.fermyon.com/blog/tinygo-webassembly-favicon-server">fermyon</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/architecture.md" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/writing_modules.md#outbound-http-requests" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wasi-experimental-http" class="known-uri">gh</a>  <a href="https://github.com/jedisct1/witx-codegen" class="known-uri">gh</a>  <a href="https://wasi.dev/">wasi</a>  <a href="https://developer.fermyon.com/spin/http-trigger#exposing-http-triggers-using-https">dev:fermyon</a>  <a href="https://www.fermyon.com/blog/wasm-wasi-wagi">fermyon</a>  <a href="https://datatracker.ietf.org/doc/html/rfc3875">datatracker:ietf</a>  <a href="https://github.com/deislabs/wagi" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/environment_variables.md" class="known-uri">gh</a>  <a href="https://developer.fermyon.com/spin/http-trigger#http-with-wagi-webassembly-gateway-interface">dev:fermyon</a>  <a href="https://github.com/deislabs/wagi/tree/main/docs" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/writing_modules.md#outbound-http-requests" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/WASI/pull/312" class="known-uri">gh</a>  <a href="https://github.com/badeend/WASI-Networking" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-sockets/" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wasi-experimental-http" class="known-uri">gh</a>  <a href="https://deislabs.io/posts/introducing-wagi-easiest-way-to-build-webassembly-microservices/">deislabs</a>  <a href="https://deislabs.io/posts/wagi-updates/">deislabs</a>  <a href="https://github.com/deislabs/wasi-experimental-http" class="known-uri">gh</a>  <a href="https://github.com/engineerd/wasm-to-oci" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/docs/configuring_and_running.md" class="known-uri">gh</a>  <a href="https://github.com/deislabs/bindle" class="known-uri">gh</a> <strong title-level="1">Using C with Fermyon</strong>
+
+"...not all of the stdlib is supported by WebAssembly’s sandboxed runtime.
+		Sockets, for example, are not currently supported..."
+
+	"It can be frustrating to figure out which existing libraries can be ported..."
+
+				-- <a href="https://www.fermyon.com/wasm-languages/c-lang">fermyon</a>  <a href="https://developer.fermyon.com/spin/other-languages">dev:fermyon</a>  <a href="https://www.fermyon.com/wasm-languages/c-lang">fermyon</a>  <a href="https://www.fermyon.com/wasm-languages/cpp">fermyon</a>  <a href="https://wasi.dev/">wasi</a>  <a href="https://github.com/WebAssembly/wasi-sdk" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-libc" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi-fileserver-c" class="known-uri">gh</a>  <a href="https://emscripten.org/index.html">emscripten</a>  <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm" class="known-uri">dev:moz</a> <strong title-level="2">C++</strong> <a href="https://www.fermyon.com/wasm-languages/cpp">fermyon</a>  <a href="https://neugierig.org/software/blog/2022/06/wasm-c++.html">neugierig</a>  <a href="https://github.com/leaningtech/cheerp-compiler" class="known-uri">gh</a>  <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm" class="known-uri">dev:moz</a>  <a href="https://nxxm.github.io/cppcon2018/CPP_EVERYWHERE_WITH_WASM.html#/" class="known-uri">nxxm:gh</a>  <a href="https://github.com/PetterS/clang-wasm" class="known-uri">gh</a>  <a href="https://www.qt.io/">qt</a>  <a href="https://wiki.qt.io/Qt_for_WebAssembly">wiki:qt</a>  <a href="https://medium.com/@tdeniffel/pragmatic-compiling-from-c-to-webassembly-a-guide-a496cc5954b8">medium</a>  <a href="https://www.tutorialspoint.com/webassembly/webassembly_working_with_cplusplus.htm">tutorialspoint</a> <strong title-level="1">TODO</strong> <a href="https://www.fermyon.com/blog/introducing-bartholomew">fermyon</a>  <a href="https://www.fermyon.com/blog/2022-02-08-hello-world">fermyon</a>  <a href="https://handlebarsjs.com/">handlebarsjs</a>  <a href="https://gohugo.io/">gohugo</a>  <a href="https://rhai.rs/">rhai</a>  <a href="https://getbootstrap.com/">getbootstrap</a>  <a href="https://github.com/deislabs/wagi-fileserver" class="known-uri">gh</a>  <a href="https://validator.w3.org/feed/docs/atom.html">validator:w3</a> How to do it with style. <a href="https://developer.fermyon.com/cloud/github-actions">dev:fermyon</a> How to deal with secrets. <a href="https://developer.fermyon.com/cloud/variables">dev:fermyon</a>  <a href="https://developer.fermyon.com/spin/dynamic-configuration">dev:fermyon</a>  <a href="https://developer.fermyon.com/cloud/cloud-command-reference#spin-cloud-variables">dev:fermyon</a>  <a href="https://wiki.archlinux.org/title/Bash#Tips_and_tricks" class="known-uri">wiki:arch</a>  <a href="https://aur.archlinux.org/packages?O=0&K=wasi" class="known-uri">aur:arch</a>  <a href="https://stackoverflow.com/questions/2857273/ssl-and-wsgi-apps-python" class="known-uri">So</a>  <a href="http://www.gevent.org/">gevent</a>  <a href="https://lldb.llvm.org/">lldb:llvm</a>  <a href="https://www.kernel.org/doc/html/v4.16/dev-tools/kgdb.html" class="known-uri">kern</a>  <a href="https://www.kernel.org/doc/html/latest/dev-tools/gdb-kernel-debugging.html" class="known-uri">kern</a>  <a href="https://stackoverflow.com/questions/4943857/how-is-linux-kernel-live-debugging-done-and-what-tools-are-used" class="known-uri">So</a>  <a href="https://www.edn.com/inside-the-linux-kernel-debugger-a-guide-to-getting-started-with-kdb/">edn</a>  <a href="https://linux-kernel-labs.github.io/refs/heads/master/lectures/debugging.html" class="known-uri">linux-kernel-labs:gh</a>  <a href="https://github.com/PacktPublishing/Linux-Kernel-Debugging" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-libc" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-sdk" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/tool-conventions/blob/main/DynamicLinking.md" class="known-uri">gh</a>  <a href="https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html">gnu</a>  <a href="https://www.gnu.org/software/libc/manual/html_node/Program-Arguments.html">gnu</a>  <a href="https://en.wikipedia.org/wiki/POSIX" class="known-uri">en:wiki</a>  <a href="https://www.gnu.org/software/libc/manual/html_node/index.html#SEC_Contents">gnu</a>  <a href="https://www.rfc-editor.org/rfc/rfc3875#page-30">rfc-editor</a>  <a href="https://fermyon.github.io/spin-benchmarks/criterion/reports/startup/spin-wagi-executor/index.html" class="known-uri">fermyon:gh</a>  <a href="https://github.com/fermyon/spin/tree/main/wit/ephemeral" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md" class="known-uri">gh</a>  <a href="https://github.com/fermyon/spin" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/WASI/blob/main/Proposals.md" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-http" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-crypto" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/wasi-nn" class="known-uri">gh</a>  <a href="https://github.com/WebAssembly/component-model" class="known-uri">gh</a>  <a href="https://developer.fermyon.com/hub/">dev:fermyon</a>  <a href="https://web.dev/emscripting-a-c-library/">web</a>  <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm" class="known-uri">dev:moz</a>  <a href="https://emscripten.org/docs/getting_started/downloads.html">emscripten</a> <strong title-level="1">Beautiful Code</strong> <a href="https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html">cs:princeton</a>  <a href="http://musl.libc.org/">musl:libc</a>  <a href="http://musl.libc.org/doc/1.1.24/manual.html">musl:libc</a>  <a href="https://github.com/inputsh/awesome-c" class="known-uri">gh</a>  <a href="https://github.com/oz123/awesome-c" class="known-uri">gh</a>  <a href="https://github.com/uhub/awesome-c" class="known-uri">gh</a>  <a href="https://github.com/kokke/tiny-regex-c" class="known-uri">gh</a>  <a href="https://github.com/cesanta/frozen" class="known-uri">gh</a>  <a href="https://github.com/scottcgi/Mojoc" class="known-uri">gh</a>  <a href="https://github.com/kovidgoyal/kitty" class="known-uri">gh</a>  <a href="https://sw.kovidgoyal.net/kitty/">sw:kovidgoyal</a>  <a href="https://github.com/kovidgoyal/html5-parser" class="known-uri">gh</a>  <a href="https://html5-parser.readthedocs.io/en/latest/">html5-parser:readthedocs</a>  <a href="https://github.com/google/gumbo-parser" class="known-uri">gh</a>  <a href="https://lxml.de/">lxml</a>  <a href="https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home">gitlab:gnome</a>  <a href="https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home">gitlab:gnome</a>  <a href="https://gnome.pages.gitlab.gnome.org/libxml2/examples/">gitlab:gnome</a>  <a href="https://gnome.pages.gitlab.gnome.org/libxml2/tutorial/">gitlab:gnome</a>  <a href="https://gnome.pages.gitlab.gnome.org/libxml2/devhelp/general.html">gitlab:gnome</a> <strong title-level="1">Html Parsing Spec</strong> <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing">spec:whatwg</a>  <a href="https://lld.llvm.org/WebAssembly.html">lld:llvm</a>  <a href="https://github.com/musec/libpreopen" class="known-uri">gh</a>  <a href="https://en.wikipedia.org/wiki/Capability-based_security" class="known-uri">en:wiki</a>  <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" class="known-uri">en:wiki</a>  <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" class="known-uri">en:wiki</a>  <a href="https://en.wikipedia.org/wiki/Session_hijacking" class="known-uri">en:wiki</a>  <a href="https://en.wikipedia.org/wiki/Session_key" class="known-uri">en:wiki</a>  <a href="https://en.wikipedia.org/wiki/HTTP_cookie#Cookie_theft_and_session_hijacking" class="known-uri">en:wiki</a>  <a href="https://wunderwuzzi23.github.io/blog/passthecookie.html" class="known-uri">wunderwuzzi23:gh</a>  <a href="https://stackoverflow.com/questions/4143196/is-get-data-also-encrypted-in-https" class="known-uri">So</a>  <a href="http://answers.google.com/answers/threadview/id/758002.html#answer" class="known-uri">answers:G</a>  <a href="https://en.wikipedia.org/wiki/Server_Name_Indication" class="known-uri">en:wiki</a>  <a href="https://web.archive.org/web/20050301052721/http://wp.netscape.com/eng/ssl3/draft302.txt" class="known-uri">web:ia</a>  <a href="https://googleblog.blogspot.com/2011/10/making-search-more-secure.html">googleblog:blogspot</a>  <a href="https://www.imperialviolet.org/2010/06/25/overclocking-ssl.html">imperialviolet</a>  <a href="https://www.eff.org/https-everywhere">eff</a>  <a href="https://www.ietf.org/rfc/rfc4366.txt">ietf</a>  <a href="https://www.paulkocher.com/">paulkocher</a>  <a href="https://www.paulkocher.com/doc/SSLv3.pdf">paulkocher</a>  <a href="https://www.schneier.com/blog/archives/2010/10/firesheep.html">schneier</a>  <a href="https://crypto.stanford.edu/~eujin/sslsniffer/documentation.html">crypto:stanford</a>  <a href="https://dl.acm.org/doi/10.1145/319195.319213">dl:acm</a>  <a href="https://www.php.net/manual/en/features.session.security.management.php">php</a>  <a href="https://security.stackexchange.com/questions/19911/crime-how-to-beat-the-beast-successor" class="known-uri">security:Sx</a>  <a href="https://resources.infosecinstitute.com/topics/hacking/beast-vs-crime-attack/">resources:infosecinstitute</a>  <a href="https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/01-Testing_for_Weak_SSL_TLS_Ciphers_Insufficient_Transport_Layer_Protection">owasp</a>  <a href="https://community.sophos.com/utm-firewall/f/network-protection-firewall-nat-qos-ips/40984/beast-and-crime-vulnerabilities">community:sophos</a>  <a href="https://medium.com/@c0D3M/beast-attack-explained-f272acd7996e">medium</a>  <a href="https://blogs.cisco.com/security/breach-crime-and-blackhat">blogs:cisco</a>  <a href="https://openvpn.net/security-advisory/the-voracle-attack-vulnerability/">openvpn</a>  <a href="https://mitmproxy.org/">mitmproxy</a>  <a href="https://crypto.stanford.edu/ssl-mitm/">crypto:stanford</a>  <a href="https://security.stackexchange.com/questions/202006/what-are-mitm-proxies-used-for-in-enterprises#202007" class="known-uri">security:Sx</a>  <a href="https://stackoverflow.com/questions/55623092/parsing-a-string-with-quotes-in-getopts" class="known-uri">So</a>  <a href="http://williamstallings.com/styled-9/">williamstallings</a>  <a href="https://www.thomasnet.com/articles/other/best-computer-engineering-books/">thomasnet</a>  <a href="https://developers.google.com/search" class="known-uri">developers:G</a>  <a href="https://github.com/WebAssembly/binaryen#binaryen-optimizations" class="known-uri">gh</a>  <a href="https://bytecodealliance.github.io/cargo-wasi/wasm-opt.html" class="known-uri">bytecodealliance:gh</a>  <a href="https://rustwasm.github.io/docs/book/reference/code-size.html" class="known-uri">rustwasm:gh</a>  <a href="https://www.infoq.com/articles/six-ways-optimize-webassembly/">infoq</a> <strong title-level="1">Optimization Flags</strong> <a href="https://github.com/WebAssembly/binaryen#binaryen-optimizations" class="known-uri">gh</a> --strip-debug	(24 MB -> 9 MB)
+-Oz				(8.9 MB -> 8.4 MB)
+
+Info with: --metrics, --func-metrics.
+
+No benefits apparently:  --abstract-type-refining, --code-folding, --gufa.
+
+Too slow to see what happens: --flatten --dfo.
+
+Increases size: --alignment-lowering.
+
+The following raises an error: --minify-imports-and-exports-and-modules;
+so don't know what it does. Is it a bug?
+
+
+<strong title-level="1">DOCS</strong>
+
+WASI: <a href="https://wasi.dev/">wasi</a> WASI Docs: <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-intro.md" class="known-uri">gh</a> Core Spec: <a href="https://www.w3.org/TR/wasm-core-1/">w3</a> Cargo-wasi subcommand: <a href="https://bytecodealliance.github.io/cargo-wasi/index.html" class="known-uri">bytecodealliance:gh</a> Rust for Webassembly: <a href="https://rustwasm.github.io/docs/book/introduction.html" class="known-uri">rustwasm:gh</a> WAGI Docs: <a href="https://github.com/deislabs/wagi/tree/main/docs" class="known-uri">gh</a> Fermyon contribution guide: <a href="https://github.com/fermyon/wasm-languages" class="known-uri">gh</a> HTML Parsing Spec: <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing">spec:whatwg</a> <strong title-level="1">Experimental WAGI Outbound HTTP</strong>
+
+This works only for Rust and AS, not for C nor C++.
+It should be possible to split my app into C components and one Rust compnent
+with the latter doing all the fetching (into a shared sqlite database). But alas!
+It is a pipe-dream. WAGIs have no access to these things. Pure functions like. <a href="https://github.com/deislabs/wagi/blob/main/docs/writing_modules.md#outbound-http-requests" class="known-uri">gh</a> This shows how a Rust WAGI app would use the experimental api. <a href="https://github.com/deislabs/wasi-experimental-http/blob/main/crates/as/raw.ts" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/examples/sources/http-example/src/main.rs" class="known-uri">gh</a>  <a href="https://github.com/deislabs/wagi/blob/main/examples/sources/http-example/Cargo.toml" class="known-uri">gh</a> Another idea was to write a C layer and send a pull request. <a href="https://github.com/jedisct1/witx-codegen" class="known-uri">gh</a>  <a href="https://docs.wasmtime.dev/api/wasmtime/" class="known-uri">docs:wt</a> See also: <a href="https://github.com/fermyon/wasm-languages" class="known-uri">gh</a> <strong title-level="1">Fermyon with C</strong> <a href="https://docs.wasmtime.dev/c-api/index.html" class="known-uri">docs:wt</a> <strong title-level="1">Wasmtime</strong> <a href="https://docs.wasmtime.dev/introduction.html" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/api/wasmtime/" class="known-uri">docs:wt</a>  <a href="https://wasmtime.dev/" class="known-uri">wt</a>  <a href="https://docs.wasmtime.dev/c-api/index.html" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/wasm-c.html" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/examples-c-hello-world.html" class="known-uri">docs:wt</a>  <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-documents.md" class="known-uri">gh</a> <strong title-level="1">Wasmtime for C</strong> <a href="https://docs.wasmtime.dev/lang-c.html" class="known-uri">docs:wt</a> Just says "more coming soon" :_)
+
+	And points to: <a href="https://docs.wasmtime.dev/c-api/" class="known-uri">docs:wt</a>  <a href="https://docs.wasmtime.dev/wasm-c.html" class="known-uri">docs:wt</a> This is another part of the same docs which has more text. <a href="https://github.com/WebAssembly/wasi-sdk/releases" class="known-uri">gh</a> By default, the C/C++ toolchain orders linear memory to put the globals
+	first, the stack second, and start the heap after that. This reduces code
+	size, because references to globals can use small offsets. However, it [is]
+	also means that stack overflow will often lead to corrupted globals.
+	The -Wl,--stack-first flag to clang instructs it to put the stack first,
+	followed by the globals and the heap, which may produce slightly larger
+	code, but will more reliably trap on stack overflow.
+
+	See the wasm-ld documentation for more information and additional flags.
+	Note flags related to dynamic linking, such -shared and --export-dynamic are
+	not yet stable and are expected to change behavior in the future. <a href="https://lld.llvm.org/WebAssembly.html">lld:llvm</a>  <a href="https://github.com/WebAssembly/exception-handling/" class="known-uri">gh</a> <strong title-level="2">Wasmtime Cache Configuration</strong> <a href="https://docs.wasmtime.dev/cli-cache.html" class="known-uri">docs:wt</a> <strong title-level="1">Fermyon Limits & Quotas</strong> <a href="https://developer.fermyon.com/cloud/faq">dev:fermyon</a>  <a href="https://developer.fermyon.com/cloud/noops-sql-db">dev:fermyon</a> <strong title-level="1">New stuff</strong> <a href="https://brigade.sh/">brigade</a> Brigade is a platform for running scriptable, automated tasks.
+
+	Brigade was apparently archived by the CNCF.
+
+	See: <a href="https://www.cncf.io/archived-projects/">cncf</a>  <a href="https://www.cncf.io/">cncf</a> CNCF is the open source, vendor-neutral hub of cloud native computing,
+	hosting projects like Kubernetes and Prometheus to make cloud native
+	universal and sustainable.
+
+
+<strong title-level="1">Memory-Mapped Files in the Wasmtime Runtime</strong> <a href="https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-rationale.md#why-no-mmap-and-friends" class="known-uri">gh</a> To make things easier for people porting programs that just use mmap to
+	read and write files in a simple way, WASI libc includes a minimal
+	userspace emulation of mmap and munmap. <a href="https://groups.google.com/g/leveldb/c/C5Hh__JfdrQ" class="known-uri">groups:G</a> There was a bug on OS X where mmap and fsync did not perform as
+	expected. This caused problems in bitcoin, leading to their famous
+	leveldb bug bounty. The solution was to change to purely stdio-based
+	writing so it works on all platforms without relying on Linux behavior. <a href="https://pubs.opengroup.org/onlinepubs/7908799/xsh/mmap.html" class="known-uri">pubs:og</a> <strong title-level="1">Great</strong> <a href="https://pubs.opengroup.org/onlinepubs/007908799/index.html" class="known-uri">pubs:og</a> The Open Group UNIX MAN pages
+
+
+<strong title-level="1">Feeds</strong> <a href="https://feed.infoq.com/">feed:infoq</a> InfoQ provides software engineers with the opportunity to share experiences
+	gained using innovator and early adopter stage techniques and technologies
+	with the wider industry. We carefully curate and peer review everything
+	we publish. <a href="https://archive.org/details/in.ernet.dli.2015.149724/page/n193/mode/1up" class="known-uri">ia</a> but as the broad-winged windward stranger shot nigh to her,
+	the boastful sails all fell together as blank bladders that
+	are burst, and all life fled from the smitten hull.
+
+	Moby Dick <a href="https://archive.org/download/bookoftypespecim00barnrich/bookoftypespecim00barnrich.pdf" class="known-uri">ia</a>  <a href="https://archive.org/download/ajapaneseenglis01hepbgoog/ajapaneseenglis01hepbgoog.pdf" class="known-uri">ia</a>  <a href="https://archive.org/download/scofieldreferenc00unse/scofieldreferenc00unse.pdf" class="known-uri">ia</a>  <a href="https://archive.org/download/arabiantranslat01burtuoft" class="known-uri">ia</a>  <a href="https://archive.org/download/arabiantranslat02burtuoft" class="known-uri">ia</a>  <a href="https://archive.org/download/arabiantranslat03burtuoft" class="known-uri">ia</a>  <a href="https://archive.org/download/arabiantranslat04burtuoft" class="known-uri">ia</a> ...
+
+
+
+
+To this reasoning, founded upon figures, I had nothing to object. <a href="https://archive.org/details/twentythousandle00verniala/page/70/mode/1up" class="known-uri">ia</a>  <a href="https://archive.org/download/con00ciseoxforddicfowlrich/con00ciseoxforddicfowlrich.djvu" class="known-uri">ia</a>  <a href="https://archive.org/details/bennersprophecie00bennrich/page/60/mode/1up" class="known-uri">ia</a>  <a href="https://archive.org/download/publicationstext00unknuoft/publicationstext00unknuoft.djvu" class="known-uri">ia</a> <footer>
+<span>Look Ma... no cookies!</span>
+<span>Copyleft (<strong class="petokraka">&#x2605</strong>) Dejan Budimir.</span>
+</footer>
 </body>
 </html>
