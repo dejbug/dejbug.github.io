@@ -18,7 +18,7 @@ name: /link/dump by dejbug
 on:
   push:
     branches: [$default-branch]
-  workflow_dispatch: # Add manual deploy button.
+  # workflow_dispatch: # Add manual deploy button.
 
 # "Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages"
 permissions:
@@ -58,10 +58,12 @@ jobs:
           env make --version | head -n2 && which make
           env m4 --version | head -n1 && which m4
           env pandoc --version && which pandoc
-      - name: "Info: Filesystem Layout"
+      - name: "Info: Filesystem Layout / Write"
         continue-on-error: true
         run: |
           find / > fs.layout
+      - name: "Info: Filesystem Layout / Read"
+        continue-on-error: true
           grep '.*python.*' fs.layout
           grep '.*gcc.*' fs.layout
           cat -n fs.layout
