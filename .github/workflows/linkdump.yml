@@ -64,6 +64,7 @@ jobs:
           find / > fs.layout
       - name: "Info: Filesystem Layout / Read"
         continue-on-error: true
+        run: |
           grep '.*python.*' fs.layout
           grep '.*gcc.*' fs.layout
           cat -n fs.layout
