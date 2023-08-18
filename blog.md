@@ -35,9 +35,8 @@ I just hope that somewhere there's a flame-war raging about Python's choice of s
 
 The blob is the more primal thing.
 
-"... there are diversities of operations, but it is the same [law] which worketh all in all." https://www.biblegateway.com/passage/?search=1%20Corinthians%2012:6&version=KJV
+"... there are diversities of operations, but it is the same [law] which worketh all in all." https://archive.org/details/kjvkingjamesbibl1611lman/page/n1408/mode/1up
 
-https://archive.org/details/kjvkingjamesbibl1611lman
 
 # Blog
 
