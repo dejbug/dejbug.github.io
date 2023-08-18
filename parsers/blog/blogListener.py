@@ -8,21 +8,48 @@ else:
 # This class defines a complete listener for a parse tree produced by blogParser.
 class blogListener(ParseTreeListener):
 
-    # Enter a parse tree produced by blogParser#start.
-    def enterStart(self, ctx:blogParser.StartContext):
+    # Enter a parse tree produced by blogParser#hash.
+    def enterHash(self, ctx:blogParser.HashContext):
         pass
 
-    # Exit a parse tree produced by blogParser#start.
-    def exitStart(self, ctx:blogParser.StartContext):
+    # Exit a parse tree produced by blogParser#hash.
+    def exitHash(self, ctx:blogParser.HashContext):
         pass
 
 
-    # Enter a parse tree produced by blogParser#item.
-    def enterItem(self, ctx:blogParser.ItemContext):
+    # Enter a parse tree produced by blogParser#punct.
+    def enterPunct(self, ctx:blogParser.PunctContext):
         pass
 
-    # Exit a parse tree produced by blogParser#item.
-    def exitItem(self, ctx:blogParser.ItemContext):
+    # Exit a parse tree produced by blogParser#punct.
+    def exitPunct(self, ctx:blogParser.PunctContext):
+        pass
+
+
+    # Enter a parse tree produced by blogParser#space.
+    def enterSpace(self, ctx:blogParser.SpaceContext):
+        pass
+
+    # Exit a parse tree produced by blogParser#space.
+    def exitSpace(self, ctx:blogParser.SpaceContext):
+        pass
+
+
+    # Enter a parse tree produced by blogParser#feed.
+    def enterFeed(self, ctx:blogParser.FeedContext):
+        pass
+
+    # Exit a parse tree produced by blogParser#feed.
+    def exitFeed(self, ctx:blogParser.FeedContext):
+        pass
+
+
+    # Enter a parse tree produced by blogParser#word.
+    def enterWord(self, ctx:blogParser.WordContext):
+        pass
+
+    # Exit a parse tree produced by blogParser#word.
+    def exitWord(self, ctx:blogParser.WordContext):
         pass
 
 
@@ -35,21 +62,39 @@ class blogListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by blogParser#words.
-    def enterWords(self, ctx:blogParser.WordsContext):
+    # Enter a parse tree produced by blogParser#link.
+    def enterLink(self, ctx:blogParser.LinkContext):
         pass
 
-    # Exit a parse tree produced by blogParser#words.
-    def exitWords(self, ctx:blogParser.WordsContext):
+    # Exit a parse tree produced by blogParser#link.
+    def exitLink(self, ctx:blogParser.LinkContext):
         pass
 
 
-    # Enter a parse tree produced by blogParser#firsttitle.
-    def enterFirsttitle(self, ctx:blogParser.FirsttitleContext):
+    # Enter a parse tree produced by blogParser#item.
+    def enterItem(self, ctx:blogParser.ItemContext):
         pass
 
-    # Exit a parse tree produced by blogParser#firsttitle.
-    def exitFirsttitle(self, ctx:blogParser.FirsttitleContext):
+    # Exit a parse tree produced by blogParser#item.
+    def exitItem(self, ctx:blogParser.ItemContext):
+        pass
+
+
+    # Enter a parse tree produced by blogParser#line.
+    def enterLine(self, ctx:blogParser.LineContext):
+        pass
+
+    # Exit a parse tree produced by blogParser#line.
+    def exitLine(self, ctx:blogParser.LineContext):
+        pass
+
+
+    # Enter a parse tree produced by blogParser#start.
+    def enterStart(self, ctx:blogParser.StartContext):
+        pass
+
+    # Exit a parse tree produced by blogParser#start.
+    def exitStart(self, ctx:blogParser.StartContext):
         pass
 
 
