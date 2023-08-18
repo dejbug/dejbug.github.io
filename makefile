@@ -1,7 +1,19 @@
 # make reset
 # make awk
-# make parse ; make parse blog ; make blog parse
-# make tokens ; make tokens blog ; make blog tokens
+# make blog
+# make debug tree blog
+
+# Add more flags by PREPENDing with combinations of:
+#	tokens, tree, sll, trace, diagnostics, debug (trace + diagnostics)
+# E.g. make trace diagnostics tokens blog-
+
+# Another way to call into PYGRUN (e.g. for grammar blog):
+#	make blog-tokens ; make blog-sll ; make blog-trace ; make blog-tree
+# E.g. make debug blog-tokens
+
+# GENERAL NOTE on pygrun: Tokens are always printed first,
+#	afterwards come the debug and trace (interleaved).
+#	The tree is printed last.
 
 GrammarFiles := $(wildcard *.g4)
 GrammarNames := $(GrammarFiles:%.g4=%)
@@ -21,11 +33,6 @@ build/ : ; mkdir build
 .PHONY : awk gawk
 awk gawk : ; @gawk -f blog.awk -- blog.md
 
-.PHONY : parse tokens
-
-ifneq (,$(filter parse tokens,$(MAKECMDGOALS)))
-
-parse tokens : $(ParserFiles) ; @echo -n
 
 define deriveParserFiles
 parsers/$1/$1Listener.py parsers/$1/$1Lexer.py parsers/$1/$1Parser.py
@@ -36,25 +43,32 @@ $(eval ParserFiles += $(call deriveParserFiles,$1))
 $(call deriveParserFiles,$1) : $1.g4 ; antlr4 -o parsers/$1 -Dlanguage=Python3 $$<
 endef
 
-define makeParseCommand
+define makeParserCommand
 .PHONY : $1
-$1 : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start -at -- ../../blog.md
+$1 : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start $2 -- ../../blog.md
 endef
 
-define makeTokensCommand
-.PHONY : $1
-$1 : $(ParserFiles) ; @cd parsers/blog && pygrun -eutf8 blog start --tokens -- ../../blog.md
+PYGRUN_FLAGS :=
+
+.PHONY : tokens trace tree sll diag diagnostics debug
+tokens : ; $(eval PYGRUN_FLAGS += --tokens) @echo -n
+trace : ; $(eval PYGRUN_FLAGS += -a) @echo -n
+tree : ; $(eval PYGRUN_FLAGS += -t) @echo -n
+sll : ; $(eval PYGRUN_FLAGS += -s) @echo -n
+diag diagnostics : ; $(eval PYGRUN_FLAGS += -d) @echo -n
+debug : trace diagnostics ; @echo -n
+
+define makeParserCommands
+.PHONY : $1 $1-tokens $1-trace $1-tree
+$1 : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start $$(PYGRUN_FLAGS) -- ../../blog.md
+$1-tokens : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start --tokens $$(PYGRUN_FLAGS) -- ../../blog.md
+$1-trace : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start $2 -a $$(PYGRUN_FLAGS) -- ../../blog.md
+$1-tree : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start $2 -t $$(PYGRUN_FLAGS) -- ../../blog.md
+$1-sll : $(call deriveParserFiles,$1) ; @cd parsers/blog && pygrun -eutf8 blog start $2 -s $$(PYGRUN_FLAGS) -- ../../blog.md
 endef
 
 # $(foreach name,$(GrammarNames),$(info $(call makeParserRule,$(name))))
 $(foreach name,$(GrammarNames),$(eval $(call makeParserRule,$(name))))
 
-ifneq (,$(filter parse,$(MAKECMDGOALS)))
-$(foreach name,$(GrammarNames),$(eval $(call makeParseCommand,$(name))))
-endif
-
-ifneq (,$(filter tokens,$(MAKECMDGOALS)))
-$(foreach name,$(GrammarNames),$(eval $(call makeTokensCommand,$(name))))
-endif
-
-endif
+# $(foreach name,$(GrammarNames),$(info $(call makeParserCommands,$(name))))
+$(foreach name,$(GrammarNames),$(eval $(call makeParserCommands,$(name))))
