@@ -18,7 +18,7 @@ name: /link/dump by dejbug
 on:
   # workflow_dispatch: # Add manual deploy button.
   push:
-    branches: [ $default-branch ]
+    branches: [ "master" ]
 
 # "Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages"
 permissions:

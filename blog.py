@@ -1,4 +1,4 @@
-import sys, re, io, urllib.parse
+import sys, re, io, urllib.parse, subprocess
 
 DEFAULT_INPUT_FILEPATH = "blog.md"
 DEFAULT_OUTPUT_FILEPATH = None
@@ -91,6 +91,13 @@ def main(args = sys.argv[1:]):
 	ipath = args[0] if len(args) >= 1 else DEFAULT_INPUT_FILEPATH
 	opath = args[1] if len(args) >= 2 else DEFAULT_OUTPUT_FILEPATH
 	mfile = io.StringIO()
+
+	# FIXME: This is just a HACK. Use ArgumentParser.
+	if ipath == '-b':
+		# p = subprocess.run('ls', capture_output = True)
+		# print(p.stdout.decode('utf-8'))
+		print('<strong><a href="/archive/2023-08-17.html">[back]</a></strong>')
+		return
 
 	if ipath:
 		with open(ipath) as ifile:

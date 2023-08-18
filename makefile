@@ -20,19 +20,35 @@ GrammarNames := $(GrammarFiles:%.g4=%)
 ParserFiles =
 
 .PHONY : all clean reset run
-all : build/index.html
+all : build/index.html | archive
 clean :
 	rm -f parsers/*/*.interp parsers/*/*.tokens
 	rm -rf build
 reset : | clean ; rm -rf parsers
 run : build/index.html ; cd build && php -S localhost:8000
 
+# %/ : ; mkdir -p $@
+
 build/index.html : index.template *.md *.py | build/ ; python render.py -do $@ $< ACTOR=makefile
 build/ : ; mkdir build
 
+ArchiveSources = $(wildcard archive/*.md)
+ArchiveTargets = $(ArchiveSources:archive/%.md=build/archive/%.html)
+ArchiveTargetNames = $(ArchiveSources:archive/%.md=%)
+
+.PHONY : archive
+archive : $(ArchiveTargets) | build/archive/
+build/archive/ : ; mkdir -p $@
+
+# This is just a HACK. Provide for this in render.py .
+build/archive/%.html : archive/%.md index.template *.py | build/archive/
+	cp $(word 1,$^) $(dir $@)blog.md
+	cp $(word 2,$^) $(dir $@)
+	cp *.py $(dir $@)
+	cd $(dir $@) && python render.py -do $(notdir $@) $(notdir $(word 2,$^)) ACTOR=makefile
+
 .PHONY : awk gawk
 awk gawk : ; @gawk -f blog.awk -- blog.md
-
 
 define deriveParserFiles
 parsers/$1/$1Listener.py parsers/$1/$1Lexer.py parsers/$1/$1Parser.py
