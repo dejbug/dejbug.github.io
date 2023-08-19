@@ -1,4 +1,4 @@
-import sys, re, io, urllib.parse, subprocess
+import sys, re, io, urllib.parse, html, subprocess
 
 DEFAULT_INPUT_FILEPATH = "blog.md"
 DEFAULT_OUTPUT_FILEPATH = None
@@ -79,6 +79,9 @@ def transtit(m):
 
 def parse(text, file = sys.stdout):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
+	# text = re.sub(r'<', '&lt;', text, flags = re.S)
+	# text = re.sub(r'>', '&gt;', text, flags = re.S)
+	text = html.escape(text, quote = False)
 	text = re.sub(r'^\s*((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	# text = re.sub(r'\s*<?(https?://' + LINKCC + r'+)>?\s*', transuri, text, flags = re.S)
 	# NOTE: Sublime highlights the string after LINKCC weird. Send them a note.
