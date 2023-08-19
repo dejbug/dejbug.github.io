@@ -56,3 +56,4 @@ The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the 
 
 
 ! back=2023-08-18
+! blurb=Digressions are like.... wait! That reminds me of something about left recursive grammars but first let me go off on a tangent about bats! Aren't they just marvellous feats of natural selection? It really makes you believe in the inevitability of things. The emergence of all that is physically possible. You should really read the first chapter of The Blind Watchmaker. And wasn't Hedy Lamarr just *swoon*? But first go re-watch that Seinfeld episode where they go: Is he very well-read or is he very ... well ... red!?

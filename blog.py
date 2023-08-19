@@ -94,6 +94,7 @@ def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--title', action='store_true')
 	parser.add_argument('--backref', action='store_true')
+	parser.add_argument('-v', '--variable')
 	parser.add_argument('-o', '--opath', default = DEFAULT_OUTPUT_FILEPATH)
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
 	args = parser.parse_args(args)
@@ -113,12 +114,18 @@ def main(args = sys.argv[1:]):
 		# p = subprocess.run('ls', capture_output = True)
 		# print(p.stdout.decode('utf-8'))
 		with open(args.ipath) as ifile:
-			m = re.search(r'^!\s*back=(.+?)\s*$', ifile.read(), re.S|re.M)
+			m = re.search(r'^!\s*back(?:ref)?=(.+?)\s*$', ifile.read(), re.S|re.M)
 			if m:
 				source = f'archive/{m.group(1)}.md'
 				if os.path.isfile(source):
 					rendered = f'/archive/{m.group(1)}.html'
 					print(f'<strong><a href="{rendered}">[back]</a></strong>')
+		return
+
+	if args.variable:
+		with open(args.ipath) as ifile:
+			m = re.search(r'^!\s*' + args.variable + r'=(.+?)\s*$', ifile.read(), re.S|re.M)
+			if m: print(m.group(1))
 		return
 
 	if args.title:
