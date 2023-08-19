@@ -29,7 +29,7 @@ run : build/index.html ; cd build && php -S localhost:8000
 
 # %/ : ; mkdir -p $@
 
-build/index.html : index.template *.md *.py | build/ ; python render.py -do $@ $< ACTOR=makefile
+build/index.html : index.template *.md *.py | build/ ; python render.py -do $@ index.template source=blog.md
 build/ : ; mkdir build
 
 ArchiveSources = $(wildcard archive/*.md)
@@ -42,10 +42,7 @@ build/archive/ : ; mkdir -p $@
 
 # This is just a HACK. Provide for this in render.py .
 build/archive/%.html : archive/%.md index.template *.py | build/archive/
-	cp $(word 1,$^) $(dir $@)blog.md
-	cp $(word 2,$^) $(dir $@)
-	cp *.py $(dir $@)
-	cd $(dir $@) && python render.py -do $(notdir $@) $(notdir $(word 2,$^)) ACTOR=makefile
+	python render.py -do $@ index.template source=$<
 
 .PHONY : awk gawk
 awk gawk : ; @gawk -f blog.awk -- blog.md
