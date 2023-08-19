@@ -117,11 +117,11 @@
 </style>
 <body>
 <div id="meta" class="noise">
-	<div id="pill" class="glow">{{ sed -nE '/^\s*#\s*(.*?)/{ s/^\s*#\s*//p ; q }' blog.md }}</div>
+	<div id="pill" class="glow">{{ python blog.py --title "{source}" }}</div>
 	{{ date '+%Y-%m-%d' }} &nbsp; dejbug.github.io</div>
 {{ python blog.py "{source}" }}
 <div style="float: right">
-{{ python blog.py -b "{source}" }}
+{{ python blog.py --backref "{source}" }}
 </div>
 <footer>
 <span class="noise">Look Ma... no cookies!</span>

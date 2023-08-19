@@ -92,7 +92,8 @@ def parse(text, file = sys.stdout):
 
 def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
-	parser.add_argument('-b', '--backref', action='store_true')
+	parser.add_argument('--title', action='store_true')
+	parser.add_argument('--backref', action='store_true')
 	parser.add_argument('-o', '--opath', default = DEFAULT_OUTPUT_FILEPATH)
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
 	args = parser.parse_args(args)
@@ -118,6 +119,12 @@ def main(args = sys.argv[1:]):
 				if os.path.isfile(source):
 					rendered = f'/archive/{m.group(1)}.html'
 					print(f'<strong><a href="{rendered}">[back]</a></strong>')
+		return
+
+	if args.title:
+		with open(args.ipath) as ifile:
+			m = re.search(r'^#+\s*(.+?)\s*$', ifile.read(), re.S|re.M)
+			print(m.group(1) if m else '')
 		return
 
 	if args.ipath:
