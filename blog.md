@@ -30,7 +30,7 @@ There is also, in the proper getopt, a '-' prefix which suppresses any re-sortin
 
 #### TODO
 
-North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build a custom getopt and maybe publish my first repo package. Chances are somebody beat me to it and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
+North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build a custom getopt and maybe publish my first repo package. Chances are somebody beat me to it https://pypi.org/project/getopts/ and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
 
 # Digressions
 
