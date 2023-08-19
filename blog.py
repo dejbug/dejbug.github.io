@@ -1,74 +1,18 @@
 import sys, os, re, io
 import argparse, urllib.parse, html, subprocess
 
+import known
+
 DEFAULT_INPUT_FILEPATH = "blog.md"
 DEFAULT_OUTPUT_FILEPATH = None
-
-KNOWN = {
-	'com': {
-		'github': 'gh',
-		'google': 'G',
-		'stackexchange': 'Sx',
-		'stackoverflow': 'So',
-		'sublimetext': 'st',
-	},
-	'dev': {
-		'wasmtime': 'wt',
-	},
-	'org': {
-		'archive': 'ia',
-		'wikipedia': 'wiki',
-		'mozilla': 'moz',
-		'archlinux': 'arch',
-		'kernel': 'kern',
-		'opengroup': 'og',
-		'rust-lang': 'rs',
-	},
-	'io': {
-		'github': 'gh',
-		'sublimetext': 'st',
-	}
-}
-
-KNOWN_SUBS = {
-	'org': {
-		'wikipedia': {
-			'en': '',
-		},
-	},
-}
-
-def transloc(text):
-	text = text.lower()
-	x = text.split('.')
-	assert len(x) >= 2, "invalid netloc?"
-
-	a = ".".join(x[:-2]) if len(x) >= 3 else ""
-	b = x[-2]
-	c = x[-1]
-
-	if a and a == 'www': a = ""
-
-	known = False
-	if c in KNOWN:
-		if b in KNOWN[c]:
-			known = True
-			if c in KNOWN_SUBS:
-				if b in KNOWN_SUBS[c]:
-					if a in KNOWN_SUBS[c][b]:
-						a = KNOWN_SUBS[c][b][a]
-			b = KNOWN[c][b]
-
-	if a: b = f'{a}:{b}'
-	return b, known
 
 
 def transuri(m):
 	name = uri = m.group(1)
 	x = urllib.parse.urlparse(uri)
-	name, known = transloc(x.netloc)
+	name, isknown = known.translate(x.netloc)
 	return f' <a href="{uri}"' + (
-		f' class="known-uri"' if known else ''
+		f' class="known-uri"' if isknown else ''
 		) + f'>{name}</a> '
 
 
