@@ -1,4 +1,4 @@
-import sys, re, io, urllib.parse, html, subprocess
+import sys, os, re, io, urllib.parse, html, subprocess
 
 DEFAULT_INPUT_FILEPATH = "blog.md"
 DEFAULT_OUTPUT_FILEPATH = None
@@ -79,6 +79,7 @@ def transtit(m):
 
 def parse(text, file = sys.stdout):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
+	text = re.sub('^!.*$', '', text, re.S|re.M)
 	text = html.escape(text, quote = False)
 	text = re.sub(r'^\s*((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	# text = re.sub(r'\s*<?(https?://' + LINKCC + r'+)>?\s*', transuri, text, flags = re.S)
@@ -93,11 +94,19 @@ def main(args = sys.argv[1:]):
 	opath = args[1] if len(args) >= 2 else DEFAULT_OUTPUT_FILEPATH
 	mfile = io.StringIO()
 
-	# FIXME: This is just a HACK. Use ArgumentParser.
+	# FIXME: This is just a HACK. We should automate this based
+	#	on the input file path. The '^!' mechanism is good for
+	#	other settings though.
 	if ipath == '-b':
 		# p = subprocess.run('ls', capture_output = True)
 		# print(p.stdout.decode('utf-8'))
-		print('<strong><a href="/archive/2023-08-17.html">[back]</a></strong>')
+		with open(DEFAULT_INPUT_FILEPATH) as ifile:
+			m = re.search(r'^!\s*back=(.+?)\s*$', ifile.read(), re.S|re.M)
+			if m:
+				source = f'archive/{m.group(1)}.md'
+				if os.path.isfile(source):
+					rendered = f'archive/{m.group(1)}.html'
+					print(f'<strong><a href="{rendered}">[back]</a></strong>')
 		return
 
 	if ipath:
