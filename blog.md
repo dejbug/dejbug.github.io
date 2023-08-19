@@ -26,7 +26,11 @@ Compare and contrast with the manpage.
 	POSIXLY_CORRECT is set, parsing stops as soon as the first
 	non-option parameter ... is found"
 
-North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build my own and maybe publish my first repo package. Chances are somebody beat me to it and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
+There is also, in the proper getopt, a '-' prefix which suppresses any re-sorting done on the processed arguments and I feel that this, too, is a #need-to-have.
+
+#### TODO
+
+North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build a custom getopt and maybe publish my first repo package. Chances are somebody beat me to it and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
 
 # Digressions
 
@@ -52,7 +56,7 @@ The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the 
 
 	>go left
 
-	Good choice. Plowing onwards, comrade.
+	Good choice! Plowing onward, comrade.
 
 
 ! back=2023-08-18
