@@ -79,8 +79,6 @@ def transtit(m):
 
 def parse(text, file = sys.stdout):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
-	# text = re.sub(r'<', '&lt;', text, flags = re.S)
-	# text = re.sub(r'>', '&gt;', text, flags = re.S)
 	text = html.escape(text, quote = False)
 	text = re.sub(r'^\s*((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	# text = re.sub(r'\s*<?(https?://' + LINKCC + r'+)>?\s*', transuri, text, flags = re.S)
