@@ -36,6 +36,23 @@ North of Pangalin! is this shoddy craftsmanship. We can do better than that. Con
 
 I was hoping to have more control of how PEX packaging and my shy (necro) comment https://github.com/pantsbuild/pex/issues/963 was answered rather quickly pointing me to a new, "additive" alternative https://github.com/pantsbuild/pex/releases/tag/v2.1.139 to my "subtractive" approach . Sweet!
 
+# Murrine
+
+Just peeked into the logs and was reminded that https://security.archlinux.org/package/gtk-engine-murrine was missing which https://www.gnupg.org/related_software/pinentry/index.html seems rather fond of. So I installed it. Looking forward to seeing the effects! https://en.wikipedia.org/wiki/Murrine
+
+Also found the https://kaosx.us/ project by chance. It sure uses all the right words. Let's keep an eye on it.
+
+# Shameful fact #1
+
+I was driven home from chess club last night and a song was playing on the radio. I never really listen to german radio nor do I own a television set so I must have grown rather susceptible to its occasional charms. Long story short, I've got Streisand's Woman in Love running in the background. Let's see how long until those particular receptors become saturated. Let's hope they aren't re-uptake inhibited. For the love of good music!
+
+## Radioactive Skies
+
+A propos good music. Please do support the folks in Boise: https://radioboise.org/ ! They are doing wonderful things over there.
+
+Also throw a buck or two at https://somafm.com/ to keep it going.
+
+Remember gothicradio.com? https://web.archive.org/web/20230000000000*/http://gothicradio.com/ I wonder what those guys are doing now. Back then it was pretty much the only thing that had the power to please this queer old brain. It was a simpler time. A magical time. There seemed to be much harmony in a certain dissonance with life. Ah! was it not good to be young. Sitting quietly in my room, listening to gothicradio.com, reading stuff on textfiles.com and coding...., looking back I feel I've made the most of it. There were other things, of course, but this was at the core of that. Ah, but too much #nostalgia for the good old days may make a fashist out of you yet!
 
 # Digressions
 
