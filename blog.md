@@ -4,11 +4,11 @@ This morning I notice that (again) my weforum feed fails: AssertionError: Error:
 
 ## Testing
 
-To find more out first I will need a way to relay requests through fermyon e.g. `curl xyz.fermyon.app/get/<url>?user-agent=X`.
+To find more out, first I will need a way to relay requests through fermyon e.g. `curl xyz.fermyon.app/get/<url>?user-agent=X`. Sadly, this won't work. I had a lapse of memory and forgot that every app has "allowed_http_hosts" permissions hard-coded into it. Which is probably a good idea.
 
 ### Testing the tester
 
-But to run the thing locally I wanted a nice way to send it arguments on the console. Instead of e.g. `python xyz.py /get/<url>?User-Agent=X` just `python xyz.py /get -u <url> -agent X`.
+In any case! To run the thing locally I wanted a nice way to send it arguments on the console. Instead of e.g. `python xyz.py /get/<url>?User-Agent=X` just `python xyz.py /get -u <url> -agent X`.
 
 The general idea is from `handle_request(request)` to call `parseRequest(request, shortopts, longopts)` and get the correct meta regardless of whether it runs *spinned* or local.
 
@@ -56,4 +56,5 @@ The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the 
 
 
 ! back=2023-08-18
+
 ! blurb=Digressions are like.... wait! That reminds me of something about left recursive grammars but first let me go off on a tangent about bats! Aren't they just marvellous feats of natural selection? It really makes you believe in the inevitability of things. The emergence of all that is physically possible. You should really read the first chapter of The Blind Watchmaker. And wasn't Hedy Lamarr just *swoon*? But first go re-watch that Seinfeld episode where they go: Is he very well-read or is he very ... well ... red!?
