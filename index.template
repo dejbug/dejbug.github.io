@@ -124,7 +124,7 @@
 <body>
 <div id="meta" class="noise">
 	<div id="pill" class="glow">{{ python blog.py --title "{source}" }}</div>
-	{{ date '+%Y-%m-%d' }} &nbsp; dejbug.github.io</div>
+	{{ date '+%Y-%m-%d' }} &nbsp; <a href="https://dejbug.github.io/">dejbug.github.io</a></div>
 {{ python blog.py "{source}" }}
 <div id="backref">{{ python blog.py --backref "{source}" }}</div>
 <footer>
