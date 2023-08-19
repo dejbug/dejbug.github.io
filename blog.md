@@ -26,7 +26,7 @@ Compare and contrast with the manpage.
 	POSIXLY_CORRECT is set, parsing stops as soon as the first
 	non-option parameter ... is found"
 
-North of Pangalin! https://web.archive.org/web/20220303045027/http://the-eye.eu/public/Books/ManyThings/HTML/page1.html is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build my own and maybe publish my first repo package. Chances are somebody beat me to it and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
+North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build my own and maybe publish my first repo package. Chances are somebody beat me to it and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
 
 # Digressions
 
