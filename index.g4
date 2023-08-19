@@ -1,4 +1,4 @@
-grammar blog;
+grammar index;
 
 fragment WORDCC : [0-9A-Za-z] ;
 fragment LINKCC : [-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%'] ; // '

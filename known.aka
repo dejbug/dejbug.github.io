@@ -1,0 +1,33 @@
+archive.org:ia
+archlinux.org:arch
+eff.org
+fermyon.app:fermyon.app
+fermyon.com:fermyon
+github.com:gh
+github.io:gh
+gnome.org
+gnupg.org:gnupg
+google.com:G
+ietf.org
+kernel.org:kern
+llvm.org
+man7.org:man7
+medium.com
+mozilla.org:moz		developer:dev	firefox-source-docs:ff-src
+mozillazine.org:mozillazine
+opengroup.org:og
+pypi.org:pypi
+python.org:py
+qt.io
+radioboise.org:radioboise
+rfc-editor.org:rfc
+rust-lang.org:rs
+somafm.com
+stackexchange.com:Sx
+stackoverflow.com:So
+sublimetext.com:st
+sublimetext.io:st
+w3.org
+wasi.dev
+wasmtime.dev:wt
+wikipedia.org:wiki	en:

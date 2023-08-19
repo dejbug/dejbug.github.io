@@ -43,7 +43,7 @@ def parseArgs(args = sys.argv[1:]):
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
 	args = parser.parse_args(args)
 	if not os.path.isfile(args.ipath):
-		parser.error('input file not found: {args.ipath}')
+		parser.error(f'input file not found: "{args.ipath}"')
 	return parser, args
 
 
