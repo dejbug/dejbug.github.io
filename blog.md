@@ -32,7 +32,7 @@ North of Pangalin! https://web.archive.org/web/20220303045027/http://the-eye.eu/
 
 While I'm writing these lines I realize that some of the urls _didn't render well_. Due, of course, to my primitive `blog.py` parser which is innocent of context. https://en.wikipedia.org/wiki/Contextualism
 
-The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the point of failure ; 1.1.1 use a command line parser to make testing a pleasure ; 1.1.1.1 write a better getopt ; 2. writing a stream-of-consciousness blog about 1. ; 2.2 either/or (or both) : 2.2.1 switching to my ANTLR grammar earlier than hoped ; 2.2.2 fixing blog.py elegantly to handle the most basic contexts well .
+The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the point of failure ; 1.1.1 use a command line parser to make testing a pleasure ; 1.1.1.1 write a better getopt ; 2. writing a stream-of-consciousness blog about 1. ; 2.1 either/or (or both) : 2.1.1 switching to my ANTLR grammar earlier than hoped ; 2.1.2 fixing blog.py elegantly to handle the most basic contexts well .
 
 ## Adventure Time
 
