@@ -3,8 +3,6 @@
 <meta charset="UTF-8">
 <title>dejbug's /link/dump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="vendor/w3/w3.css"> -->
-<!-- <script src="vendor/w3/w3.js"></script> -->
 <style>
 	:root {
 		--color-pubtime: hotpink;
@@ -28,6 +26,7 @@
 		--color-blue: #ccddee;
 		--color-pink: #eecce9; */ }
 	body {
+		min-height: 42em;
 		font-family: monospace; font-size: 24pt; line-height: 200%;
  		background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
 		color: var(--color-body-fg);
