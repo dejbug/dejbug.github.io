@@ -2,12 +2,6 @@
 
 This morning I notice that (again) my weforum feed fails: AssertionError: Error::Io("error trying to connect: tcp connect error: Connection timed out (os error 110)") https://atoms.fermyon.app/weforum . Testing locally worked fine so maybe "the imperfection is yours" http://transcripts.terrafirmascapers.com/104.htm http_send? https://github.com/fermyon/spin-python-sdk/issues/48
 
-## Update
-
-All those urgent-seeming things that also seemed important https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method ... well, after they were *properly* attended to -- by which I probably just mean to say that my brain has finally developed a **proper** kind of fuzziness and warmth (which one might also call exhaustion) which is to me the tell-tell sign of the distinct possibility that today, maybe, I can go ahead and pretend that indeed I have done well -- so after I have let myself go a bit with whatever I felt like doing rather than doing that which really needed doing, well, I finally came around to setting up for testing and tried the feed again to take a look at that strange error message one more time and wouldn't you know the darn thing just worked. Like nothing bad had ever happened to it. I hope it wasn't some transient network thing or Cloudflare going paranoid over the eddies in the all-sorts-of-general-mish-mash that is its cloud. I hope it was some Fermyon <3 thing and that the busy people there were awake and pretty much on top of it.
-
-Tomorrow I will need to take care of some chess club things. I need a Swiss Tournament pairer. I really do not want to use somebody else's though. But there's not much time until first round and people need to know.
-
 ## Testing
 
 To find more out, first I will need a way to relay requests through fermyon e.g. `curl xyz.fermyon.app/get/<url>?user-agent=X`. Sadly, this won't work. I had a lapse of memory and forgot that every app has "allowed_http_hosts" permissions hard-coded into it. Which is probably a good idea.
@@ -60,9 +54,15 @@ Also throw a buck or two at https://somafm.com/ to keep it going.
 
 Remember gothicradio.com? https://web.archive.org/web/20230000000000*/http://gothicradio.com/ I wonder what those guys are doing now. Back then it was pretty much the only thing that had the power to please this queer old brain. It was a simpler time. A magical time. There seemed to be much harmony in a certain dissonance with life. Ah! was it not good to be young. Sitting quietly in my room, listening to gothicradio.com, reading stuff on textfiles.com and coding...., looking back I feel I've made the most of it. There were other things, of course, but this was at the core of that. Ah, but too much #nostalgia for the good old days may make a fashist out of you yet!
 
+## Update
+
+All those urgent-seeming things that also seemed important https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method ... well, after they were *properly* attended to -- by which I probably just mean to say that my brain has finally developed a **proper** kind of fuzziness and warmth (which one might also call exhaustion) which is to me the tell-tell sign of the distinct possibility that today, maybe, I can go ahead and pretend that indeed I have done well -- so after I have let myself go a bit with whatever I felt like doing rather than doing that which really needed doing, well, I finally came around to setting up for testing and tried the feed again to take a look at that strange error message one more time and wouldn't you know the darn thing just worked. Like nothing bad had ever happened to it. I hope it wasn't some transient network thing or Cloudflare going paranoid over the eddies in the all-sorts-of-general-mish-mash that is its cloud. I hope it was some Fermyon <3 thing and that the busy people there were awake and pretty much on top of it.
+
+Tomorrow I will need to take care of some chess club things. I need a Swiss Tournament pairer. I really do not want to use somebody else's though. But there's not much time until first round and people need to know.
+
 # Digressions
 
-While I'm writing these lines I realize that some of the urls _didn't render well_. Due, of course, to my primitive `blog.py` parser which is innocent of context. https://en.wikipedia.org/wiki/Contextualism
+While I'm writing these lines I realize that some of the urls on this page _didn't render well_. Due, of course, to my primitive `blog.py` parser which is innocent of context. https://en.wikipedia.org/wiki/Contextualism
 
 The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the point of failure ; 1.1.1 use a command line parser to make testing a pleasure ; 1.1.1.1 write a better getopt ; 2. writing a stream-of-consciousness blog about 1. ; 2.1 either/or (or both) : 2.1.1 switching to my ANTLR grammar earlier than hoped ; 2.1.2 fixing blog.py elegantly to handle the most basic contexts well .
 
