@@ -3,18 +3,22 @@ archlinux.org:arch
 eff.org
 fermyon.app:fermyon.app
 fermyon.com:fermyon
+fide.com\handbook:hb\arbiters:arb\ratings:rat
 github.com:gh
 github.io:gh
 gnome.org
 gnupg.org:gnupg
 google.com:G
 ietf.org
+jstor.org
 kernel.org:kern
 llvm.org
 man7.org:man7
+marxists.org
 medium.com
-mozilla.org:moz		developer:dev	firefox-source-docs:ff-src
+mozilla.org:moz\developer:dev\firefox-source-docs:ff-src
 mozillazine.org:mozillazine
+nosubject.com
 opengroup.org:og
 pypi.org:pypi
 python.org:py
@@ -25,9 +29,11 @@ rust-lang.org:rs
 somafm.com
 stackexchange.com:Sx
 stackoverflow.com:So
+stanford.edu
 sublimetext.com:st
 sublimetext.io:st
+utm.edu
 w3.org
 wasi.dev
 wasmtime.dev:wt
-wikipedia.org:wiki	en:
+wikipedia.org:wiki\en:

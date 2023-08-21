@@ -14,7 +14,8 @@
 		--color-link-known: #3affbe; /* teal */
 		--color-link: #1d959b; /* #f3f4f2; */
 		--color-meta: #b76e93; /* hotpink; */
-		/*
+		--color-code-fg: #50ff00;
+		--color-code-br: #03d0ff;
 		--color-1: #5e8fbb;
 		--color-2: #cb8aa6;
 		--color-3: #ab3e6d;
@@ -24,7 +25,8 @@
 		--color-7: #c3ff87;
 		--color-8: #189dff;
 		--color-blue: #ccddee;
-		--color-pink: #eecce9; */ }
+		--color-pink: #eecce9;
+	}
 	body {
 		min-height: 42em;
 		font-family: monospace; font-size: 24pt; line-height: 200%;
@@ -57,6 +59,21 @@
 	a + a {
 /*		This seems to see through naked text!*/
 /*		margin-left: 3.4em;*/
+	}
+	i {
+		font-style: normal;
+		color: hotpink;
+	}
+	u {
+		text-decoration: none;
+		border-bottom: thin solid orchid;
+		padding-bottom: .17em;
+	}
+	code {
+		color: var(--color-code-fg);
+		border: thin solid var(--color-code-br);
+		border-radius: 8px;
+		padding: 0 .2em;
 	}
 	.known-uri {
 		border-right: thin solid crimson;

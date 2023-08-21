@@ -1,92 +1,138 @@
-# Fermyon! #2
+# Wubba Lubba Dub Dub!
 
-This morning I notice that (again) my weforum feed fails: AssertionError: Error::Io("error trying to connect: tcp connect error: Connection timed out (os error 110)") https://atoms.fermyon.app/weforum . Testing locally worked fine so maybe "the imperfection is yours" http://transcripts.terrafirmascapers.com/104.htm http_send? https://github.com/fermyon/spin-python-sdk/issues/48
+Today went by too quickly. I've finally managed to draw the pairings https://handbook.fide.com/chapter/C0403 for the first round of our tournament https://springerbk.de/meister-23.html . Using a FIDE-approved tool https://spp.fide.com/c-04-a-appendix-endorsement-of-a-software-program/ , https://spp.fide.com/wp-content/uploads/2020/04/C04Annex3_FEP19.pdf .
 
-## Testing
+Sure, there were a couple python libs
 
-To find more out, first I will need a way to relay requests through fermyon e.g. `curl xyz.fermyon.app/get/<url>?user-agent=X`. Sadly, this won't work. I had a lapse of memory and forgot that every app has "allowed_http_hosts" permissions hard-coded into it. Which is probably a good idea.
+https://github.com/thurstonemerson/swiss-system-tournament
+https://github.com/tahahojati/SwissTournament
+https://github.com/ave-llan/swiss-tournament
 
-### Testing the tester
+But I don't trust them. I chose https://github.com/BieremaBoyzProgramming/bbpPairings over http://www.rrweb.org/javafo/JaVaFo.htm , though the docs are the same as http://www.rrweb.org/javafo/aum/JaVaFo2_AUM.htm . It uses a machine-readable input format https://ratings.fide.com/download/fidexchg.txt , https://handbook.fide.com/files/handbook/fidexchg.txt , https://www.fide.com/FIDE/handbook/C04Annex2_TRF16.pdf . An example: http://www.rrweb.org/javafo/aum/RankedTRFXSample2.txt . So basically I will have to write an interface for it #trf.interface.
 
-In any case! To run the thing locally I wanted a nice way to send it arguments on the console. Instead of e.g. `python xyz.py /get/<url>?User-Agent=X` just `python xyz.py /get -u <url> -agent X`.
+You can "download ratings" here: https://ratings.fide.com/download.phtml .
 
-The general idea is from `handle_request(request)` to call `parseRequest(request, shortopts, longopts)` and get the correct meta regardless of whether it runs *spinned* or local.
+# Arbiter
 
-Right now I'm doing things with argparse https://docs.python.org/3/library/argparse.html which is a bit unwieldy. I long for the elegance of getopt https://www.man7.org/linux/man-pages/man1/getopt.1.html (not to be confused with getopts https://man7.org/linux/man-pages/man1/getopts.1p.html ) and found that python stdlib has it! https://docs.python.org/3/library/getopt.html This would have made things simple *if only* it didn't have this quirk
+I really need to read the Arbiter's Manual https://arbiters.fide.com/news/7742 and FIDE Handbook https://handbook.fide.com/ . I shall hang out at https://spp.fide.com/objectives/ a bit.
 
-	https://docs.python.org/3/library/getopt.html#getopt.getopt :
+There is so much to do! I was counting 1178 open tabs https://github.com/dejbug/tablist when I remembered that there really should have been another tablister, a bit more capable https://github.com/dejbug/ff-tab-lister/ , of mine to be found on moz-addons https://github.com/dejbug/tablist and yet it's gone! I wonder what was wrong with it. It must have been a compatibility issue with the new SDK. Of course. _I was using the *config* store which no longer exists_.
 
-	"Unlike GNU getopt(), after a non-option argument, all further arguments are considered also non-options. This is similar to the way non-GNU Unix systems work."
+# It's been a while!
 
-Compare and contrast with the manpage.
+And I've been neglecting JS. I used to hate it since Netspace. Now they gave it template literals https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals but it still has no printf https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Text_formatting . http://es6-features.org/ https://github.com/lukehoban/es6features
 
-	https://www.man7.org/linux/man-pages/man1/getopt.1.html#SCANNING_MODES :
+But I looked at tablister again and thought about adding a gui to it https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface and then fiddled around and got carried away a bit and ended up with rubbish code https://github.com/dejbug/tablist/tree/dev . Todo!
 
-	"If the first character is '+', or if the environment variable
-	POSIXLY_CORRECT is set, parsing stops as soon as the first
-	non-option parameter ... is found"
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Working_with_the_Tabs_API
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Implement_a_settings_page
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Extension_pages
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface
 
-There is also, in the proper getopt, a '-' prefix which suppresses any re-sorting done on the processed arguments and I feel that this, too, is a #need-to-have.
+I shall get back into extensions development. I need an URL up-and-down counter for archive.org. Also a badge shall show in my toolbar if there's a DJVU version of a book in the downloads without me having to navigate to it.
 
-#### TODO
+https://extensionworkshop.com/documentation/develop/build-a-secure-extension/
+https://extensionworkshop.com/documentation/develop/browser-compatibility/
 
-North of Pangalin! is this shoddy craftsmanship. We can do better than that. Considering how simple it is, I shall build a custom getopt and maybe publish my first repo package. Chances are somebody beat me to it https://pypi.org/project/getopts/ and made a beautiful getopt clone already but I feel the rising need to minimize dependencies on known unknowns https://en.wikipedia.org/wiki/There_are_unknown_unknowns and besides it is good exercise to find small problems and write some simple https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html code. Simplicity being a more complex thought than "easy", mind you.
+Some official best-practice patterns: https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Grid_wrapper .
 
-# PEX Issue
+Stylish https://stylestage.dev/styles/ and nice https://styleshout.com/ .
 
-I was hoping to have more control of how PEX packaging and my shy (necro) comment https://github.com/pantsbuild/pex/issues/963 was answered rather quickly pointing me to a new, "additive" alternative https://github.com/pantsbuild/pex/releases/tag/v2.1.139 to my "subtractive" approach . Sweet!
+I like web components https://github.com/mdn/web-components-examples/tree/main/defined-pseudo-class . It's one of the things that drew me back to web dev.
 
-# Murrine
+This is on my #todo list.
 
-Just peeked into the logs and was reminded that https://security.archlinux.org/package/gtk-engine-murrine was missing which https://www.gnupg.org/related_software/pinentry/index.html seems rather fond of. So I installed it. Looking forward to seeing the effects! https://en.wikipedia.org/wiki/Murrine
+https://vuejs.org/
+https://quasar.dev/docs
+https://tailwindcss.com/
 
-Also found the https://kaosx.us/ project by chance. It sure uses all the right words. Let's keep an eye on it.
+https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined
 
-# Shameful fact #1
+Did we really need https://mermaid.js.org/ a better graphviz https://graphviz.org/ ?
 
-I was driven home from chess club last night and a song was playing on the radio. I never really listen to german radio nor do I own a television set so I must have grown rather susceptible to its occasional charms. Long story short, I've got Streisand's Woman in Love running in the background. Let's see how long until those particular receptors become saturated. Let's hope they aren't re-uptake inhibited. For the love of good music!
+# GUI
 
-## Radioactive Skies
+I used to write in native Win32 API because the MFC had too much magic going on. It was a framework which you couldn't use without understanding what it abstracted away for you. It was self-defeating. ATL was better. I loved Don Box's book on COM. I was fond of Microsoft back then. Afterwards it was easy to switch to wxWidgets and later to https://www.wxpython.org/ https://www.blog.pythonlibrary.org/ .
 
-A propos good music. Please do support the folks in Boise: https://radioboise.org/ ! They are doing wonderful things over there.
+At my last job interview they wanted me to sue Qt and Java. I wanted to look into it https://wiki.python.org/moin/PyQt , https://wiki.qt.io/Qt_for_Python but chose to go full pineapple bananas and write for Xorg https://www.x.org/wiki/ProgrammingDocumentation/ directly https://www.x.org/releases/current/doc/libX11/libX11/libX11.html , at the very least for GTK.
 
-Also throw a buck or two at https://somafm.com/ to keep it going.
+I then looked through the Python wiki https://wiki.python.org/moin/GuiProgramming for what else is new and found something truly stunning. Apparently there are quite a few additions to the python GUI ecosystem. Yes, Tkinter is shipped with it but it's not a joy to write for it.
 
-Remember gothicradio.com? https://web.archive.org/web/20230000000000*/http://gothicradio.com/ I wonder what those guys are doing now. Back then it was pretty much the only thing that had the power to please this queer old brain. It was a simpler time. A magical time. There seemed to be much harmony in a certain dissonance with life. Ah! was it not good to be young. Sitting quietly in my room, listening to gothicradio.com, reading stuff on textfiles.com and coding...., looking back I feel I've made the most of it. There were other things, of course, but this was at the core of that. Ah, but too much #nostalgia for the good old days may make a fashist out of you yet!
+ImGUI used to be the rage for OpenGL. Now this. https://github.com/hoffstadt/DearPyGui https://aur.archlinux.org/packages/python-dearpygui .
 
-## Update
+But this just blew my mind. https://pypi.org/project/nicegui/#description
+https://github.com/zauberzeug/nicegui/blob/main/DEPENDENCIES.md . It's inspired by https://justpy.io/ https://aur.archlinux.org/packages/python-justpy they say. Which, too, was news to me. Now *this* is awesome! https://fastapi.tiangolo.com/ and this https://www.starlette.io/ ( "Starlette is a lightweight ASGI framework/toolkit, which is ideal for building async web services in Python." ) and *this* https://www.uvicorn.org/ . Also https://github.com/python/mypy ( "Static Typing for Python" ) and https://docs.pydantic.dev/latest/ ( "Pydantic is the most widely used data validation library for Python" ) .
 
-All those urgent-seeming things that also seemed important https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method ... well, after they were *properly* attended to -- by which I probably just mean to say that my brain has finally developed a **proper** kind of fuzziness and warmth (which one might also call exhaustion) which is to me the tell-tell sign of the distinct possibility that today, maybe, I can go ahead and pretend that indeed I have done well -- so after I have let myself go a bit with whatever I felt like doing rather than doing that which really needed doing, well, I finally came around to setting up for testing and tried the feed again to take a look at that strange error message one more time and wouldn't you know the darn thing just worked. Like nothing bad had ever happened to it. I hope it wasn't some transient network thing or Cloudflare going paranoid over the eddies in the all-sorts-of-general-mish-mash that is its cloud. I hope it was some Fermyon <3 thing and that the busy people there were awake and pretty much on top of it.
+This is cute https://docs.python.org/3/library/pathlib.html . They overrode the division operator to easily concatenate paths.
 
-Tomorrow I will need to take care of some chess club things. I need a Swiss Tournament pairer. I really do not want to use somebody else's though. But there's not much time until first round and people need to know.
+# Sublime Object of Desire
 
-# Digressions
+https://packagecontrol.io/packages/Tailwind%20CSS%20Autocomplete
 
-While I'm writing these lines I realize that some of the urls on this page _didn't render well_. Due, of course, to my primitive `blog.py` parser which is innocent of context. https://en.wikipedia.org/wiki/Contextualism
+https://tailwindcss.com/docs/utility-first
+https://justpy.io/quasar_tutorial/introduction/#props-of-quasar-components
+https://quasar.dev/start/how-to-use-vue
 
-The #toomanytabs so far: 1. deal with the weforum feed error ; 1.1. isolate the point of failure ; 1.1.1 use a command line parser to make testing a pleasure ; 1.1.1.1 write a better getopt ; 2. writing a stream-of-consciousness blog about 1. ; 2.1 either/or (or both) : 2.1.1 switching to my ANTLR grammar earlier than hoped ; 2.1.2 fixing blog.py elegantly to handle the most basic contexts well .
+https://github.com/zauberzeug/nicegui/tree/main/examples/docker_image
 
-## Adventure Time
+# And now for something completely different!
 
-	You arrive at a fork in the road. The path to the right looks well trampled
-	and is littered with bedoodled napkins of all kinds. You can make out
-	flowcharts of some sort on some of them.
+https://www.nosubject.com/Beautiful_Soul
 
-	>look at flowcharts.
+`"me who does not recognise his very own raison d'etre in the disorder that he denounces in the world"`
 
-	One of them is actually a sprawling binary tree and shows what looks to be a
-	perfect illustration of your early morning train of thought.
+https://hegel.net/en/ep2331.htm
 
-	>define train.
-
-	The word "train" here is of course unfortunate for it suggests a certain
-	linearity and would therefore be very much misleading.
-
-	>go left
-
-	Good choice! Plowing onward, comrade.
+	"Now, so far as the spirit which is certain of itself, in the form
+	of a “beautiful soul”, does not possess the strength to relinquish the
+	self-absorbed uncommunicative knowledge of itself, it cannot attain to
+	any identity with the consciousness that is repulsed, and so cannot
+	succeed in seeing the unity of its self in another life, cannot reach
+	objective existence. The identity comes about, therefore, merely in a
+	negative way, as a state of being devoid of spiritual character."
 
 
-! back=2023-08-18
+https://www.marxists.org/reference/archive/hegel/works/ph/phc2cc.htm
+https://www.marxists.org/reference/archive/hegel/works/ph/phconten.htm
+https://www.jstor.org/stable/1566362
+https://plato.stanford.edu/entries/hegel-dialectics/
+https://iep.utm.edu/hegelsoc/
 
-! blurb=Digressions are like.... wait! That reminds me of something about left recursive grammars but first let me go off on a tangent about bats! Aren't they just marvellous feats of natural selection? It really makes you believe in the inevitability of things. The emergence of all that is physically possible. You should really read the first chapter of The Blind Watchmaker. And wasn't Hedy Lamarr just *swoon*? But first go re-watch that Seinfeld episode where they go: Is he very well-read or is he very ... well ... red!?
+https://iep.utm.edu/socrates/
+
+	`When knowledge is something other than its object, it is contingent in character.`
+
+# APIs
+
+https://www.openapis.org/
+https://spec.openapis.org/oas/latest.html
+https://github.com/OAI/OpenAPI-Specification
+
+# Auth
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
+
+https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/
+https://github.com/zauberzeug/nicegui/blob/main/examples/authentication/main.py
+
+# Stuff
+
+https://www.jetbrains.com/research/python-developers-survey-2017/#tools-and-features
+
+https://github.com/swagger-api/swagger-ui
+
+# Distros
+
+https://archlinuxgui.com/
+https://kaosx.us/
+
+
+# Projections
+
+I need to learn to use these https://docs.github.com/en/issues/planning-and-tracking-with-projects project management tools. I need to organize my time better. I need to get an overview, assume a vantage point,  surface, find some air to breathe.
+
+	`"... this "beautiful soul," then, being conscious of this contradiction in its unreconciled immediacy, is disordered to the point of madness, wastes itself in yearning and pines away in consumption."` -- Hegel
+
+! back=2023-08-19
+
+! blurb=Shoutout to <a href="http://schizoid.in/">Radio Schizoid</a> Mumbai!

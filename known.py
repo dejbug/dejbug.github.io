@@ -36,27 +36,34 @@ def compile(ipath):
 	assert ipath
 	assert os.path.isfile(ipath)
 
-	regex = re.compile(r'^\s*([^#].*?)\.(.+?)(?:[ \t]*:[ \t]*(.+)?[ \t]*)?$', re.M)
+	# regex = re.compile(r'^\s*([^#].*?)\.(.+?)(?:[ \t]*:[ \t]*(.+)?[ \t]*)?$', re.M)
+	regex = re.compile(r'^\s*([^#].*?)\.(.+?)[ \t]*([:\\].*)?$', re.M)
 
 	aka = { 'domains': {}, 'subdomains': {} }
 	with open(ipath) as file:
 		for m in re.finditer(regex, file.read()):
 			name, top, alias = m.groups()
-			rest = []
 
-			if alias is not None:
-				x = alias.split('\t')
-				alias = x[0]
-				rest = x[1:]
+			if alias:
+				if alias.startswith(':'):
+					x = alias[1:].split('\\')
+					alias = x[0]
+					rest = x[1:]
+				elif alias.startswith('\\'):
+					alias, rest = name, alias[1:].split('\\')
+
 			if not alias:
 				alias = name
+
+			# print(name, '.', top, ':', alias, '/', rest)
 
 			setdict(aka, 'domains', top, name, alias)
 
 			for pair in rest:
 				pair = pair.strip()
 				if not pair: continue
-				key, val = pair.split(':')
+				x = pair.split(':')
+				key, val = x if len(x) == 2 else (x[0], '')
 				setdict(aka, 'subdomains', top, name, key, val)
 
 	return aka
