@@ -44,7 +44,8 @@ ArchiveTargetNames = $(ArchiveSources:archive/%.md=%)
 archive : $(ArchiveTargets) | build/archive/
 
 .PHONY : github
-github : github.css github.svg | build/ ; cp $^ build/
+github : build/github.css build/github.svg
+build/github.% : github.% | build/ ; cp $< $@
 
 .PHONY : test
 PythonFiles := $(shell find . -iname '*.py')
