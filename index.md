@@ -1,138 +1,140 @@
-# Wubba Lubba Dub Dub!
+# Water, water
 
-Today went by too quickly. I've finally managed to draw the pairings https://handbook.fide.com/chapter/C0403 for the first round of our tournament https://springerbk.de/meister-23.html . Using a FIDE-approved tool https://spp.fide.com/c-04-a-appendix-endorsement-of-a-software-program/ , https://spp.fide.com/wp-content/uploads/2020/04/C04Annex3_FEP19.pdf .
+every where... and I almost dehydrated yesterday. Must try and take in more of the transparent stuff.
 
-Sure, there were a couple python libs
+https://archive.org/details/rimeofancientmar00coler/page/6/mode/2up
 
-https://github.com/thurstonemerson/swiss-system-tournament
-https://github.com/tahahojati/SwissTournament
-https://github.com/ave-llan/swiss-tournament
+# archive.py
 
-But I don't trust them. I chose https://github.com/BieremaBoyzProgramming/bbpPairings over http://www.rrweb.org/javafo/JaVaFo.htm , though the docs are the same as http://www.rrweb.org/javafo/aum/JaVaFo2_AUM.htm . It uses a machine-readable input format https://ratings.fide.com/download/fidexchg.txt , https://handbook.fide.com/files/handbook/fidexchg.txt , https://www.fide.com/FIDE/handbook/C04Annex2_TRF16.pdf . An example: http://www.rrweb.org/javafo/aum/RankedTRFXSample2.txt . So basically I will have to write an interface for it #trf.interface.
+Being lazy I wanted to `make new` and archive the current blog page while creating a new one (the latter so that e.g. `ls -t --time=birth` would work). But then of course I came up with a couple more edge cases and the following (abridged) list of #toomanytabs came up.
 
-You can "download ratings" here: https://ratings.fide.com/download.phtml .
+I was surprised to find https://docs.python.org/3/library/difflib.html and just had to use it here.
 
-# Arbiter
+Next was the question of how to colorize it https://en.wikipedia.org/wiki/ANSI_escape_code#Colors . https://pypi.org/project/colout/ https://github.com/nojhan/colout is probably just fine but I chose https://github.com/garabik/grc because it's #native and #non-AUR.
 
-I really need to read the Arbiter's Manual https://arbiters.fide.com/news/7742 and FIDE Handbook https://handbook.fide.com/ . I shall hang out at https://spp.fide.com/objectives/ a bit.
+I wanted to simply pipe the output through a colorizer in the shell but then I thought, this is too simple not to do it directly. Saw how `grc` did it, which was very simple (and elegant). So simply took the relevant regexes out of its config script and presto.
 
-There is so much to do! I was counting 1178 open tabs https://github.com/dejbug/tablist when I remembered that there really should have been another tablister, a bit more capable https://github.com/dejbug/ff-tab-lister/ , of mine to be found on moz-addons https://github.com/dejbug/tablist and yet it's gone! I wonder what was wrong with it. It must have been a compatibility issue with the new SDK. Of course. _I was using the *config* store which no longer exists_.
+The remaining issues was what if I page it through `less`. Turns out `less -R` is for that.
 
-# It's been a while!
+https://wiki.archlinux.org/title/Color_output_in_console#less
+https://man.archlinux.org/man/less.1#D
 
-And I've been neglecting JS. I used to hate it since Netspace. Now they gave it template literals https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals but it still has no printf https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Text_formatting . http://es6-features.org/ https://github.com/lukehoban/es6features
+# More Docs
 
-But I looked at tablister again and thought about adding a gui to it https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface and then fiddled around and got carried away a bit and ended up with rubbish code https://github.com/dejbug/tablist/tree/dev . Todo!
+(for later)
 
-https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Working_with_the_Tabs_API
-https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Implement_a_settings_page
-https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Extension_pages
-https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface
+terminal-colors.d - onfigure output colorization for various utilities
 
-I shall get back into extensions development. I need an URL up-and-down counter for archive.org. Also a badge shall show in my toolbar if there's a DJVU version of a book in the downloads without me having to navigate to it.
+https://www.man7.org/linux/man-pages/man5/terminal-colors.d.5.html
 
-https://extensionworkshop.com/documentation/develop/build-a-secure-extension/
-https://extensionworkshop.com/documentation/develop/browser-compatibility/
+ANSI/VT100 Terminal Control Escape Sequences
 
-Some official best-practice patterns: https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Grid_wrapper .
+http://web.archive.org/web/20200626080032/http://www.termsys.demon.co.uk/vtansi.htm
 
-Stylish https://stylestage.dev/styles/ and nice https://styleshout.com/ .
+Terminal codes (ANSI/VT100) introduction
 
-I like web components https://github.com/mdn/web-components-examples/tree/main/defined-pseudo-class . It's one of the things that drew me back to web dev.
+https://web.archive.org/web/20230405000510/https://wiki.bash-hackers.org/scripting/terminalcodes
 
-This is on my #todo list.
+ANSI Escape Sequences: Colours and Cursor Movement
 
-https://vuejs.org/
-https://quasar.dev/docs
-https://tailwindcss.com/
+https://tldp.org/HOWTO/Bash-Prompt-HOWTO/c327.html
+https://wiki.archlinux.org/title/Bash/Prompt_customization
 
-https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined
+XTerm Control Sequences
 
-Did we really need https://mermaid.js.org/ a better graphviz https://graphviz.org/ ?
+https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
 
-# GUI
+https://www.itu.int/rec/T-REC-T.416/en
+https://www.itu.int/rec/T-REC-T.412/en
+https://www.iso.org/standard/22943.html
 
-I used to write in native Win32 API because the MFC had too much magic going on. It was a framework which you couldn't use without understanding what it abstracted away for you. It was self-defeating. ATL was better. I loved Don Box's book on COM. I was fond of Microsoft back then. Afterwards it was easy to switch to wxWidgets and later to https://www.wxpython.org/ https://www.blog.pythonlibrary.org/ .
+ECMA-48 Control functions for coded character sets (5e, 1991)
 
-At my last job interview they wanted me to sue Qt and Java. I wanted to look into it https://wiki.python.org/moin/PyQt , https://wiki.qt.io/Qt_for_Python but chose to go full pineapple bananas and write for Xorg https://www.x.org/wiki/ProgrammingDocumentation/ directly https://www.x.org/releases/current/doc/libX11/libX11/libX11.html , at the very least for GTK.
+https://www.ecma-international.org/publications-and-standards/standards/ecma-48/
 
-I then looked through the Python wiki https://wiki.python.org/moin/GuiProgramming for what else is new and found something truly stunning. Apparently there are quite a few additions to the python GUI ecosystem. Yes, Tkinter is shipped with it but it's not a joy to write for it.
+Finally, this https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences went on a curious tangent https://en.wikipedia.org/wiki/Tekhelet .
 
-ImGUI used to be the rage for OpenGL. Now this. https://github.com/hoffstadt/DearPyGui https://aur.archlinux.org/packages/python-dearpygui .
+# Sublime Text
 
-But this just blew my mind. https://pypi.org/project/nicegui/#description
-https://github.com/zauberzeug/nicegui/blob/main/DEPENDENCIES.md . It's inspired by https://justpy.io/ https://aur.archlinux.org/packages/python-justpy they say. Which, too, was news to me. Now *this* is awesome! https://fastapi.tiangolo.com/ and this https://www.starlette.io/ ( "Starlette is a lightweight ASGI framework/toolkit, which is ideal for building async web services in Python." ) and *this* https://www.uvicorn.org/ . Also https://github.com/python/mypy ( "Static Typing for Python" ) and https://docs.pydantic.dev/latest/ ( "Pydantic is the most widely used data validation library for Python" ) .
+I plan on adding a #TRF syntax highlighter to the repo.
 
-This is cute https://docs.python.org/3/library/pathlib.html . They overrode the division operator to easily concatenate paths.
+# Binge!
 
-# Sublime Object of Desire
+Looking forward to going through my Babylon 5 boxset again. Only question is: before or after Alien Nation ?
 
-https://packagecontrol.io/packages/Tailwind%20CSS%20Autocomplete
+https://en.wikipedia.org/wiki/Babylon_5
+https://en.wikipedia.org/wiki/Alien_Nation
 
-https://tailwindcss.com/docs/utility-first
-https://justpy.io/quasar_tutorial/introduction/#props-of-quasar-components
-https://quasar.dev/start/how-to-use-vue
+# TIL
 
-https://github.com/zauberzeug/nicegui/tree/main/examples/docker_image
+https://www.theguardian.com/technology/2019/oct/30/ai-becomes-grandmaster-in-fiendishly-complex-starcraft-ii I've completely missed this!
 
-# And now for something completely different!
+https://lucene.apache.org/core/2_9_4/queryparsersyntax.html Didn't know that Archive's search syntax was a thing.
 
-https://www.nosubject.com/Beautiful_Soul
+# Zathura
 
-`"me who does not recognise his very own raison d'etre in the disorder that he denounces in the world"`
+So I'm using SciTE https://scintilla.org/SciTE.html for notes-taking, having written a couple Lua scripts https://www.scintilla.org/SciTELua.html https://www.scintilla.org/PaneAPI.html to make this possible. So I pop up my bookmarks file, put the caret over a filepath and press F12 on my mouse https://www.redragonzone.com/products/redragon-m908-rgb-gaming-mouse to open a document. But then I realize that I've switched my default reader to *zathura* https://pwmt.org/projects/zathura/ recently and that the back/forward buttons on my mouse have now got screwy.
 
-https://hegel.net/en/ep2331.htm
+I have two buttons set to emit *pageup* / *pagedown* button presses and I have two buttons to emit *forward* / *backward* events.
 
-	"Now, so far as the spirit which is certain of itself, in the form
-	of a “beautiful soul”, does not possess the strength to relinquish the
-	self-absorbed uncommunicative knowledge of itself, it cannot attain to
-	any identity with the consciousness that is repulsed, and so cannot
-	succeed in seeing the unity of its self in another life, cannot reach
-	objective existence. The identity comes about, therefore, merely in a
-	negative way, as a state of being devoid of spiritual character."
+So a couple of things happend all at once.
 
+How do I set keybindings in zathura?
 
-https://www.marxists.org/reference/archive/hegel/works/ph/phc2cc.htm
-https://www.marxists.org/reference/archive/hegel/works/ph/phconten.htm
-https://www.jstor.org/stable/1566362
-https://plato.stanford.edu/entries/hegel-dialectics/
-https://iep.utm.edu/hegelsoc/
+https://man.archlinux.org/man/zathura.1#MOUSE_AND_KEY_BINDINGS
+https://man.archlinux.org/man/zathurarc.5.en
 
-https://iep.utm.edu/socrates/
+Here, the *feedkeys* command is nice. `map <PageUp> feedkeys <C-u>` and `map <PageDown> feedkeys <C-d>` works.
 
-	`When knowledge is something other than its object, it is contingent in character.`
+What are the scancodes of those latter two? It turns out that running `showkey`on Arch fails; we need `sudo showkey` works. Also tldr; I need `xev` https://wiki.archlinux.org/title/Keyboard_input to get the *forward* / *backward* events to log. It's logged as *button8* / *button9*. Alas, `map <Button9> feedkeys <C-d>` doesn't work because zathura stops at Button5 https://man.archlinux.org/man/zathurarc.5.en#Mouse .
 
-# APIs
+Now I was looking at ways to configure my Windows-supproting mouse in Linux.
 
-https://www.openapis.org/
-https://spec.openapis.org/oas/latest.html
-https://github.com/OAI/OpenAPI-Specification
+I realize that blinkenlights https://en.wikipedia.org/wiki/Blinkenlights are very important to some people https://openrgb.org/ and that my mouse is popular enough https://openrgb.org/devices_0.9.html .
 
-# Auth
+This though was very nice to see:
 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
+https://en.wikipedia.org/wiki/QMK
+https://docs.qmk.fm/
 
-https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/
-https://github.com/zauberzeug/nicegui/blob/main/examples/authentication/main.py
+And finally I landed here.
 
-# Stuff
+https://github.com/dokutan/mouse_m908
+https://github.com/dokutan/mouse_m908/tree/master/documentation
 
-https://www.jetbrains.com/research/python-developers-survey-2017/#tools-and-features
+And now I'm worried.
 
-https://github.com/swagger-api/swagger-ui
+https://github.com/dokutan/mouse_m908#safety
 
-# Distros
+I will have to look at the source https://github.com/dokutan/mouse_m908/tree/master/documentation and, at least to double-check, probably go myself and packetsniff https://vusb-analyzer.sourceforge.net/tutorial.html the windows app's https://www.winehq.org/ USB https://libusb.sourceforge.io/api-1.0/libusb_api.html protocol. And who knows, maybe the driver is simple enough to reverse? Though last time I did this was in 32-bit times. Things have changed a lot since then. https://valgrind.org/
 
-https://archlinuxgui.com/
-https://kaosx.us/
+#linkdump
 
+https://web.archive.org/web/20200223173329/https://www.linuxvoice.com/drive-it-yourself-usb-car-6/
 
-# Projections
+https://hackaday.com/2018/05/25/usb-reverse-engineering-a-universal-guide/
+https://hackaday.com/2017/07/25/hackaday-prize-entry-usb-packet-snooping/
 
-I need to learn to use these https://docs.github.com/en/issues/planning-and-tracking-with-projects project management tools. I need to organize my time better. I need to get an overview, assume a vantage point,  surface, find some air to breathe.
+https://goodfet.sourceforge.net/
+https://www.tindie.com/products/circuit_circus/greatfet-one-aka-azalea-pcb/
+https://www.circuit-circus.org/projects-real
 
-	`"... this "beautiful soul," then, being conscious of this contradiction in its unreconciled immediacy, is disordered to the point of madness, wastes itself in yearning and pines away in consumption."` -- Hegel
+https://greatfet.readthedocs.io/en/latest/
+https://github.com/greatfet-hardware/azalea
+https://github.com/greatscottgadgets/gsg-kicad-lib
+https://github.com/greatscottgadgets
+
+https://hackaday.com/2017/03/02/good-usb-protecting-your-ports-with-two-microcontrollers/
+
+https://hackaday.com/2008/11/19/how-to-the-bus-pirate-universal-serial-interface/
+
+# Window Managers
+
+"Manajer, he manajer." -- Manuel (Fawlty Towers)
+
+I need to get away from this bloated Desktop and use https://wiki.archlinux.org/title/I3 or https://www.nongnu.org/ratpoison/ . Let's look at https://wiki.archlinux.org/title/Comparison_of_tiling_window_managers later. My `.xinitrc` claims that I have already fiddled with https://wiki.archlinux.org/title/JWM , https://wiki.archlinux.org/title/Fluxbox , https://wiki.archlinux.org/title/LXQt , and https://wiki.archlinux.org/title/Openbox but I don't remember what my verdict was.
+
 
 ! back=2023-08-21
 
-! blurb=Shoutout to <a href="http://schizoid.in/">Radio Schizoid</a> Mumbai!
+! blurb=Three cups of water for every cup of coffee you imbibe.
