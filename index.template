@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <title>dejbug's /link/dump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="github.css">
 <style>
 	:root {
 		--color-pubtime: hotpink;
@@ -139,6 +140,7 @@
 	}
 </style>
 <body>
+<a class="github" href="https://github.com/dejbug/dejbug.github.io/"></a>
 <div id="meta" class="noise">
 	<div id="pill" class="glow">{{ python blog.py --title "{source}" }}</div>
 	{{ date '+%Y-%m-%d' }} &nbsp; <a href="https://dejbug.github.io/">dejbug.github.io</a></div>

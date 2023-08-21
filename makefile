@@ -20,7 +20,7 @@ GrammarNames := $(GrammarFiles:%.g4=%)
 ParserFiles =
 
 .PHONY : all clean reset run
-all : build/index.html | archive
+all : build/index.html | archive github
 clean :
 	rm -f parsers/*/*.interp parsers/*/*.tokens
 	rm -rf build
@@ -42,6 +42,9 @@ ArchiveTargetNames = $(ArchiveSources:archive/%.md=%)
 
 .PHONY : archive
 archive : $(ArchiveTargets) | build/archive/
+
+.PHONY : github
+github : github.css github.svg | build/ ; cp $^ build/
 
 .PHONY : test
 PythonFiles := $(shell find . -iname '*.py')
