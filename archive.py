@@ -55,8 +55,12 @@ class ArchiveItem:
 		for n in nn: yield n
 
 	@classmethod
-	def current(cls):
-		dt = datetime.now()
+	def current(cls, path = None):
+		if path:
+			t = os.path.getmtime(path)
+			dt = datetime.fromtimestamp(t)
+		else:
+			dt = datetime.now()
 		# print(dt.strftime('%Y-%m-%d.md'))
 		return cls(dt.year, dt.month, dt.day)
 
@@ -81,8 +85,8 @@ def get_diff(fromfile, tofile):
 	with open(tofile) as tf:
 		tolines = tf.readlines()
 
-	return difflib.ndiff(fromlines, tolines)
-	# return difflib.unified_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
+	# return difflib.ndiff(fromlines, tolines)
+	return difflib.unified_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
 	# return difflib.context_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
 	# return difflib.HtmlDiff().make_file(fromlines, tolines, fromfile, tofile, context=True, numlines=5)
 
@@ -106,11 +110,22 @@ def colorize_lines(lines):
 		else:
 			yield line + lf
 
-def print_diff(args):
+def make_current_archive_item(args):
+	# return ArchiveItem.current(args.ipath if args.mtime else None)
+
+	if args.mtime:
+		# Return last-modified-time-based target path.
+		return ArchiveItem.current(args.ipath)
+	else:
+		# Return now-time-based target path.
+		return ArchiveItem.current(None)
+
+
+def print_diff(args, file = sys.stdout):
 	# grc -c conf.diff python archive.py -a index.md
 	# python archive.py -a index.md | grcat conf.diff
 
-	cur = ArchiveItem.current()
+	cur = make_current_archive_item(args)
 	top = getLatestArchiveItemByName()
 	# print(cur - top)
 	diff = get_diff(args.ipath, top.path)
@@ -118,7 +133,7 @@ def print_diff(args):
 	if lines:
 		if not args.plain:
 			lines = colorize_lines(lines)
-		sys.stdout.writelines(lines)
+		file.writelines(lines)
 
 def same_first_line(apath, bpath, strip = ''):
 	if not os.path.isfile(apath) or not os.path.isfile(bpath):
@@ -133,7 +148,7 @@ def same_first_line(apath, bpath, strip = ''):
 	return aline == bline
 
 def get_quickdiff(apath, bpath, strip = '', colorize = False):
-	same = same_first_line(args.ipath, cur.path, strip)
+	same = same_first_line(apath, bpath, strip)
 	same_str = 'the same'
 	diff_str = 'different'
 	if colorize:
@@ -146,6 +161,7 @@ def parse_args(args = sys.argv[1:]):
 	parser.add_argument('-a', '--archive', action='store_true', help='archive current blog file')
 	parser.add_argument('-d', '--diff', action='store_true', help='show diff of current blog and top archive file')
 	parser.add_argument('-f', '--force', action='store_true', help='overwrite existing archive files')
+	parser.add_argument('-m', '--mtime', action='store_true', help='use last modified time to generate paths')
 	parser.add_argument('-p', '--plain', action='store_true', help='no rainbows')
 	parser.add_argument('--colors' , action='store_true', help='unicorns')
 	parser.add_argument('ipath', nargs='?', default=DEFAULT_IPATH, help='blog file to archive')
@@ -166,7 +182,7 @@ if __name__ == '__main__':
 			print()
 
 	elif args.archive:
-		cur = ArchiveItem.current()
+		cur = make_current_archive_item(args)
 		if cur.exists:
 			if args.force:
 				print(f'Overwriting "{cur.path}" with contents of "{args.ipath}"')
@@ -181,7 +197,7 @@ if __name__ == '__main__':
 			exit()
 
 	else:
-		cur = ArchiveItem.current()
+		cur = make_current_archive_item(args)
 		qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
 
 		if cur.exists:
@@ -191,7 +207,7 @@ is occupied already.
 
 The two files are probably {qdiff}.
 
-Try `python archive.py -d | less -R` to see the diff.''')
+Try `python archive.py -d | less -R` to see the the diff.''')
 			exit(1)
 
 		else:
