@@ -1,5 +1,5 @@
 import sys, os, re, io
-import argparse, urllib.parse, html, subprocess
+import argparse, urllib.parse, html, subprocess, datetime
 
 import known
 
@@ -38,8 +38,19 @@ def parse(text, file = sys.stdout):
 	file.write(text)
 
 
+def getDateStringFromPath(path):
+	m = re.match(r'archive/(\d{4})-(\d{2})-(\d{2})\.md', path)
+	if m: return '%d-%02d-%02d' % tuple(int(x) for x in m.groups())
+
+
+def getCurrentDateString():
+	d = datetime.datetime.now()
+	return d.strftime('%Y-%m-%d')
+
+
 def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
+	parser.add_argument('--date', action='store_true')
 	parser.add_argument('--title', action='store_true')
 	parser.add_argument('--backref', action='store_true')
 	parser.add_argument('-v', '--variable')
@@ -68,21 +79,23 @@ def main(args = sys.argv[1:]):
 				if os.path.isfile(source):
 					rendered = f'/archive/{m.group(1)}.html'
 					print(f'<strong><a href="{rendered}">[back]</a></strong>')
-		return
 
-	if args.variable:
+	elif args.date:
+		d = getDateStringFromPath(args.ipath)
+		if not d: d = getCurrentDateString()
+		print(d)
+
+	elif args.variable:
 		with open(args.ipath) as ifile:
 			m = re.search(r'^!\s*' + args.variable + r'=(.+?)\s*$', ifile.read(), re.S|re.M)
 			if m: print(m.group(1))
-		return
 
-	if args.title:
+	elif args.title:
 		with open(args.ipath) as ifile:
 			m = re.search(r'^#+\s*(.+?)\s*$', ifile.read(), re.S|re.M)
 			print(m.group(1) if m else '')
-		return
 
-	if args.ipath:
+	elif args.ipath:
 		with open(args.ipath) as ifile:
 			parse(ifile.read(), mfile)
 
