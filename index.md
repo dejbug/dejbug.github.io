@@ -58,6 +58,14 @@ Finally, this https://stackoverflow.com/questions/4842424/list-of-ansi-color-esc
 
 I plan on adding a #TRF syntax highlighter to the repo. Update: Almost done.
 
+http://www.sublimetext.com/docs/syntax.html
+http://www.sublimetext.com/docs/selectors.html
+
+http://www.sublimetext.com/docs/scope_naming.html
+http://www.sublimetext.com/docs/scope_naming.html#color-schemes
+
+http://www.sublimetext.com/docs/color_schemes.html
+
 ## Feature Request
 
 I hate that the full path in the titlebar gets centered. It really needs to stay aligned so that one can quickly tell when one is _crossing folder boundaries_. I just can't believe that nobody seems to look at it (otherwise there would have been a config setting by now to change it). I'm getting seasick trying to orient myself by it. :barfemoji:
