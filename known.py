@@ -43,6 +43,7 @@ def compile(ipath):
 	with open(ipath) as file:
 		for m in re.finditer(regex, file.read()):
 			name, top, alias = m.groups()
+			rest = []
 
 			if alias:
 				if alias.startswith(':'):
