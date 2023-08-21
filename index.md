@@ -73,7 +73,12 @@ https://lucene.apache.org/core/2_9_4/queryparsersyntax.html Didn't know that Arc
 
 # Zathura
 
-So I'm using SciTE https://scintilla.org/SciTE.html for notes-taking, having written a couple Lua scripts https://www.scintilla.org/SciTELua.html https://www.scintilla.org/PaneAPI.html to make this possible. So I pop up my bookmarks file, put the caret over a filepath and press F12 on my mouse https://www.redragonzone.com/products/redragon-m908-rgb-gaming-mouse to open a document. But then I realize that I've switched my default reader to *zathura* https://pwmt.org/projects/zathura/ recently and that the back/forward buttons on my mouse have now got screwy.
+So I'm using SciTE https://scintilla.org/SciTE.html for notes-taking, having written a couple Lua scripts https://www.scintilla.org/SciTELua.html https://www.scintilla.org/PaneAPI.html to make this possible. So I pop up my bookmarks file, put the caret over a filepath and press F12 on my mouse https://www.redragonzone.com/products/redragon-m908-rgb-gaming-mouse to open a document. But then I realize that I've switched my default reader to *zathura*
+
+https://pwmt.org/projects/zathura/
+https://git.pwmt.org/pwmt/zathura/-/boards
+
+recently and that the back/forward buttons on my mouse have now got screwy.
 
 I have two buttons set to emit *pageup* / *pagedown* button presses and I have two buttons to emit *forward* / *backward* events.
 
@@ -84,9 +89,17 @@ How do I set keybindings in zathura?
 https://man.archlinux.org/man/zathura.1#MOUSE_AND_KEY_BINDINGS
 https://man.archlinux.org/man/zathurarc.5.en
 
+https://git.pwmt.org/pwmt/zathura/-/blob/develop/zathura/config.c
+https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gdk/gdkkeysyms.h
+
 Here, the *feedkeys* command is nice. `map <PageUp> feedkeys <C-u>` and `map <PageDown> feedkeys <C-d>` works.
 
 What are the scancodes of those latter two? It turns out that running `showkey`on Arch fails; we need `sudo showkey` works. Also tldr; I need `xev` https://wiki.archlinux.org/title/Keyboard_input to get the *forward* / *backward* events to log. It's logged as *button8* / *button9*. Alas, `map <Button9> feedkeys <C-d>` doesn't work because zathura stops at Button5 https://man.archlinux.org/man/zathurarc.5.en#Mouse .
+
+Using https://wiki.gnome.org/action/show/Projects/GTK/Inspector?action=show&redirect=Projects%2FGTK%2B%2FInspector `gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true` and `Control-Shift-D` showed me the name of the signal to connect to but writing my own GTK signal tracer a la `win.connect("button-press-event", cb)` didn't provide any new insights over and above `xev`. It's buttons 8 and 9 all the way https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gdk/gdkkeysyms.h ; that's all there is to it, and there is no way to bind to them https://docs.gtk.org/gdk4/keys.html https://docs.gtk.org/gtk3/key-bindings.html https://docs.gtk.org/gobject/method.Object.connect.html , apparently.
+
+https://git.pwmt.org/search?search=GDK_KEY_n&nav_source=navbar&project_id=1&group_id=34&search_code=true&repository_ref=develop
+https://git.pwmt.org/pwmt/zathura/-/commits/develop
 
 Now I was looking at ways to configure my Windows-supproting mouse in Linux.
 
@@ -107,6 +120,21 @@ And now I'm worried.
 https://github.com/dokutan/mouse_m908#safety
 
 I will have to look at the source https://github.com/dokutan/mouse_m908/tree/master/documentation and, at least to double-check, probably go myself and packetsniff https://vusb-analyzer.sourceforge.net/tutorial.html the windows app's https://www.winehq.org/ USB https://libusb.sourceforge.io/api-1.0/libusb_api.html protocol. And who knows, maybe the driver is simple enough to reverse? Though last time I did this was in 32-bit times. Things have changed a lot since then. https://valgrind.org/
+
+# GTK
+
+https://wiki.archlinux.org/title/GTK #linkdump
+
+https://docs.gtk.org/
+https://www.gtk.org/docs/apis/
+
+https://developer.gnome.org/documentation/tutorials/beginners.html
+https://pygobject.readthedocs.io/en/latest/guide/api/index.html
+http://web.mit.edu/ghudson/dev/nokrb/third/gtk2/docs/reference/gtk/html/index.html
+https://lazka.github.io/pgi-docs/
+https://python-gtk-3-tutorial.readthedocs.io/en/latest/introduction.html
+
+# Voiding the warranty
 
 #linkdump
 
@@ -134,6 +162,36 @@ https://hackaday.com/2008/11/19/how-to-the-bus-pirate-universal-serial-interface
 
 I need to get away from this bloated Desktop and use https://wiki.archlinux.org/title/I3 or https://www.nongnu.org/ratpoison/ . Let's look at https://wiki.archlinux.org/title/Comparison_of_tiling_window_managers later. My `.xinitrc` claims that I have already fiddled with https://wiki.archlinux.org/title/JWM , https://wiki.archlinux.org/title/Fluxbox , https://wiki.archlinux.org/title/LXQt , and https://wiki.archlinux.org/title/Openbox but I don't remember what my verdict was.
 
+
+# Coredump
+
+https://man7.org/linux/man-pages/man3/backtrace.3.html
+
+`coredumctl`
+
+https://blogs.gnome.org/mcatanzaro/2021/09/18/creating-quality-backtraces-for-crash-reports/
+
+https://wiki.ubuntu.com/Backtrace
+
+https://community.kde.org/Guidelines_and_HOWTOs/Debugging/How_to_create_useful_crash_reports
+
+https://unix.stackexchange.com/questions/11053/capture-and-log-gdb-backtraces-without-stopping-the-process
+
+
+# Archive.org
+
+Using the web page to search for books is bothersome in that the "always available" needs to be ticked manually and there is no apparent advanced search option to set it. But one can set a bookmark in Firefox and give it a shortcut. For example https://archive.org/search?query=%s&and%5B%5D=lending%3A%22is_readable%22 with shortcut `a` and https://web.archive.org/20230000000000*/%s with shortcut `wb`.
+
+
+# New things
+
+https://python-poetry.org/docs/
+
+	"Poetry is a tool for dependency management and packaging in Python.
+	It allows you to declare the libraries your project depends on and it
+	will manage (install/update) them for you. Poetry offers a lockfile
+	to ensure repeatable installs, and can build your project for
+	distribution."
 
 ! back=2023-08-21
 
