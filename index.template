@@ -40,6 +40,10 @@
 		hyphens: auto;
 /*		word-break: break-all;*/
 	}
+	article {
+		columns: {{ python blog.py -v columns "{source}" }};
+		column-gap: 2em;
+	}
 	footer {
 		margin-top: 1.2em;
 		color: lightslategray;
@@ -49,7 +53,11 @@
 		align-items: baseline;
 	}
 	strong {
+		display: {{ python blog.py -v header "{source}" }};
 		color: tomato;
+	}
+	strong ~ strong {
+		margin-top: 1em;
 	}
 	a, a:visited {
 /*		hyphens: none;*/
@@ -90,6 +98,7 @@
 
 		font-size: 80%;
 		line-height: 150%;
+		margin-bottom: 1.4em;
 	}
 	.known-uri {
 		border-right: thin solid crimson;
@@ -105,6 +114,7 @@
 	}
 	.petokraka {
 		font-size: 160%;
+		color: tomato;
 	}
 	#pill {
 		color: var(--color-pubtime);
@@ -137,6 +147,9 @@
 			word-break: break-all;
 			hyphens: manual;
 		}
+		article {
+			columns: initial;
+		}
 		a, a:visited {
 /*			border-right: thin solid crimson;*/
 		}
@@ -145,6 +158,7 @@
 			padding: 0;
 			border-radius: 0;
 			box-shadow: none;
+			margin-bottom: 1em;
 		}
 		.noise {
 			display: none;
@@ -161,15 +175,17 @@
 	}
 </style>
 <body>
+<article>
 <a class="github" href="https://github.com/dejbug/dejbug.github.io/"></a>
 <div id="meta" class="noise">
 	<div id="pill" class="glow">{{ python blog.py --title "{source}" }}</div>
 	{{ python blog.py --date "{source}" }} &nbsp; <a href="https://dejbug.github.io/">dejbug.github.io</a></div>
 {{ python blog.py "{source}" }}
 <div id="backref">{{ python blog.py --backref "{source}" }}</div>
+</article>
 <footer>
 <span class="noise">{{ python blog.py -v blurb "{source}" }}</span>
-<span id="copyleft">Copyleft (<strong class="petokraka">&#x2605</strong>) Dejan Budimir</span>
+<span id="copyleft">Copyleft (<span class="petokraka">&#x2605</span>) Dejan Budimir</span>
 </footer>
 </body>
 </html>
