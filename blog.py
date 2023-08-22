@@ -30,6 +30,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'(\s+)([*]{1,2})(.+?)\2', r'\1<b>\3</b>', text, flags = re.S)
 	text = re.sub(r'(\s+)([_]{1,2})(.+?)\2', r'\1<u>\3</u>', text, flags = re.S)
 	text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text, flags = re.S)
+	text = re.sub(r'"""(.+?)"""', r'<blockquote>\1</blockquote>', text, flags = re.S)
 	text = re.sub(r'^\s*((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	# text = re.sub(r'\s*<?(https?://' + LINKCC + r'+)>?\s*', transuri, text, flags = re.S)
 	# NOTE: Sublime highlights the string after LINKCC weird. Send them a note.

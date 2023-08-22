@@ -76,6 +76,13 @@
 		border-radius: 8px;
 		padding: 0 .2em;
 	}
+	blockquote {
+		background-color: #745a803d;
+		color: antiquewhite;
+		border-radius: .1em;
+		padding: 1em;
+		box-shadow: 6px 3px 20px antiquewhite;
+	}
 	.known-uri {
 		border-right: thin solid crimson;
 		padding-right: .3em;
