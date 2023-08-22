@@ -79,9 +79,17 @@
 	blockquote {
 		background-color: #745a803d;
 		color: antiquewhite;
-		border-radius: .1em;
-		padding: 1em;
+
+		border-radius: .3em;
 		box-shadow: 6px 3px 20px antiquewhite;
+
+		padding: 1em;
+		text-align: left;
+		word-break: keep-all;
+		hyphens: auto;
+
+		font-size: 80%;
+		line-height: 150%;
 	}
 	.known-uri {
 		border-right: thin solid crimson;
@@ -131,6 +139,12 @@
 		}
 		a, a:visited {
 /*			border-right: thin solid crimson;*/
+		}
+		blockquote {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			box-shadow: none;
 		}
 		.noise {
 			display: none;
