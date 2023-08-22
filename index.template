@@ -131,11 +131,11 @@
 		left: calc(100svw - 1.5em);
 		width: max-content;
 	}
-	#backref {
-		float: right;
-	}
 	#copyleft {
 		margin-left: auto;
+	}
+	#backref {
+		margin-left: 1em;
 	}
 	.noise { }
 	@media (max-width: 800px) {
@@ -181,11 +181,11 @@
 	<div id="pill" class="glow">{{ python blog.py --title "{source}" }}</div>
 	{{ python blog.py --date "{source}" }} &nbsp; <a href="https://dejbug.github.io/">dejbug.github.io</a></div>
 {{ python blog.py "{source}" }}
-<div id="backref">{{ python blog.py --backref "{source}" }}</div>
 </article>
 <footer>
 <span class="noise">{{ python blog.py -v blurb "{source}" }}</span>
 <span id="copyleft">Copyleft (<span class="petokraka">&#x2605</span>) Dejan Budimir</span>
+<span id="backref">{{ python blog.py --backref "{source}" }}</span>
 </footer>
 </body>
 </html>

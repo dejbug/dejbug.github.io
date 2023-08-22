@@ -30,13 +30,13 @@ The _Sublime Text docs are so abysmal_ that users had to write their own https:/
 
 I'm stuck with it for now. The syntax highlighter is fine. And no recompilation necessary, which was its major selling point. The auto hinting system I imagined can be realized after all, I reckon, with ViewEventListener https://www.sublimetext.com/docs/api_reference.html#sublime_plugin.ViewEventListener and (the somewhat under-documented) #Phantoms https://www.sublimetext.com/docs/api_reference.html#sublime.Phantom .
 
-And it **does** look beautiful. With the industrial_coding theme and the Mersi color scheme.
+And it **does** look beautiful. With the industrial_coding theme https://packagecontrol.io/packages/industrial-coding-theme and the Mersi color scheme https://packagecontrol.io/packages/Theme%20-%20Mersi .
 
 # Auditing
 
 Remind me to go audit all the ST packages I've installed. Mostly themes. For now I've disabled Package Control's auto-upgrade feature, just because one never knows and really there is no need to update anything with the themes I have so far. I don't particularly enjoy people being able to push self-executing code to my machine at will. Such things should be run in a sandbox, WebAssembly style.
 
-I guess I wanted my cake and be eating it too. Pass the potatoes.
+I guess I wanted my cake and be eating it too. Pass the potatoes please?
 
 	"""A perennial plant (Solanum tuberosum) in the nightshade family that was first cultivated in South America and is widely grown for its starchy edible tubers. -- https://www.wordnik.com/words/potato """
 
