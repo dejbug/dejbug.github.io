@@ -1,11 +1,13 @@
 apache.org
 archive.org:ia
 archlinux.org:arch
+cnn.com
 ecma-international.org:ecma
 eff.org
 fermyon.app:fermyon.app
 fermyon.com:fermyon
 fide.com\handbook:hb\arbiters:arb\ratings:rat
+github.blog:gh.blog
 github.com:gh
 github.io:gh
 gnome.org
@@ -22,7 +24,10 @@ marxists.org
 medium.com
 mozilla.org:moz\developer:dev\firefox-source-docs:ff-src
 mozillazine.org:mozillazine
+nist.gov
 nosubject.com
+npr.org
+nytimes.com:nyt
 opengroup.org:og
 pypi.org:pypi
 python.org:py
@@ -45,6 +50,7 @@ theguardian.com:guardian
 tldp.org
 utm.edu
 w3.org
+washingtonpost.com:wp
 wasi.dev
 wasmtime.dev:wt
 wikipedia.org:wiki\en:

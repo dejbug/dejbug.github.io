@@ -16,7 +16,7 @@ So _I've moved things into their own repo_ https://github.com/dejbug/SublimeTRF 
 
 Ok. I've found an okay use for Sublime Text over and above the highlights. Though in the process I was frequently _wondering whether I should have worked on a **SciTE** integration instead_ .
 
-The old way of adding syntax to SciTE is deprecated https://www.scintilla.org/SciTELexer.html in favor of Lexilla https://www.scintilla.org/LexillaDoc.html https://github.com/ScintillaOrg/lexilla . The last paragraph hints at the possibility of adding new lexers dynamically, without recompilation. Also I remember vaguely that PEG http://bford.info/packrat/ lexers used to be supported via Lua http://www.inf.puc-rio.br/~roberto/lpeg/ https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/lualpeg/lpeg.html .
+The old way of adding syntax to SciTE is deprecated https://www.scintilla.org/SciTELexer.html in favor of Lexilla https://www.scintilla.org/LexillaDoc.html https://github.com/ScintillaOrg/lexilla . The last paragraph hints at the possibility of adding new lexers dynamically, without recompilation. Also I remember vaguely that PEG https://bford.info/pub/lang/peg/  http://bford.info/packrat/ lexers used to be supported via Lua http://www.inf.puc-rio.br/~roberto/lpeg/ https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/lualpeg/lpeg.html .
 
 But the syntax highlighting is half the story. It feels like in SciTE you have more control over the editor. The code is old-school and hierarchical. And the docs are **far** superior!
 
@@ -26,11 +26,66 @@ But the syntax highlighting is half the story. It feels like in SciTE you have m
 
 The _Sublime Text docs are so abysmal_ that users had to write their own https://github.com/sublimetext-io/docs.sublimetext.io . Futhermore, these unofficial docs were so popular and useful to the hoi polloi that some of them were willing to pay https://app.bountysource.com/teams/st-undocs/fundraiser for it. Even though there is still much more left to write https://trello.com/b/ArLlY4X7/sublime-text-unofficial-documentation !
 
+Also see this https://github.com/jan-keller/autofuzz-bugs/issues/1 and this https://github.com/bountysource/core/issues/1586 about BountySource https://en.wikipedia.org/wiki/Bountysource#cite_note-11 .
+
 # Still, Sublime Text
 
-I'm stuck with it for now. The syntax highlighter is fine. And no recompilation necessary, which was its major selling point. The auto hinting system I imagined can be realized after all, I reckon, with ViewEventListener https://www.sublimetext.com/docs/api_reference.html#sublime_plugin.ViewEventListener and (the somewhat under-documented) #Phantoms https://www.sublimetext.com/docs/api_reference.html#sublime.Phantom .
+I'm stuck with it for now. The syntax highlighter is fine. And there's no recompilation necessary, which was its major selling point. The auto hinting system I imagined can be realized after all, I reckon, with ViewEventListener https://www.sublimetext.com/docs/api_reference.html#sublime_plugin.ViewEventListener and (the somewhat under-documented) #Phantoms https://www.sublimetext.com/docs/api_reference.html#sublime.Phantom .
 
 And it **does** look beautiful. With the industrial_coding theme https://packagecontrol.io/packages/industrial-coding-theme and the Mersi color scheme https://packagecontrol.io/packages/Theme%20-%20Mersi .
+
+# Future Creep
+
+I will have to complicate the syntax anyway. It's not very useful in the current form. I hope they have provided for a mechanism to avoid gratuitous nesting. It would make sense for a thing like that to be there.
+
+There's this unfortunate detail about Phantoms; they remind me of how ST handles bookmarks. It binds to ranges, selections, not to line numbers. You could end up having dozens of bookmarks all on the same line and then wonder why toggling doesn't seem to work.
+
+I really miss the clunky feel of SciTE but: Python over Lua, Lua over Emacs Lisp, Lisp over ... what was it that vim uses, what was vimscript? They are differnt tools for different things, I feel.
+
+SciTE has no macros, which sucks. ST has better macros than it used to have, but some things still don't work, apparently (copy and pasting mid-macro, for example). Vim would be perfect if it didn't feel like the console editor that it truly is, and most wonderfully so. Let's not even talk of the new ones, VS Code for instance, which are trying to be too helpful only to be getting in the way. The editor should never draw attention to itself. Writing in those hyper-assisting editors feels like going to the disco. All those flashing lights. Triggering seizures.
+
+There's also TextAdept https://orbitalquark.github.io/textadept/ https://github.com/orbitalquark/textadept https://aur.archlinux.org/packages/textadept-gtk3 , which wants to be what I would love it to be but last time I checked the startup script looked a bit too messy and I moved on. It's time to give it another look. If it were Python based rather than Lua I'd jump on it immediately.
+
+I feel like SublimeText is good for now. Writing extensions for it is not too much of a pain.
+
+Vim is #1 for a great many things, remote work being one. If there only were a proper GUI mode for it! Instead it feels like there's a thick hard glassy pane between us. Like you can't reach through to it. It's clunky in a bad way. Don't ask me to define the feeling but it's not just phantoms of the mind. It has real effects on my behavior.
+
+There really should be nothing far more beautiful than a nicely colored screen of code.
+
+# TIL
+
+Static sites with Vue https://vuepress.vuejs.org/ .
+
+You can https://en.wikipedia.org/wiki/Crowdfunding crowdfund an experiment https://experiment.com/ .
+
+# Transcending Binaries
+
+This warms the heart <3 :
+
+	""" FIDE and its member federations more often receive recognition requests from individual members who identify themselves as transgender. https://doc.fide.com/docs/DOC/2FC2023/CM2_2023_45.pdf """
+
+https://www.theguardian.com/sport/2023/aug/17/trans-women-banned-from-world-chess-events-while-review-takes-place
+https://www.washingtonpost.com/sports/2023/08/17/fide-transgender-ban-chess-women/
+https://www.npr.org/2023/08/18/1194593562/chess-transgender-fide-pushback
+https://www.nytimes.com/2023/08/17/sports/chess-transgender-women-ban-fide.html
+https://fortune.com/2023/08/21/transgender-women-chess-competitions-fide-federation-switzerland/
+https://edition.cnn.com/2023/08/17/sport/fide-bans-transgender-women-chess-spt-intl/index.html
+
+The passage that was of universal interest to the press:
+
+	"""If a player holds any of the women titles, but the gender has been changed to a man, the women titles are to be abolished. ... If a player has changed the gender from a man into a woman, all the previous titles remain eligible. https://handbook.fide.com/chapter/TransgenderRegulations """
+
+Makes sense. WGM is after all the gendered version of GM. But that is all the charity they had time for really in their new regulations.
+
+	""" FIDE's transgender policy is ridiculous and dangerous. It's obvious they didn't consult with any transgender players in constructing it. -- WGM Jennifer Shahade https://www.chess.com/news/view/fide-publishes-controversial-new-transgender-policy """
+
+I am lucky I was trite / My parents guessed my gender right .
+
+
+# GitHub MFA
+
+Github https://github.com/github/roadmap just asked me to get real https://csrc.nist.gov/pubs/sp/800/63/b/upd2/final and be adding one more auth factor and stuff. https://github.blog/2023-03-09-raising-the-bar-for-software-security-github-2fa-begins-march-13/ Apparently this was going on since March already. Open source being ubiquitous https://openuk.uk/ , deserving to be safeguarded from impersonation. We've all heard the horror stories. They are probably going to switch to something called passkeys soon https://fidoalliance.org/passkeys/ . They made me think about purchasing a YubiKey https://www.yubico.com/works-with-yubikey/catalog/ https://support.yubico.com/hc/en-us/articles/360013790319-How-many-accounts-can-I-register-my-YubiKey-with- https://www.yubico.com/products/software-development-toolkits-sdks/ . I feel a little less secure knowing that I could lock myself out by simply losing my phone. Forces one to think about things. Which is probably a good thing. https://w3c.github.io/webauthn/ https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API
+
 
 # Auditing
 
@@ -45,5 +100,4 @@ I guess I wanted my cake and be eating it too. Pass the potatoes please?
 
 ! blurb=Four eggs, three cups of flour, one cup of sugar, a block of butter and some lemon juice!
 
-! columns=2
 ! header=block

@@ -25,7 +25,9 @@ def transtit(m):
 def parse(text, file = sys.stdout):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 	text = re.sub(r'^!.*$', '', text, flags = re.S|re.M)
+	text = re.sub(r'<3', '[:heart:]', text, flags = re.S)
 	text = html.escape(text, quote = False)
+	text = re.sub(r'\[:heart:]', '<span class="petokraka">&#x2764</span>', text, flags = re.S)
 	text = re.sub(r'(\s+)(#[A-Za-z][-_.A-Za-z]*[A-Za-z]+)', r'\1<i>\2</i>', text, re.S)
 	text = re.sub(r'(\s+)([*]{1,2})(.+?)\2', r'\1<b>\3</b>', text, flags = re.S)
 	text = re.sub(r'(\s+)([_]{1,2})(.+?)\2', r'\1<u>\3</u>', text, flags = re.S)

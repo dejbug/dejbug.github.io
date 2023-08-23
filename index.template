@@ -30,7 +30,9 @@
 	}
 	body {
 		min-height: 42em;
-		font-family: monospace; font-size: 24pt; line-height: 200%;
+		font-family: monospace;
+		font-size: 24pt;
+		line-height: 200%;
  		background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
 		color: var(--color-body-fg);
 /*		filter: contrast(.9);*/
@@ -171,6 +173,12 @@
 		body {
 /*			background: pink;*/
 			font-size: 10pt;
+		}
+	}
+	@media print {
+		body {
+			color: black;
+			background-color: white;
 		}
 	}
 </style>
