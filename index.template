@@ -86,6 +86,15 @@
 		border-radius: 8px;
 		padding: 0 .2em;
 	}
+	pre {
+		background-color: #333;
+		color: #00ff00;
+		border: thin solid var(--color-code-br);
+		border-radius: 8px;
+		font-size: 80%;
+		line-height: 120%;
+		padding: 1em;
+	}
 	blockquote {
 		background-color: #745a803d;
 		color: antiquewhite;

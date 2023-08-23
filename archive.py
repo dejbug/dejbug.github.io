@@ -1,8 +1,10 @@
+#!/bin/env python
+
 # NOTE: Regexes for diff taken from:
 # 	/usr/share/grc/conf.diff
 #	See: <https://github.com/garabik/grc>
 
-import sys, os, re, argparse, difflib, shutil
+import sys, os, re, argparse, difflib, shutil, hashlib
 
 from datetime import datetime, timezone
 from functools import cmp_to_key
@@ -67,16 +69,15 @@ class ArchiveItem:
 	def __str__(self):
 		return type(self).__name__ + str(self.__dict__)
 
-def getLatestArchiveItemByName():
+def get_latest_archive_item_by_name():
 	aa = ArchiveItem.sorted(ArchiveItem.iter(), reverse = True)
 	return aa[0] if aa else None
-
 
 def file_mtime(path):
 	t = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
 	return t.astimezone().isoformat()
 
-def get_diff(fromfile, tofile):
+def get_diff(fromfile, tofile, verbose = False):
 	fromdate = file_mtime(fromfile)
 	todate = file_mtime(tofile)
 
@@ -85,10 +86,13 @@ def get_diff(fromfile, tofile):
 	with open(tofile) as tf:
 		tolines = tf.readlines()
 
-	# return difflib.ndiff(fromlines, tolines)
-	return difflib.unified_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
 	# return difflib.context_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
 	# return difflib.HtmlDiff().make_file(fromlines, tolines, fromfile, tofile, context=True, numlines=5)
+
+	if verbose:
+		return difflib.ndiff(fromlines, tolines)
+	else:
+		return difflib.unified_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=3)
 
 def colorize_lines(lines):
 	assert lines and len(lines)
@@ -120,20 +124,23 @@ def make_current_archive_item(args):
 		# Return now-time-based target path.
 		return ArchiveItem.current(None)
 
-
-def print_diff(args, file = sys.stdout):
+def print_diff_last_archived(args):
 	# grc -c conf.diff python archive.py -a index.md
 	# python archive.py -a index.md | grcat conf.diff
 
 	cur = make_current_archive_item(args)
-	top = getLatestArchiveItemByName()
+	top = get_latest_archive_item_by_name()
 	# print(cur - top)
-	diff = get_diff(args.ipath, top.path)
+	diff = get_diff(args.ipath, top.path, verbose = args.verbose)
 	lines = list(diff)
 	if lines:
 		if not args.plain:
 			lines = colorize_lines(lines)
-		file.writelines(lines)
+		sys.stdout.writelines(lines)
+		if args.verbose:
+			print()
+	if args.verbose:
+		print_hashes(args.ipath, top.path)
 
 def same_first_line(apath, bpath, strip = ''):
 	if not os.path.isfile(apath) or not os.path.isfile(bpath):
@@ -147,69 +154,141 @@ def same_first_line(apath, bpath, strip = ''):
 		bline = bline.strip(strip)
 	return aline == bline
 
+def green(text):
+	return '\033[32;1m' + text + '\033[0m'
+
+def red(text):
+	return '\033[31m' + text + '\033[0m'
+
 def get_quickdiff(apath, bpath, strip = '', colorize = False):
 	same = same_first_line(apath, bpath, strip)
 	same_str = 'the same'
 	diff_str = 'different'
 	if colorize:
-		same_str = '\033[32;1m' + same_str + '\033[0m'
-		same_str = '\033[31m' + same_str + '\033[0m'
+		same_str = green(same_str)
+		diff_str = red(diff_str)
 	return f'(different versions of) {same_str}' if same else diff_str
 
-def parse_args(args = sys.argv[1:]):
-	parser = argparse.ArgumentParser()
-	parser.add_argument('-a', '--archive', action='store_true', help='archive current blog file')
-	parser.add_argument('-d', '--diff', action='store_true', help='show diff of current blog and top archive file')
-	parser.add_argument('-f', '--force', action='store_true', help='overwrite existing archive files')
-	parser.add_argument('-m', '--mtime', action='store_true', help='use last modified time to generate paths')
-	parser.add_argument('-p', '--plain', action='store_true', help='no rainbows')
-	parser.add_argument('--colors' , action='store_true', help='unicorns')
-	parser.add_argument('ipath', nargs='?', default=DEFAULT_IPATH, help='blog file to archive')
-	return parser, parser.parse_args(args)
+def compare_files(apath, bpath, block_size = 8192):
+	if not os.path.isfile(apath): return False
+	if not os.path.isfile(bpath): return False
+	if os.path.getsize(apath) != os.path.getsize(bpath): return False
+	# TODO: Use mmaps?
+	# TODO: Use ctypes.fopen/close, ctypes.fileno, ctypes.fstat
+	#	with the "optimal block size for I/O" ?
+	with open(apath, 'rb') as afile:
+		with open(bpath, 'rb') as bfile:
+			achunk = afile.read(block_size)
+			bchunk = bfile.read(block_size)
+			if achunk != bchunk:
+				return False
+	return True
 
-if __name__ == '__main__':
-	parser, args = parse_args()
-	# print(args)
+def get_archived_version(ipath = DEFAULT_IPATH):
+	for archived in ArchiveItem.sorted(ArchiveItem.iter(), reverse = True):
+		if compare_files(ipath, archived.path):
+			return archived
 
-	if args.diff:
-		print_diff(args)
-		exit()
+def print_colors():
+	for fg in range(8):
+		for bg in range(8):
+			print(f'\033[{30+fg};{40+bg};1m{30+fg};{40+bg}\033[0m', end=' ')
+		print()
 
-	elif args.colors:
-		for fg in range(8):
-			for bg in range(8):
-				print(f'\033[{30+fg};{40+bg};1m{30+fg};{40+bg}\033[0m', end=' ')
-			print()
+def getFileHash(path):
+	md5 = hashlib.md5()
+	with open(path, 'rb') as file:
+		md5.update(file.read())
+	return md5.hexdigest()
 
-	elif args.archive:
-		cur = make_current_archive_item(args)
-		if cur.exists:
-			if args.force:
-				print(f'Overwriting "{cur.path}" with contents of "{args.ipath}"')
-				shutil.copy(args.ipath, cur.path)
-			else:
-				print(f'Target at "{cur.path}" exists. Use --force to overwrite.')
-				qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
-				print(f'The two files are probably {qdiff}.')
-		else:
-			print(f'Writing "{cur.path}" with contents of "{args.ipath}"')
+def print_hashes(ipath, apath):
+	ihash = getFileHash(ipath)
+	ahash = getFileHash(apath)
+	same = ihash == ahash
+	colorize = green if same else red
+	print(colorize(ihash), ipath)
+	print(colorize(ahash), apath)
+	return same
+
+def print_hashes_if_archived(args):
+	archived = get_archived_version(args.ipath)
+	if archived:
+		if args.verbose:
+			print(f'"{green(args.ipath)}" is already archived as "{green(archived.path)}".\n')
+		print_hashes(args.ipath, archived.path)
+
+def archive_current(args):
+	if print_hashes_if_archived(args):
+		return
+
+	cur = make_current_archive_item(args)
+	if cur.exists:
+		if args.force:
+			print(f'Overwriting "{cur.path}" with contents of "{args.ipath}"')
 			shutil.copy(args.ipath, cur.path)
-			exit()
-
+		else:
+			print(f'Target at "{cur.path}" exists. Use --force to overwrite.')
+			qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
+			print(f'The two files are probably {qdiff}.')
 	else:
-		cur = make_current_archive_item(args)
-		qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
+		print(f'Writing to "{cur.path}" with contents of "{args.ipath}"')
+		shutil.copy(args.ipath, cur.path)
 
-		if cur.exists:
-			print(f'''Attempting to archive without the --force flag would fail because the
+def make_brand_new(args):
+	if not args.force:
+		archived = get_archived_version(args.ipath)
+		if not archived:
+			print(f'Index was {red("not")} archived yet. Watch out!')
+			return False
+	os.remove(args.ipath)
+	with open(args.ipath, 'wb') as file:
+		pass
+
+def print_dry_run_info(args):
+	cur = make_current_archive_item(args)
+	qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
+
+	if cur.exists:
+		print(f'''Attempting to archive without the --force flag would fail because the
 default target path "{cur.path}" for the current blog page
 is occupied already.
 
 The two files are probably {qdiff}.
 
 Try `python archive.py -d | less -R` to see the the diff.''')
-			exit(1)
 
-		else:
-			print(f'Archiving will succeeed because the current blog page\'s archive slot is free.')
-			exit(0)
+		if args.verbose:
+			print()
+			print_hashes_if_archived(args)
+
+	else:
+		print(f'Archiving will succeeed because the current blog page\'s archive slot is {green("free")}.')
+
+def parse_args(args = sys.argv[1:]):
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-a', '--archive', action='store_true', help='archive current blog file')
+	parser.add_argument('-d', '--diff', action='store_true', help='show diff of current blog and top archive file')
+	parser.add_argument('-f', '--force', action='store_true', help='force irreversible operations (with -a and -n)')
+	parser.add_argument('-m', '--mtime', action='store_true', help='use modified time to generate archive path (else current time)')
+	parser.add_argument('-n', '--new', action='store_true', help='make a brand new index.md')
+	parser.add_argument('-v', '--verbose', action='store_true', help='don\'t be shy')
+	parser.add_argument('-p', '--plain', action='store_true', help='no rainbows')
+	parser.add_argument('--colors' , action='store_true', help='just rainbows')
+	parser.add_argument('ipath', nargs='?', default=DEFAULT_IPATH, help='blog file to archive')
+	return parser, parser.parse_args(args)
+
+def main(args = sys.argv[1:]):
+	parser, args = parse_args(args)
+
+	if args.colors: print_colors()
+
+	elif args.diff: print_diff_last_archived(args)
+
+	elif args.archive: archive_current(args)
+
+	elif args.new: make_brand_new(args)
+
+	else: print_dry_run_info(args)
+
+if __name__ == '__main__':
+	sys.exit(main())
