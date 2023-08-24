@@ -98,7 +98,7 @@ Or:
         return [m.groups() for m in mm]
 ```
 
-And this is probably where I give type annotations up https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html . Cython I actually love https://cython.org/ . But this is just not necessary https://mypy.readthedocs.io/en/stable/kinds_of_types.html . This is really for tooling, for people to have auto-completions. I don't do auto-completion anyway. One could argue that if you can't remember the API you're using everyday you should be worrying about more than tooling.
+And this is probably where I give type annotations up https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html . Cython I actually love https://cython.org/ . But this is just not necessary https://mypy.readthedocs.io/en/stable/kinds_of_types.html . This is really for tooling, for people to have auto-completions. I don't do auto-completion anyway. One could argue that if you can't remember the API you're using everyday you should be worrying about \\more\\ **much** \\ \\than tooling\\you are ____not____ your tooling!\\.
 
 https://pypi.org/project/mypy/#files
 https://mypy.readthedocs.io/en/stable/common_issues.html
@@ -132,7 +132,7 @@ This is so useful: https://stackoverflow.com/questions/26941144/how-do-you-custo
 
 	""" color.diff.<slot> ... is one of ____context____ (or ____plain____), ____meta____ (metainformation), ____frag____ (hunk header), ____func____ (function in hunk header), ____old____ (removed lines), ____new____ (added lines), ____commit____ ... ____whitespace____ (highlighting whitespace errors), ____oldMoved____ (deleted lines), ____newMoved____ (added lines) ... https://git-scm.com/docs/git-config#Documentation/git-config.txt-colordiffltslotgt """
 
-# Awesome Python
+# Awesome Linksman
 
 https://github.com/uhub/awesome-python
 
