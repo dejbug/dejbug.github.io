@@ -188,7 +188,7 @@
 			margin-bottom: 1em;
 		}
 		.noise {
-			display: {{ python blog.py -v noise "{source}" }};
+			display: none;
 		}
 		footer {
 			justify-content: flex-end;
