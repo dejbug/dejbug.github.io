@@ -28,9 +28,19 @@ class ArchiveItem:
 		self.month = int(month or 0)
 		self.day = int(day or 0)
 
+	def __eq__(self, other):
+		if self.year != other.year: return False
+		if self.month != other.month: return False
+		if self.day != other.day: return False
+		return True
+
+	@property
+	def name(self):
+		return f'{self.year}-{self.month:02d}-{self.day:02d}'
+
 	@property
 	def path(self):
-		return f'{ARCHIVE_ROOT}/{self.year}-{self.month:02d}-{self.day:02d}.md'
+		return f'{ARCHIVE_ROOT}/{self.name}.md'
 
 	@property
 	def exists(self):
@@ -49,12 +59,18 @@ class ArchiveItem:
 		return sorted(seq, key = key, reverse = reverse)
 
 	@classmethod
+	def parse(cls, text):
+		name = filename(text)
+		m =  re.search(r'(\d{4})-(\d\d)-(\d\d)', name)
+		if m: return cls(*m.groups())
+
+	@classmethod
 	def iter(cls):
-		regex = re.compile('(\d{4})-(\d\d)-(\d\d)\.md')
+		# regex = re.compile(r'(\d{4})-(\d\d)-(\d\d)\.md')
 		nn = os.listdir(ARCHIVE_ROOT)
-		nn = (regex.match(n) for n in nn)
-		nn = (ArchiveItem(*n.groups()) for n in nn if n)
-		for n in nn: yield n
+		nn = (cls.parse(n) for n in nn)
+		nn = (n for n in nn if n)
+		return nn
 
 	@classmethod
 	def current(cls, path = None):
@@ -68,6 +84,11 @@ class ArchiveItem:
 
 	def __str__(self):
 		return type(self).__name__ + str(self.__dict__)
+
+def filename(text):
+	_, name = os.path.split(text)
+	name, _ = os.path.splitext(name)
+	return name
 
 def get_latest_archive_item_by_name():
 	aa = ArchiveItem.sorted(ArchiveItem.iter(), reverse = True)
@@ -189,11 +210,29 @@ def get_archived_version(ipath = DEFAULT_IPATH):
 		if compare_files(ipath, archived.path):
 			return archived
 
+def find_backref_for(ipath):
+	archived = ArchiveItem.parse(ipath)
+	if not archived:
+		top = get_latest_archive_item_by_name()
+		if top: return top.name
+	else:
+		aa = ArchiveItem.sorted(ArchiveItem.iter(), reverse = True)
+		found = False
+		for a in aa:
+			if found:
+				return a.name
+			elif a == archived:
+				found = True
+
 def print_colors():
 	for fg in range(8):
 		for bg in range(8):
 			print(f'\033[{30+fg};{40+bg};1m{30+fg};{40+bg}\033[0m', end=' ')
 		print()
+
+def print_backref(args):
+	backref = find_backref_for(args.ipath)
+	if backref: print(backref)
 
 def getFileHash(path):
 	md5 = hashlib.md5()
@@ -267,6 +306,7 @@ Try `python archive.py -d | less -R` to see the the diff.''')
 def parse_args(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-a', '--archive', action='store_true', help='archive current blog file')
+	parser.add_argument('-b', '--backref', action='store_true', help='find backref for ipath')
 	parser.add_argument('-d', '--diff', action='store_true', help='show diff of current blog and top archive file')
 	parser.add_argument('-f', '--force', action='store_true', help='force irreversible operations (with -a and -n)')
 	parser.add_argument('-m', '--mtime', action='store_true', help='use modified time to generate archive path (else current time)')
@@ -281,6 +321,8 @@ def main(args = sys.argv[1:]):
 	parser, args = parse_args(args)
 
 	if args.colors: print_colors()
+
+	elif args.backref: print_backref(args)
 
 	elif args.diff: print_diff_last_archived(args)
 

@@ -1,9 +1,11 @@
+#!/bin/env python
+
 import sys, os, re, io
 import argparse, urllib.parse, html, subprocess, datetime
 
 import known
 
-DEFAULT_INPUT_FILEPATH = "blog.md"
+DEFAULT_INPUT_FILEPATH = "index.md"
 DEFAULT_OUTPUT_FILEPATH = None
 
 
@@ -52,9 +54,9 @@ def getCurrentDateString():
 
 def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--date', action='store_true')
-	parser.add_argument('--title', action='store_true')
-	parser.add_argument('--backref', action='store_true')
+	parser.add_argument('-d','--date', action='store_true')
+	parser.add_argument('-t', '--title', action='store_true')
+	parser.add_argument('-b', '--backref', action='store_true')
 	parser.add_argument('-v', '--variable')
 	parser.add_argument('-o', '--opath', default = DEFAULT_OUTPUT_FILEPATH)
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
@@ -68,18 +70,19 @@ def main(args = sys.argv[1:]):
 	parser, args = parseArgs(args)
 	mfile = io.StringIO()
 
-	# FIXME: This is just a HACK. We should automate this based
-	#	on the input file path. The '^!' mechanism is good for
-	#	other settings though.
 	if args.backref:
-		# p = subprocess.run('ls', capture_output = True)
-		# print(p.stdout.decode('utf-8'))
 		with open(args.ipath) as ifile:
 			m = re.search(r'^!\s*back(?:ref)?=(.+?)\s*$', ifile.read(), re.S|re.M)
 			if m:
-				source = f'archive/{m.group(1)}.md'
+				backref = m.group(1)
+			else:
+				import archive
+				backref = archive.find_backref_for(args.ipath)
+
+			if backref:
+				source = f'archive/{backref}.md'
 				if os.path.isfile(source):
-					rendered = f'/archive/{m.group(1)}.html'
+					rendered = f'/archive/{backref}.html'
 					print(f'<strong><a href="{rendered}">[back]</a></strong>')
 
 	elif args.date:

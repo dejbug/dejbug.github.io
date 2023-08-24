@@ -4,6 +4,7 @@ archlinux.org:arch
 cnn.com
 ecma-international.org:ecma
 eff.org
+fandom.com
 fermyon.app:fermyon.app
 fermyon.com:fermyon
 fide.com\handbook:hb\arbiters:arb\ratings:rat
@@ -11,9 +12,11 @@ github.blog:gh.blog
 github.com:gh
 github.io:gh
 gnome.org
+gnu.org
 gnupg.org:gnupg
 google.com:G
 hackaday.com
+ibm.com
 ietf.org
 iso.org
 jstor.org
@@ -22,6 +25,7 @@ llvm.org
 man7.org:man7
 marxists.org
 medium.com
+mit.edu\mitpress:press
 mozilla.org:moz\developer:dev\firefox-source-docs:ff-src
 mozillazine.org:mozillazine
 nist.gov
@@ -55,3 +59,4 @@ wasi.dev
 wasmtime.dev:wt
 wikipedia.org:wiki\en:
 winehq.org
+youtube.com

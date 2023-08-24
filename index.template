@@ -202,7 +202,7 @@
 <footer>
 <span class="noise">{{ python blog.py -v blurb "{source}" }}</span>
 <span id="copyleft">Copyleft (<span class="petokraka">&#x2605</span>) Dejan Budimir</span>
-<span id="backref">{{ python blog.py --backref "{source}" }}</span>
+<span id="backref">{{ python blog.py -b "{source}" }}</span>
 </footer>
 </body>
 </html>
