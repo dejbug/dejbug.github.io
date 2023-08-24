@@ -1,6 +1,6 @@
 #!/bin/env python
 
-import sys, os, re, io
+import sys, os, re, io, random
 import argparse, urllib.parse, html, subprocess, datetime
 
 import known
@@ -42,6 +42,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'(\s+)[*]{2}(.+?)[*]{2}', r'\1<b>\2</b>', text, flags = re.S)
 	text = re.sub(r'\\\\(.+?)\\\\(.+?)\\\\', ruby, text, flags = re.S)
 	text = re.sub(r'____(.+?)____', r'<u>\1</u>', text, flags = re.S)
+	text = re.sub(r'\^{3}(.+?)\^{3}', r'<div class="upright">\1</div>', text, flags = re.S)
 	text = re.sub(r'```(.+?)```', r'<pre>\1</pre>', text, flags = re.S)
 	text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text, flags = re.S)
 	text = re.sub(r'"""(.+?)"""', r'<blockquote>\1</blockquote>', text, flags = re.S)
@@ -65,6 +66,7 @@ def getCurrentDateString():
 
 def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
+	parser.add_argument('-p', '--purple-haze', action='store_true')
 	parser.add_argument('-d','--date', action='store_true')
 	parser.add_argument('-t', '--title', action='store_true')
 	parser.add_argument('-b', '--backref', action='store_true')
@@ -110,6 +112,17 @@ def main(args = sys.argv[1:]):
 		with open(args.ipath) as ifile:
 			m = re.search(r'^#+\s*(.+?)\s*$', ifile.read(), re.S|re.M)
 			print(m.group(1) if m else '')
+
+	elif args.purple_haze:
+		haze = ''
+		cc = ['--color-purple-haze-1', '--color-purple-haze-2']
+		for i in range(2):
+			x = random.choice((-7, -5, -2, 3, 6, 8))
+			y = random.choice((-7, -5, -2, 3, 6, 8))
+			r = random.randint(3, 7)
+			if i > 0: haze += ', '
+			haze += f'{x}px {y}px {r}px var({cc[i]})'
+		print(f'text-shadow: {haze};')
 
 	elif args.ipath:
 		with open(args.ipath) as ifile:

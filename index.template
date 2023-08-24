@@ -18,6 +18,8 @@
 		--color-meta: #b76e93; /* hotpink; */
 		--color-code-fg: #50ff00;
 		--color-code-br: #03d0ff;
+		--color-purple-haze-1: magenta;
+		--color-purple-haze-2: cyan;
 		--color-1: #5e8fbb;
 		--color-2: #cb8aa6;
 		--color-3: #ab3e6d;
@@ -142,6 +144,21 @@
 	}
 	.red {
 		color: tomato;
+	}
+	.upright {
+		float: right;
+		display: block;
+		border-left: thin solid hotpink;
+		writing-mode: vertical-lr;
+		text-orientation: upright;
+		height: fit-content;
+		margin: 1em 1em 1em 2em;
+		padding: 1em;
+		color: hotpink;
+		font-weight: thin;
+		font-family: mono;
+/*		text-shadow: -7px 3px 5px #07fff3f0, 5px 7px 1px #6d29b2f0;*/
+		{{ python blog.py --purple-haze }}
 	}
 	#pill {
 		color: var(--color-pubtime);

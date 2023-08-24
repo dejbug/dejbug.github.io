@@ -1,5 +1,14 @@
 # Gently
 
+^^^
+For ///
+a
+dream ///
+lies
+here
+^^^
+
+
 I'm rewriting known.py, the URI rewriter. It should be a bit slower by design but cleaner and a bit more powerful.
 
 I've started using type annotations. The first type-checker I'm trying is mypy and already I've run into one or two of its bugs https://github.com/python/mypy/issues/1465 https://github.com/python/mypy/issues/9372 . I'm getting:
