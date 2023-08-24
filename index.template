@@ -94,6 +94,14 @@
 		font-size: 80%;
 		line-height: 120%;
 		padding: 1em;
+		overflow: auto;
+		scrollbar-color: black gray;
+  		scrollbar-width: thin;
+	}
+	q {
+		color: #b4e0ad;
+		font-size: 90%;
+		font-family: sans;
 	}
 	blockquote {
 		background-color: #745a803d;
@@ -125,6 +133,12 @@
 	}
 	.petokraka {
 		font-size: 160%;
+		color: tomato;
+	}
+	.emoji {
+		font-size: 160%;
+	}
+	.red {
 		color: tomato;
 	}
 	#pill {

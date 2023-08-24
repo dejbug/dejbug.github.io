@@ -1,119 +1,205 @@
-# Optimal IO
+# Gently
 
-I had to check two files for equality in Python and was about to use `mmap` but started wondering what size its preferred input buffer was.
+I'm rewriting known.py, the URI rewriter. It should be a bit slower by design but cleaner and a bit more powerful.
 
-Someone https://stackoverflow.com/questions/15979793/is-there-any-way-to-find-the-buffer-size-of-a-file-object pointed out that it used to be hard-coded to 8192 http://hg.python.org/cpython/file/84cd07899baf/Objects/fileobject.c#l2313 . Well, even in 3.11 it still does **look** like it https://github.com/python/cpython/blob/154477be722ae5c4e18d22d0860e284006b09c4f/Modules/_io/fileio.c#L694 Well, kinda.
-
-#tldr; Everything is explained in `_pyio.py` https://github.com/python/cpython/blob/93714b7db795b14b26adffde30753cfda0ca4867/Lib/_pyio.py#L123 .
-
-	""" Binary files are buffered in fixed-size chunks; the size of the buffer is chosen using a heuristic trying to determine the underlying device's "block size" and falling back on `io.DEFAULT_BUFFER_SIZE`. https://github.com/python/cpython/blob/93714b7db795b14b26adffde30753cfda0ca4867/Lib/_pyio.py#L129 """
-
-Alas! I've read these lines too late. And because I knew the block size was available with `stat` I had with that a ____pretty little trap____ laid out for me already.
+I've started using type annotations. The first type-checker I'm trying is mypy and already I've run into one or two of its bugs https://github.com/python/mypy/issues/1465 https://github.com/python/mypy/issues/9372 . I'm getting:
 
 ```
-$ stat /tmp/tags/GTAGS
-  File: /tmp/tags/GTAGS
-  Size: 52051968        Blocks: 101664     IO Block: 4096   regular file
-Device: #,##    Inode: ###         Links: #
-Access: (0644/-rw-r--r--)  Uid: (#####/xxxxxxxx)   Gid: (#####/xxxxxxxx)
-Access: 2023-08-23 16:30:49.290685452 +0200
-Modify: 2023-08-23 15:51:15.817349681 +0200
-Change: 2023-08-23 15:51:15.820683015 +0200
- Birth: 2023-08-23 15:51:11.780683011 +0200
-$ stat -c'The "optimal I/O transfer size hint" for %n is %o.' /tmp/tags/GTAGS
-The "optimal I/O transfer size hint" for /tmp/tags/GTAGS is 4096.
+archive.py:58: error: "object" has no attribute "time"  [attr-defined]
 ```
 
-Even here I could have saved myself by simply calling into the shell with `os.system` or `subprocess.run` but `os.stat` was just perplexing me!
+with:
+
 
 ```
-$ python -c 'import os; print(os.stat("/tmp/tags/GTAGS"))'
-os.stat_result(st_mode=33188, st_ino=###, st_dev=##, st_nlink=#, st_uid=#####,
-	st_gid=#####, st_size=52051968, st_atime=1692801049, st_mtime=1692798675,
-	st_ctime=1692798675)
+...
+    @property # type: ignore
+    def time(self):
+        return self.year * 100000 + self.month * 100 + self.day
+
+...
+key = cmp_to_key(lambda a, b: a.time - b.time)
+return sorted(seq, key = key, reverse = reverse)
 ```
 
-See what's missing?
+I've even added the `test: ignore` comment as Guido suggested https://github.com/python/mypy/issues/1362 which does nothing. It doesn't look like they are going to do anything about it soon https://github.com/python/mypy/issues/1465 . So I probably need to move to another checker or, given that Guido himself seems to endorse this tool https://twitter.com/gvanrossum/status/700741601966985216 , I stop using `@property` altogether. Decisions. It's ____like having an ingrown toenail____ and thinking it'll take care of itself. A couple months of living like that and your entire gait will change; the way you navigate around potential obstacles, the way you move through your environment. My wishful-thinking had transformed the most inoccuous things into potential sources of pain that are best to be avoided. Mypy looks like that, given what grander vision it had started with https://www.slideshare.net/jukkaleh/mypy-pyconfi2012 . Wishful-thinking-wise it was powerful enough to even stop another, earlier effort in that same direction http://www.alorelang.org/ .
+
+Damn it. I just realized the problem with mypy. The ArchLinux package is outdated (1.3.0 < 1.5.1) and was flagged https://archlinux.org/packages/extra/any/mypy/ . Ok so the PKGBUILD didn't need any changing at all apart from the obvious version and checksum. The problem with gratuitous build-time deps https://github.com/python/mypy/issues/14171 is still being handled well by the maintainer's sed scripts. But when it runs through all its self-checks (which takes forever) mypy quits with 5 fails out of 1117.
 
 ```
-$ sed -n '61p' /usr/include/bits/struct_stat.h
-    __blksize_t st_blksize;     /* Optimal block size for I/O.  */
+=================================================== short test summary info ====================================================
+FAILED mypy/test/meta/test_parse_data.py::ParseTestDataSuite::test_bad_eq_version_check - AssertionError: assert 'version==3.7 always false since minimum runtime version is (3, 8)' in ''
+FAILED mypy/test/meta/test_parse_data.py::ParseTestDataSuite::test_bad_ge_version_check - AssertionError: assert 'version>=3.8 always true since minimum runtime version is (3, 8)' in ''
+FAILED mypy/test/meta/test_parse_data.py::ParseTestDataSuite::test_parse_invalid_case - assert "Invalid testcase id 'foo-XFAIL'" in ''
+FAILED mypy/test/meta/test_parse_data.py::ParseTestDataSuite::test_parse_invalid_section - assert ".test:3: Invalid section header [unknownsection] in case 'abc'" in ''
+FAILED mypy/test/meta/test_update_data.py::UpdateDataSuite::test_update_data - assert '[case testCorrect]\ns: str = 42  # E: Incompatible types in assignment (expression has type "int", variable has typ...
+=============================== 5 failed, 1117 passed, 1 skipped, 2 xfailed in 775.86s (0:12:55) ===============================
 ```
 
-So I spent an hour oscillating between `sys/stat.h`, `bits/types.h`, `bits/typesizes.h`, `bits/struct_stat.h` trying to recreate `struct stat` in ctypes. Here it is.
+`test_bad_eq_version_check` is the culprit https://github.com/python/mypy/blob/master/mypy/test/meta/test_parse_data.py . According to the comments it is a meta test, a test that tests the testers. I don't really need this. So:
 
 ```
-class stat(ctypes.Structure):
-	_fields_ = [
-		('st_dev', ctypes.c_ulonglong),
-		('st_ino', ctypes.c_ulonglong),
-		('st_nlink', ctypes.c_ulonglong),
-		('st_mode', ctypes.c_uint),
-		('st_uid', ctypes.c_uint),
-		('st_gid', ctypes.c_uint),
-		('__pad0', ctypes.c_uint),
-		('st_rdev', ctypes.c_ulonglong),
-		('st_size', ctypes.c_longlong),
-		('st_blksize', ctypes.c_longlong),
-		('st_blocks', ctypes.c_longlong),
-		('st_atim', ctypes.c_longlong),
-		('st_atimensec', ctypes.c_ulong),
-		('st_mtim', ctypes.c_longlong),
-		('st_mtimensec', ctypes.c_ulong),
-		('st_ctim', ctypes.c_longlong),
-		('st_ctimensec', ctypes.c_ulong),
-		('__glibc_reserved', ctypes.c_long * 3)
-	]
-```
-https://www.youtube.com/watch?v=q0Se2f0Rq88
-
-The thing is perfectly non-portable and ugly but at least I had a way to get the unabridged fstat. Again, I really should have called into the shell and moved on but ____I tend to get obsessive____ in that way.
-
-It took so long to find the bloody types. What I should have done is `printf("%d\n", sizeof(stat::st_ino));` (g++) etc. and  experimentally determine signedness. But I guess I just wanted to do it the hard way. One of those days.
-
-So one file would point me to another and the other back. Like nobody wanted anything to do with me. For example. #struct_stat.h will tell you that `stat::st_ino` is of `__ino_t` type. E.g. `find /usr/include/ -iname '*.h' | xargs grep __ino_t` will tell you that if you looked in #types.h you would see that `__ino_t` is of type `__INO_T_TYPE`. E.g. `gtags -C /usr/include/ /tmp/tags/ && global -C /tmp/tags/ __INO_T_TYPE` https://www.gnu.org/software/global/globaldoc_toc.html#Basic-usage https://github.com/oracle/opengrok/wiki/Comparison-with-Similar-Tools would refer you kindly to #typesizes.h. There you'll see that `__INO_T_TYPE` is a `__SYSCALL_ULONG_TYPE` which is either `__UQUAD_TYPE` or `__ULONGWORD_TYPE` depending on compile-time flags https://www.ibm.com/docs/en/zos/2.3.0?topic=environments-ilp32-lp64-data-models-data-type-sizes . This would send you back to #types.h to tell you that `__UQUAD_TYPE` is an `__uint64_t` and so on.
-
-It was only later that I stumbled over `_pyio.open` and saw that `st_blksize` was indeed a thing in Python's stat https://github.com/python/cpython/blob/93714b7db795b14b26adffde30753cfda0ca4867/Lib/_pyio.py#L250 .
-
-Compare and contrast:
-
-```
-$ python -c 'import os; print(os.stat("/tmp/tags/GTAGS"))'
-os.stat_result(st_mode=33188, st_ino=###, st_dev=##, st_nlink=#, st_uid=#####,
-	st_gid=#####, st_size=52051968, st_atime=1692801049, st_mtime=1692798675,
-	st_ctime=1692798675)
+$ diff PKGBUILD-1.3.0 PKGBUILD
+6c6
+< pkgver=1.3.0
+---
+> pkgver=1.5.1
+21c21
+< sha256sums=('e1f4d16e296f5135624b34e8fb741eb0eadedca90862405b1f1fde2040b9bd11')
+---
+> sha256sums=('b031b9601f1060bf1281feab89697324726ba0c0bae9d7cd7ab4b690940f0b92')
+36,39c36,39
+< check() {
+<     cd "$pkgname-$pkgver"
+<     pytest -vv -c /dev/null
+< }
+---
+> # check() {
+>     # cd "$pkgname-$pkgver"
+>     # pytest -vv -c /dev/null
+> # }
+$ makepkg -s
+# pacman -R mypy
+$ pacman -U mypy-1.5.1-1-any.pkg.tar.zst
 ```
 
-But:
+Now let's see about those, ahem, **other** error, yes?
 
 ```
-$ python -c 'import os; print(os.stat("/tmp/tags/GTAGS").st_blksize)'
-4096
+def parseLine(line) -> list[tuple[str | None, str, str | None]]:
+    ...
+    return [m.groups() for m in mm]
 ```
 
-This is where I should be crying but hey ho. You win some you lose some. It's all up there in the Great Material Continuum https://memory-alpha.fandom.com/wiki/Great_Material_Continuum .
+Causes `known.py:60: error: List comprehension has incompatible type` ...
 
-# Intermezzo
+```
+#version-1.3.0 List[Tuple[Union[str, Any], ...]]; expected List[Tuple[Optional[str], str, Optional[str]]]  [misc]
+```
 
-My good friend P. from my local chess club had me rewrite my tournament announcement and so we spent two happy hours obsessing over things together. We have different communication styles so I had a chance to recall some wisdom which I myself had had forgotten and to pass it on to a slightly younger generation.
+```
+#version-1.5.1 List[tuple[str | Any, ...]]; expected List[tuple[str | None, str, str | None]]  [misc]
 
-# Interference
+```
 
-I had tried to explain a Swiss-style https://spp.fide.com/c-04-3-fide-dutch-system/ tournament with the sentence, "it's like round-robin but with fewer rounds." https://en.wikipedia.org/wiki/Genus%E2%80%93differentia_definition My friend was stuck on the first part, how can it be round-robin when it's not. He was making fun of me. The fact that I had likened it to a round-robin when that was precisely what it wasn't. https://en.wikipedia.org/wiki/Principle_of_charity
+What it wants me to write is this:
 
-# Interpolation
+```
+    # return [tuple(m.groups()) for m in mm]                  # Not this.
+    # return [(*m.groups(), ) for m in mm]                    # Not this.
+    return [(m.group(1), m.group(2), m.group(3)) for m in mm] # This!
+```
 
-My meaning was more accurate than my words of course. The point of a tournament is to determine the best player. A round-robin is the ideal. In practice there might be too many players to have everyone play everybody, so the next best thing is to reduce the rounds somehow. The Swiss system, though imperfect, is exploiting statistical knowledge about the players to **simulate** https://mitpress.mit.edu/9780936756028/simulations/ the unattainable ideal of perfect information.
+Or:
 
-All of that reminded me that I had to continue working on my swiss tournament pairer. Our website needs more work as well. It's just a mockup really.
+```
+    def parseLine(line) -> list[tuple[str | None, ...]]:
+        ...
+        return [m.groups() for m in mm]
+```
 
-# Suboptimal IQ
+And this is probably where I give type annotations up https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html . Cython I actually love https://cython.org/ . But this is just not necessary https://mypy.readthedocs.io/en/stable/kinds_of_types.html . This is really for tooling, for people to have auto-completions. I don't do auto-completion anyway. One could argue that if you can't remember the API you're using everyday you should be worrying about more than tooling.
 
-I feel like I didn't do a lot today. I went to bed too late today and got up in a haze. I didn't get to eat a lot. Didn't drink a lot. I can plainly see my ego work against me. I was not exaggerating with my getting obsessive over little things like this. Comparing tiny text files but with "optimal I/O" for heaven's sake!
+https://pypi.org/project/mypy/#files
+https://mypy.readthedocs.io/en/stable/common_issues.html
 
-I'm afraid this is a question of intelligence. I'm just not clever enough to also be smart.
+https://github.com/astral-sh/ruff
+https://github.com/psf/black
+
+https://wiki.archlinux.org/title/Pacman#Removing_packages
+https://wiki.archlinux.org/title/System_maintenance#Avoid_certain_pacman_commands
+https://wiki.archlinux.org/title/Python_package_guidelines#Standards_based_(PEP_517)
+
+https://docs.pytest.org/en/7.4.x/
+
+https://github.com/google/pytype
 
 
-! header=block
+https://peps.python.org/pep-0484/
+https://docs.python.org/3/library/typing.html
+https://typing.readthedocs.io/en/latest/
+https://typing.readthedocs.io/en/latest/source/unreachable.html
 
-! blurb=Two steps forward / One step back / Runs the heap / Into the stack
+
+https://adamj.eu/tech/2021/05/25/python-type-hints-specific-type-ignore/
+https://realpython.com/python-type-checking/#static-type-checking
+
+# Git
+
+This is so useful: https://stackoverflow.com/questions/26941144/how-do-you-customize-the-color-of-the-diff-header-in-git-diff#26941235
+
+	""" ... Colors may also be given as numbers between 0 and 255 ... https://git-scm.com/docs/git-config#Documentation/git-config.txt-color """
+
+	""" color.diff.<slot> ... is one of ____context____ (or ____plain____), ____meta____ (metainformation), ____frag____ (hunk header), ____func____ (function in hunk header), ____old____ (removed lines), ____new____ (added lines), ____commit____ ... ____whitespace____ (highlighting whitespace errors), ____oldMoved____ (deleted lines), ____newMoved____ (added lines) ... https://git-scm.com/docs/git-config#Documentation/git-config.txt-colordiffltslotgt """
+
+# Awesome Python
+
+https://github.com/uhub/awesome-python
+
+[:rocket:]
+
+/// ""Typed (sigh) interaction with the GitHub API"" https://github.com/PyGithub/PyGithub
+/// ""Poetry helps you declare, manage and install dependencies of Python projects, ensuring you have the right stack everywhere."" https://github.com/python-poetry/poetry
+/// ""Never use print() to debug again."" https://github.com/gruns/icecream
+/// ""An ASGI web server, for Python."" https://github.com/encode/uvicorn
+/// ""REST API framework designed for human beings "" (6.6k stars) https://github.com/pyeve/eve
+/// ""It's React, but in Python (6.7k stars) "" https://github.com/reactive-python/reactpy
+/// ""Simple PyTorch Tutorials Zero to ALL!"" https://github.com/hunkim/PyTorchZeroToAll
+/// ""A collection of design patterns/idioms in Python]"" https://github.com/faif/python-patterns
+/// ""Free (as in freedom) open source clone of the Age of Empires II engine"" https://github.com/SFTtech/openage
+/// ""A Blender script to procedurally generate 3D spaceships"" https://github.com/a1studmuffin/SpaceshipGenerator
+/// ""A swiss army knife for pentesting networks"" https://github.com/Porchetta-Industries/CrackMapExec
+/// ""Brython (Browser Python) is an implementation of Python 3 running in the browser"" https://github.com/brython-dev/brython
+/// ""Exploit Development and Reverse Engineering with GDB Made Easy"" https://github.com/pwndbg/pwndbg
+/// ""A little Python library for making simple Electron-like HTML/JS GUI apps"" https://github.com/python-eel/Eel
+/// ""A Python module for learning all major algorithms"" https://github.com/OmkarPathak/pygorithm
+/// ""A static type analyzer for Python code"" https://github.com/google/pytype
+/// ""Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."" https://github.com/tornadoweb/tornado
+/// ""Cross-platform, fast, feature-rich, GPU based terminal"" https://github.com/kovidgoyal/kitty
+/// ""Project documentation with Markdown."" https://github.com/mkdocs/mkdocs
+/// ""Open source UI framework written in Python, running on Windows, Linux, macOS, Android and iOS"" https://github.com/kivy/kivy
+/// ""A Grammar of Graphics for Python"" https://github.com/has2k1/plotnine
+/// ""A very fast and expressive template engine."" https://github.com/pallets/jinja
+/// ""A lossless video/GIF/image upscaler achieved with waifu2x, Anime4K, SRMD and RealSR. Started in Hack the Valley 2, 2018."" https://github.com/k4yt3x/video2x
+/// ""Every web site provides APIs."" https://github.com/gaojiuli/toapi
+/// ""Selenium-python but lighter: Helium is the best Python library for web automation."" https://github.com/mherrmann/selenium-python-helium
+/// ""Bittorrent software for cats"" https://github.com/nyaadevs/nyaa
+/// ""Reverse engineering framework in Python"" https://github.com/cea-sec/miasm
+/// ""A fully tested, abstract interface to creating OAuth clients and servers."" https://github.com/joestump/python-oauth2
+/// ""Golem is creating a global market for computing power."" https://github.com/golemfactory/clay
+/// ""Fast and powerful SSL/TLS scanning library."" https://github.com/nabla-c0d3/sslyze
+/// ""Simple, elegant, Pythonic functional programming."" https://github.com/evhub/coconut
+/// ""Data validation using Python type hints"" https://github.com/pydantic/pydantic
+/// ""Typed interactions with the GitHub API v3"" https://github.com/PyGithub/PyGithub
+/// ""Shadowsocks - Wikipedia"" https://en.wikipedia.org/wiki/Shadowsocks
+/// ""The OpenAI Python library provides convenient access to the OpenAI API from applications written in the Python language."" https://github.com/openai/openai-python
+/// ""Minimal and clean examples of machine learning algorithms implementations"" https://github.com/rushter/MLAlgorithms
+/// ""PEFT: State-of-the-art Parameter-Efficient Fine-Tuning."" https://github.com/huggingface/peft
+/// ""The little ASGI framework that shines."" https://github.com/encode/starlette
+/// ""Computer Vision and Robotics Library for AI"" https://github.com/kornia/kornia
+/// ""The LBRY SDK for building decentralized, censorship resistant, monetized, digital content apps."" https://github.com/lbryio/lbry-sdk
+/// ""Python-powered, cross-platform, Unix-gazing shell."" https://github.com/xonsh/xonsh
+/// ""Low code web framework for real world applications, in Python and Javascript"" https://github.com/frappe/frappe
+/// ""The Web API toolkit."" https://github.com/encode/apistar
+/// ""Learning to See in the Dark. CVPR 2018"" https://github.com/cchen156/Learnin
+/// ""A free, online learning platform to make quality education accessible for all."" https://github.com/oppia/oppia
+/// ""Create web-based user interfaces with Python. The nice way."" https://github.com/zauberzeug/nicegui
+/// ""Python Koans - Learn Python through TDD"" https://github.com/gregmalcolm/python_koans
+/// ""A dialect of Lisp that's embedded in Python"" https://github.com/hylang/hy
+/// ""Python framework for building microservices"" https://github.com/nameko/nameko
+/// ""A functional standard library for Python."" https://github.com/pytoolz/toolz
+/// ""Tensorflow tutorial from basic to hard"" https://github.com/MorvanZhou/Tensorflow-Tutorial
+/// ""Swagger/OpenAPI First framework for Python on top of Flask with automatic endpoint validation & OAuth2 support"" https://github.com/spec-first/connexion
+/// ""A full-featured, hackable tiling window manager written and configured in Python (X11 & Wayland)"" https://github.com/qtile/qtile
+/// ""A tour in the wonderland of math with python."" https://github.com/neozhaoliang/pywonderland
+/// ""A next generation HTTP client for Python."" https://github.com/encode/httpx
+/// ""A retro game engine for Python"" https://github.com/kitao/pyxel
+
+# Gait
+
+[:butterfly:]
+
+Here's an animated picture of an Elephant just walking https://en.wikipedia.org/wiki/Gait .
+
+! header = block
+! blurb = TypePython?

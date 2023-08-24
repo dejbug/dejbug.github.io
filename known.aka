@@ -7,7 +7,8 @@ eff.org
 fandom.com
 fermyon.app:fermyon.app
 fermyon.com:fermyon
-fide.com\handbook:hb\arbiters:arb\ratings:rat
+fide.com/handbook:hb/arbiters:arb/ratings:rat
+git-scm.com:git
 github.blog:gh.blog
 github.com:gh
 github.io:gh
@@ -25,8 +26,8 @@ llvm.org
 man7.org:man7
 marxists.org
 medium.com
-mit.edu\mitpress:press
-mozilla.org:moz\developer:dev\firefox-source-docs:ff-src
+mit.edu/mitpress:press
+mozilla.org:moz/developer:dev/firefox-source-docs:ff-src
 mozillazine.org:mozillazine
 nist.gov
 nosubject.com
@@ -45,9 +46,10 @@ sf.net
 somafm.com
 sourceforge.io:sf.io
 sourceforge.net:sf
+springerbk.de
 stackexchange.com:Sx
 stackoverflow.com:So
-stanford.edu
+stanford.edu//plato:sep
 sublimetext.com:st
 sublimetext.io:st
 theguardian.com:guardian
@@ -57,6 +59,6 @@ w3.org
 washingtonpost.com:wp
 wasi.dev
 wasmtime.dev:wt
-wikipedia.org:wiki\en:
+wikipedia.org:wiki/en:
 winehq.org
 youtube.com

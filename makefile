@@ -30,7 +30,7 @@ run : build/index.html ; cd build && php -S localhost:8000
 build/%.html : %.md index.template known.aka.pickle *.py | build/archive/
 	python render.py -do $@ index.template source=$<
 
-%.aka.pickle : %.aka ; python known.py -o $@ $<
+%.aka.pickle : %.aka known.py ; python known.py -o $@ $<
 
 # %/ : ; mkdir -p $@
 build/ : ; mkdir $@
@@ -47,9 +47,13 @@ archive : $(ArchiveTargets) | build/archive/
 github : build/github.css build/github.svg
 build/github.% : github.% | build/ ; cp $< $@
 
-.PHONY : test
+.PHONY : test test-doctest test-mypy
 PythonFiles := $(shell find . -iname '*.py')
-test : $(PythonFiles) ; python -m doctest $^
+# test : | test-mypy test-doctest
+test : | test-doctest
+test-mypy-strict : $(PythonFiles) ; -python -m mypy --strict $^
+test-mypy : $(PythonFiles) ; -python -m mypy $^
+test-doctest : $(PythonFiles) ; -python -m doctest $^
 
 .PHONY : awk gawk
 awk gawk : ; @gawk -f index.awk -- index.md

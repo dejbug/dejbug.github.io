@@ -56,6 +56,9 @@ class ArchiveItem:
 	@classmethod
 	def sorted(cls, seq , reverse : bool = False):
 		key = cmp_to_key(lambda a, b: a.time - b.time)
+		# reveal_type(lambda a, b: a.time - b.time)
+		# reveal_type(cmp_to_key)
+		# reveal_type(key)
 		return sorted(seq, key = key, reverse = reverse)
 
 	@classmethod
@@ -282,6 +285,7 @@ def make_brand_new(args):
 	os.remove(args.ipath)
 	with open(args.ipath, 'wb') as file:
 		pass
+	return os.path.isfile(args.ipath)
 
 def print_dry_run_info(args):
 	cur = make_current_archive_item(args)
