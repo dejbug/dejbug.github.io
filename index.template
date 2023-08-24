@@ -47,8 +47,6 @@
 		font-variant-numeric: slashed-zero;
 	}
 	article {
-		columns: {{ python blog.py -v columns "{source}" }};
-		column-gap: 2em;
 	}
 	footer {
 		margin-top: 1.2em;
@@ -160,6 +158,13 @@
 /*		text-shadow: -7px 3px 5px #07fff3f0, 5px 7px 1px #6d29b2f0;*/
 		{{ python blog.py --purple-haze }}
 	}
+	.columns {
+		margin: 2em 0;
+		columns: 2;
+		column-gap: 2em;
+
+	}
+	.noise { }
 	#pill {
 		color: var(--color-pubtime);
 		padding: 0 1em;
@@ -181,7 +186,6 @@
 	#backref {
 		margin-left: 1em;
 	}
-	.noise { }
 	@media (max-width: 800px) {
 		body {
 /*			background: hotpink;*/
@@ -190,9 +194,6 @@
 			padding: 1em;
 			word-break: break-all;
 			hyphens: manual;
-		}
-		article {
-			columns: initial;
 		}
 		a, a:visited {
 /*			border-right: thin solid crimson;*/
@@ -204,11 +205,15 @@
 			box-shadow: none;
 			margin-bottom: 1em;
 		}
-		.noise {
-			display: none;
-		}
 		footer {
 			justify-content: flex-end;
+		}
+		.columns {
+			columns: initial;
+			margin: inherit;
+		}
+		.noise {
+			display: none;
 		}
 	}
 	@media (max-width: 640px) {

@@ -2,12 +2,9 @@
 
 ^^^
 For ///
-a
-dream ///
-lies
-here
+a dream ///
+lies here
 ^^^
-
 
 I'm rewriting known.py, the URI rewriter. It should be a bit slower by design but cleaner and a bit more powerful.
 
@@ -68,7 +65,7 @@ $ diff PKGBUILD-1.3.0 PKGBUILD
 >     # pytest -vv -c /dev/null
 > # }
 $ makepkg -s
-# pacman -R mypy
+$ pacman -R mypy
 $ pacman -U mypy-1.5.1-1-any.pkg.tar.zst
 ```
 
@@ -147,62 +144,97 @@ https://github.com/uhub/awesome-python
 
 [:rocket:]
 
-/// ""Typed (sigh) interaction with the GitHub API"" https://github.com/PyGithub/PyGithub
-/// ""Poetry helps you declare, manage and install dependencies of Python projects, ensuring you have the right stack everywhere."" https://github.com/python-poetry/poetry
-/// ""Never use print() to debug again."" https://github.com/gruns/icecream
-/// ""An ASGI web server, for Python."" https://github.com/encode/uvicorn
-/// ""REST API framework designed for human beings "" (6.6k stars) https://github.com/pyeve/eve
-/// ""It's React, but in Python (6.7k stars) "" https://github.com/reactive-python/reactpy
-/// ""Simple PyTorch Tutorials Zero to ALL!"" https://github.com/hunkim/PyTorchZeroToAll
-/// ""A collection of design patterns/idioms in Python]"" https://github.com/faif/python-patterns
-/// ""Free (as in freedom) open source clone of the Age of Empires II engine"" https://github.com/SFTtech/openage
-/// ""A Blender script to procedurally generate 3D spaceships"" https://github.com/a1studmuffin/SpaceshipGenerator
-/// ""A swiss army knife for pentesting networks"" https://github.com/Porchetta-Industries/CrackMapExec
-/// ""Brython (Browser Python) is an implementation of Python 3 running in the browser"" https://github.com/brython-dev/brython
-/// ""Exploit Development and Reverse Engineering with GDB Made Easy"" https://github.com/pwndbg/pwndbg
-/// ""A little Python library for making simple Electron-like HTML/JS GUI apps"" https://github.com/python-eel/Eel
-/// ""A Python module for learning all major algorithms"" https://github.com/OmkarPathak/pygorithm
-/// ""A static type analyzer for Python code"" https://github.com/google/pytype
-/// ""Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."" https://github.com/tornadoweb/tornado
-/// ""Cross-platform, fast, feature-rich, GPU based terminal"" https://github.com/kovidgoyal/kitty
-/// ""Project documentation with Markdown."" https://github.com/mkdocs/mkdocs
-/// ""Open source UI framework written in Python, running on Windows, Linux, macOS, Android and iOS"" https://github.com/kivy/kivy
-/// ""A Grammar of Graphics for Python"" https://github.com/has2k1/plotnine
-/// ""A very fast and expressive template engine."" https://github.com/pallets/jinja
-/// ""A lossless video/GIF/image upscaler achieved with waifu2x, Anime4K, SRMD and RealSR. Started in Hack the Valley 2, 2018."" https://github.com/k4yt3x/video2x
-/// ""Every web site provides APIs."" https://github.com/gaojiuli/toapi
-/// ""Selenium-python but lighter: Helium is the best Python library for web automation."" https://github.com/mherrmann/selenium-python-helium
-/// ""Bittorrent software for cats"" https://github.com/nyaadevs/nyaa
-/// ""Reverse engineering framework in Python"" https://github.com/cea-sec/miasm
-/// ""A fully tested, abstract interface to creating OAuth clients and servers."" https://github.com/joestump/python-oauth2
-/// ""Golem is creating a global market for computing power."" https://github.com/golemfactory/clay
-/// ""Fast and powerful SSL/TLS scanning library."" https://github.com/nabla-c0d3/sslyze
-/// ""Simple, elegant, Pythonic functional programming."" https://github.com/evhub/coconut
-/// ""Data validation using Python type hints"" https://github.com/pydantic/pydantic
-/// ""Typed interactions with the GitHub API v3"" https://github.com/PyGithub/PyGithub
-/// ""Shadowsocks - Wikipedia"" https://en.wikipedia.org/wiki/Shadowsocks
-/// ""The OpenAI Python library provides convenient access to the OpenAI API from applications written in the Python language."" https://github.com/openai/openai-python
-/// ""Minimal and clean examples of machine learning algorithms implementations"" https://github.com/rushter/MLAlgorithms
-/// ""PEFT: State-of-the-art Parameter-Efficient Fine-Tuning."" https://github.com/huggingface/peft
-/// ""The little ASGI framework that shines."" https://github.com/encode/starlette
-/// ""Computer Vision and Robotics Library for AI"" https://github.com/kornia/kornia
-/// ""The LBRY SDK for building decentralized, censorship resistant, monetized, digital content apps."" https://github.com/lbryio/lbry-sdk
-/// ""Python-powered, cross-platform, Unix-gazing shell."" https://github.com/xonsh/xonsh
-/// ""Low code web framework for real world applications, in Python and Javascript"" https://github.com/frappe/frappe
-/// ""The Web API toolkit."" https://github.com/encode/apistar
-/// ""Learning to See in the Dark. CVPR 2018"" https://github.com/cchen156/Learnin
-/// ""A free, online learning platform to make quality education accessible for all."" https://github.com/oppia/oppia
-/// ""Create web-based user interfaces with Python. The nice way."" https://github.com/zauberzeug/nicegui
-/// ""Python Koans - Learn Python through TDD"" https://github.com/gregmalcolm/python_koans
-/// ""A dialect of Lisp that's embedded in Python"" https://github.com/hylang/hy
-/// ""Python framework for building microservices"" https://github.com/nameko/nameko
-/// ""A functional standard library for Python."" https://github.com/pytoolz/toolz
-/// ""Tensorflow tutorial from basic to hard"" https://github.com/MorvanZhou/Tensorflow-Tutorial
-/// ""Swagger/OpenAPI First framework for Python on top of Flask with automatic endpoint validation & OAuth2 support"" https://github.com/spec-first/connexion
-/// ""A full-featured, hackable tiling window manager written and configured in Python (X11 & Wayland)"" https://github.com/qtile/qtile
-/// ""A tour in the wonderland of math with python."" https://github.com/neozhaoliang/pywonderland
-/// ""A next generation HTTP client for Python."" https://github.com/encode/httpx
-/// ""A retro game engine for Python"" https://github.com/kitao/pyxel
+$$$
+
+## Art
+
+""A Blender script to procedurally generate 3D spaceships"" https://github.com/a1studmuffin/SpaceshipGenerator
+""A lossless video/GIF/image upscaler achieved with waifu2x, Anime4K, SRMD and RealSR. Started in Hack the Valley 2, 2018."" https://github.com/k4yt3x/video2x
+""A Grammar of Graphics for Python"" https://github.com/has2k1/plotnine
+
+## Cracking
+
+""Reverse engineering framework in Python"" https://github.com/cea-sec/miasm
+""Exploit Development and Reverse Engineering with GDB Made Easy"" https://github.com/pwndbg/pwndbg
+""A swiss army knife for pentesting networks"" https://github.com/Porchetta-Industries/CrackMapExec
+""Fast and powerful SSL/TLS scanning library."" https://github.com/nabla-c0d3/sslyze
+""Shadowsocks - Wikipedia"" https://en.wikipedia.org/wiki/Shadowsocks
+
+## Crowd
+
+""The LBRY SDK for building decentralized, censorship resistant, monetized, digital content apps."" https://github.com/lbryio/lbry-sdk
+""Golem is creating a global market for computing power."" https://github.com/golemfactory/clay
+""Bittorrent software for cats"" https://github.com/nyaadevs/nyaa
+
+## Dev
+
+""Data validation using Python type hints"" https://github.com/pydantic/pydantic
+""A static type analyzer for Python code"" https://github.com/google/pytype
+""Never use print() to debug again."" https://github.com/gruns/icecream
+""Project documentation with Markdown."" https://github.com/mkdocs/mkdocs
+""Poetry helps you declare, manage and install dependencies of Python projects, ensuring you have the right stack everywhere."" https://github.com/python-poetry/poetry
+
+## Education
+
+""Simple PyTorch Tutorials Zero to ALL!"" https://github.com/hunkim/PyTorchZeroToAll
+""Tensorflow tutorial from basic to hard"" https://github.com/MorvanZhou/Tensorflow-Tutorial
+""Minimal and clean examples of machine learning algorithms implementations"" https://github.com/rushter/MLAlgorithms
+""PEFT: State-of-the-art Parameter-Efficient Fine-Tuning."" https://github.com/huggingface/peft
+""Learning to See in the Dark. CVPR 2018"" https://github.com/cchen156/Learnin
+""A free, online learning platform to make quality education accessible for all."" https://github.com/oppia/oppia
+""A tour in the wonderland of math with python."" https://github.com/neozhaoliang/pywonderland
+""A Python module for learning all major algorithms"" https://github.com/OmkarPathak/pygorithm
+""A collection of design patterns/idioms in Python]"" https://github.com/faif/python-patterns
+""Python Koans - Learn Python through TDD"" https://github.com/gregmalcolm/python_koans
+
+# Games
+
+""A retro game engine for Python"" https://github.com/kitao/pyxel
+""Free (as in freedom) open source clone of the Age of Empires II engine"" https://github.com/SFTtech/openage
+
+## GUI
+
+""Open source UI framework written in Python, running on Windows, Linux, macOS, Android and iOS"" https://github.com/kivy/kivy
+""A little Python library for making simple Electron-like HTML/JS GUI apps"" https://github.com/python-eel/Eel
+
+# Linux
+
+""Python-powered, cross-platform, Unix-gazing shell."" https://github.com/xonsh/xonsh
+""A full-featured, hackable tiling window manager written and configured in Python (X11 & Wayland)"" https://github.com/qtile/qtile
+""Cross-platform, fast, feature-rich, GPU based terminal"" https://github.com/kovidgoyal/kitty
+
+## Lisp
+
+""A dialect of Lisp that's embedded in Python"" https://github.com/hylang/hy
+""A functional standard library for Python."" https://github.com/pytoolz/toolz
+""Simple, elegant, Pythonic functional programming."" https://github.com/evhub/coconut
+
+## ML
+
+""Computer Vision and Robotics Library for AI"" https://github.com/kornia/kornia
+""The OpenAI Python library provides convenient access to the OpenAI API from applications written in the Python language."" https://github.com/openai/openai-python
+
+## Web
+
+""Brython (Browser Python) is an implementation of Python 3 running in the browser"" https://github.com/brython-dev/brython
+""Selenium-python but lighter: Helium is the best Python library for web automation."" https://github.com/mherrmann/selenium-python-helium
+""A very fast and expressive template engine."" https://github.com/pallets/jinja
+""It's React, but in Python (6.7k stars) "" https://github.com/reactive-python/reactpy
+""Swagger/OpenAPI First framework for Python on top of Flask with automatic endpoint validation & OAuth2 support"" https://github.com/spec-first/connexion
+""Create web-based user interfaces with Python. The nice way."" https://github.com/zauberzeug/nicegui
+""Low code web framework for real world applications, in Python and Javascript"" https://github.com/frappe/frappe
+""Python framework for building microservices"" https://github.com/nameko/nameko
+""A next generation HTTP client for Python."" https://github.com/encode/httpx
+""An ASGI web server, for Python."" https://github.com/encode/uvicorn
+""The little ASGI framework that shines."" https://github.com/encode/starlette
+""Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."" https://github.com/tornadoweb/tornado
+""The Web API toolkit."" https://github.com/encode/apistar
+""Every web site provides APIs."" https://github.com/gaojiuli/toapi
+""A fully tested, abstract interface to creating OAuth clients and servers."" https://github.com/joestump/python-oauth2
+""REST API framework designed for human beings"" https://github.com/pyeve/eve
+""Typed (sigh) interaction with the GitHub API"" https://github.com/PyGithub/PyGithub
+
+$$$
 
 # Gait
 

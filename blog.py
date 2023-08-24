@@ -42,6 +42,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'(\s+)[*]{2}(.+?)[*]{2}', r'\1<b>\2</b>', text, flags = re.S)
 	text = re.sub(r'\\\\(.+?)\\\\(.+?)\\\\', ruby, text, flags = re.S)
 	text = re.sub(r'____(.+?)____', r'<u>\1</u>', text, flags = re.S)
+	text = re.sub(r'\${3}(.+?)\${3}', r'<div class="columns">\1</div>', text, flags = re.S)
 	text = re.sub(r'\^{3}(.+?)\^{3}', r'<div class="upright">\1</div>', text, flags = re.S)
 	text = re.sub(r'```(.+?)```', r'<pre>\1</pre>', text, flags = re.S)
 	text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text, flags = re.S)
