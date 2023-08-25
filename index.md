@@ -4,7 +4,7 @@ We had a thunderstorm this morning and the air is breathable again. Some storms 
 
 # Susurrous
 
-The sounds are noticeably different after an **event**. Like something's missing. What is missing is the carelessness and \\arrogance\\that's right!\\ of people going through the various motions of mundane existence --- only partially coreographed but often mostly improvised. People are animals who enjoy creative freedoms. I am very much an animal like that of course and so I need to come up with a little task today. Something small enough to be finishable in a couple hours. Because tonight is chess night and I have not seriously looked at chess in weeks.
+The sounds are noticeably different after an **event**. Like something's missing. What is missing is the noise. The carelessness and \\arrogance\\that's right!\\ of the biosphere going through the motions of its biochemical existence --- only partially coreographed but mostly made up on the spot. People are animals who enjoy creative freedoms. I am very much an animal like that of course and so today I need to come up with a little tasklet for myself. Something small enough to be finishable in a couple hours. Because tonight is club night and I have not seriously looked at chess in weeks.
 
 # Tasuke-te
 
@@ -20,7 +20,7 @@ https://www.oneearth.org/repair-reuse-recycle-how-britain-is-tackling-throwaway-
 https://en.wikipedia.org/wiki/Throw-away_society
 https://en.wikipedia.org/wiki/Tragedy_of_the_commons
 
-The thing is that we love reinventing the wheel https://en.wikipedia.org/wiki/Stovepipe_system . Given the somewhat pointless, undirected leisure that comes with long-term unemployment and if you're lucky enough to derive some pleasure from looking at screenfuls of pretty-colored text. After all, with anything a bit more complex than a wheel, it's a perfect learning experience. A perfect time-passing experience at that. And there's the nagging feeling that you may be able to do it better https://en.wikipedia.org/wiki/Anti-pattern https://en.wikipedia.org/wiki/Not_invented_here . What else are you to do with lots of time and no liquidity?
+The thing is that we love reinventing the wheel https://en.wikipedia.org/wiki/Stovepipe_system . Given the somewhat pointless, undirected leisure that comes with long-term unemployment https://www.nami.org/Blogs/NAMI-Blog/October-2019/People-with-Mental-Illness-Can-Work and if you're lucky enough to derive some pleasure from looking at screenfuls of pretty-colored text. After all, with anything a bit more complex than a wheel, it's a perfect learning experience. A perfect time-passing experience at that. And there's the nagging feeling that you may be able to do it better https://en.wikipedia.org/wiki/Anti-pattern https://en.wikipedia.org/wiki/Not_invented_here . What else are you to do with lots of time and no liquidity?
 
 # Tools
 
@@ -42,7 +42,7 @@ $ source-highlight --out-format=esc256 --style-file=./default.style -i known.py
 
 # Actions
 
-It seems that GNU's `source-highlight` https://www.gnu.org/software/src-highlite/source-highlight.html is not preinstalled https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software on the GH build server I use https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md (Ubuntu Jammy Jellyfish). Which means back to fiddling with the workspace config. It was a bit frustrating writing one more or less blindly and it took a couple of first runs to get it right, but adding little things like this should be straight-forward. Here goes nothing!
+It seems that GNU's `source-highlight` https://www.gnu.org/software/src-highlite/source-highlight.html is not preinstalled https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software on the GH build server I use https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md (Ubuntu Jammy Jellyfish). Which means back to fiddling with the workspace config. It was a bit frustrating writing one more or less blindly and it took a couple of first runs to get it right, but adding little things like this should be straight-forward. Here goes nothing! Whaddayaknow! I've managed to make an error but it works now. Hurts to be so greedy that the list of preinstalled tools wasn't enough for this stupid little blog to render, but hey ho. Grab what you can get.
 
 # TIL
 
