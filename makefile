@@ -27,7 +27,7 @@ clean :
 reset : | clean ; rm -rf parsers
 run : build/index.html ; cd build && php -S localhost:8000
 
-build/%.html : %.md index.template known.aka.pickle *.py | build/archive/
+build/%.html : %.md index.template known.aka.pickle *.py *.style | build/archive/
 	python render.py -do $@ index.template source=$<
 
 %.aka.pickle : %.aka known.py ; python known.py -o $@ $<
@@ -96,3 +96,14 @@ $(foreach name,$(GrammarNames),$(eval $(call makeParserRule,$(name))))
 
 # $(foreach name,$(GrammarNames),$(info $(call makeParserCommands,$(name))))
 $(foreach name,$(GrammarNames),$(eval $(call makeParserCommands,$(name))))
+
+TitlesSources := index $(notdir $(basename $(ArchiveSources)))
+TitlesTargets := $(TitlesSources:%=titles-%)
+.PHONY : $(TitlesTargets)
+titles : $(TitlesTargets)
+# 	@printf '%s' index.md
+# 	@sed -n '/^#/p' index.md
+# 	@find archive/*.md -exec printf '\n\n{}' \; -exec sed -n '/^#/p' '{}' \;
+
+titles-index : index.md ; @printf '$<\n' && sed -n '/^#/p' $<
+$(filter-out titles-index,$(TitlesTargets)) : titles-% : archive/%.md ; @printf '\n\n$<\n' && sed -n '/^#/p' $<

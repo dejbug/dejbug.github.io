@@ -118,6 +118,7 @@
 		ruby-align: center;
 	}
 	rt {
+		border-bottom: thin solid #e8e28e;
 		color: #e8e28e;
 		font-family: serif;
 	}

@@ -30,11 +30,33 @@ def ruby(m):
 	return f'''<ruby><rb>{text}</rb><rt>{note}</rt></ruby>'''
 
 
+def runGnuHighlighter(lang, text):
+	try:
+		assert os.path.isfile('syntax.style')
+		p = subprocess.run(['source-highlight', '-t 4', '--style-file=./syntax.style', '--src-lang=%s' % lang, '--no-doc'], input = bytes(text, 'utf8'), capture_output = True)
+		return p.stdout.decode('utf8')
+	except Exception as e:
+		# text = str(e)
+		pass
+	return f'<pre>{text}</pre>'
+
+
+def highlight(m):
+	lang = m.group(1)
+	text = m.group(2)
+	text = html.unescape(text)
+	if not lang:
+		return f'<pre>{text}</pre>'
+	text = runGnuHighlighter(lang, text)
+	return f'{text}'
+
+
 def parse(text, file = sys.stdout):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 	text = re.sub(r'^!.*$', '', text, flags = re.S|re.M)
 	text = re.sub(r'<3', '[:heart:]', text, flags = re.S)
 	text = html.escape(text, quote = False)
+	text = re.sub(r'\[:copyleft:]', '&#x1F12F', text, flags = re.S)
 	text = re.sub(r'\[:heart:]', '<span class="red emoji">&#x2764</span>', text, flags = re.S)
 	text = re.sub(r'\[:butterfly:]', '<span class="emoji">&#x1F98B</span>', text, flags = re.S)
 	text = re.sub(r'\[:rocket:]', '<span class="emoji">&#x1F680</span>', text, flags = re.S)
@@ -44,14 +66,15 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'____(.+?)____', r'<u>\1</u>', text, flags = re.S)
 	text = re.sub(r'\${3}(.+?)\${3}', r'<div class="columns">\1</div>', text, flags = re.S)
 	text = re.sub(r'\^{3}(.+?)\^{3}', r'<div class="upright">\1</div>', text, flags = re.S)
-	text = re.sub(r'```(.+?)```', r'<pre>\1</pre>', text, flags = re.S)
-	text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text, flags = re.S)
+	text = re.sub(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', highlight, text, flags = re.S)
+	text = re.sub(r'`([^`\r\n]+)`', r'<code>\1</code>', text, flags = re.S)
 	text = re.sub(r'"""(.+?)"""', r'<blockquote>\1</blockquote>', text, flags = re.S)
 	text = re.sub(r'""(.+?)""', r'<q>\1</q>', text, flags = re.S)
-	text = re.sub(r'^((#+)[ \t]*([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
+	text = re.sub(r'^((#+)[ \t]+([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	text = re.sub(r'\s*<?(https?://' + LINKCC + '+)>?\\s*', transuri, text, flags = re.S)
 	text = re.sub(r'/a>\s+([.:,;!?])', r'/a>\1', text, flags = re.S)
 	text = re.sub(r'///', '<br>', text, flags = re.S)
+	text = re.sub(r'\s+---\s+', ' &mdash; ', text, flags = re.S)
 	file.write(text)
 
 
