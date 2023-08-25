@@ -116,7 +116,7 @@ jobs:
       - name: Install Build-time Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get source-highlight
+          sudo apt-get install source-highlight
       - name: Build Artifact
         run: make
       - name: Upload Artifact
