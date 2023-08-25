@@ -40,6 +40,10 @@ $ vim default.style
 $ source-highlight --out-format=esc256 --style-file=./default.style -i known.py
 ```
 
+# Actions
+
+It seems that GNU's `source-highlight` https://www.gnu.org/software/src-highlite/source-highlight.html is not preinstalled https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software on the GH build server I use https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md (Ubuntu Jammy Jellyfish). Which means back to fiddling with the workspace config. It was a bit frustrating writing one more or less blindly and it took a couple of first runs to get it right, but adding little things like this should be straight-forward. Here goes nothing!
+
 # TIL
 
 	""" In early aviation, the Wright brothers held patents on certain aspects of aircraft, while Glenn Curtiss held patents on ailerons https://en.wikipedia.org/wiki/Ailerons which was an advance on the Wrights' system, but antipathy between the patent holders https://en.wikipedia.org/wiki/Wright_brothers_patent_war prevented their use. The government was forced to step in and create a patent pool https://en.wikipedia.org/wiki/Patent_pool during World War I. --- https://en.wikipedia.org/wiki/Tragedy_of_the_anticommons """

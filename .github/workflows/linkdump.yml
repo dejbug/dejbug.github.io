@@ -113,6 +113,10 @@ jobs:
       #   env:
       #     PREFIX_PATHS: 'true'
       #   run: ${{ steps.detect-package-manager.outputs.manager }} run build
+      - name: Install Build-time Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get source-highlight
       - name: Build Artifact
         run: make
       - name: Upload Artifact
