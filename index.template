@@ -12,6 +12,7 @@
 		--color-body-bg-top: #14453a;
 		--color-body-bg-bottom: #4b0f44;
 		--color-body-fg: #fff016;
+		--color-concent: #dfffa6;
 		--color-link-known-visited: #a9dfff;
 		--color-link-known: #3affbe; /* teal */
 		--color-link: #1d959b; /* #f3f4f2; */
@@ -121,6 +122,33 @@
 		border-bottom: thin solid #e8e28e;
 		color: #e8e28e;
 		font-family: serif;
+	}
+	details {
+		display: contents;
+		color: snow;
+
+	}
+	details summary:before, details summary:after {
+		content: "\"";
+	}
+	details[open] summary:before {
+		content: "";
+	}
+	details[open] summary {
+		color: chartreuse;
+	}
+	details[open] summary:after {
+		content: " (";
+		color: chartreuse;
+	}
+	details[open]:after {
+		content: ")";
+		color: chartreuse;
+	}
+	summary {
+		display: inline-block;
+		color: var(--color-concent);
+		cursor: pointer;
 	}
 	.known-uri {
 		border-right: thin solid crimson;

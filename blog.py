@@ -71,10 +71,13 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'"""(.+?)"""', r'<blockquote>\1</blockquote>', text, flags = re.S)
 	text = re.sub(r'""(.+?)""', r'<q>\1</q>', text, flags = re.S)
 	text = re.sub(r'^((#+)[ \t]+([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
-	text = re.sub(r'\s*<?(https?://' + LINKCC + '+)>?\\s*', transuri, text, flags = re.S)
+	text = re.sub(r'(?<=\s)<?(https?://' + LINKCC + '+)>?(?=\s)', transuri, text, flags = re.S|re.M)
 	text = re.sub(r'/a>\s+([.:,;!?])', r'/a>\1', text, flags = re.S)
 	text = re.sub(r'///', '<br>', text, flags = re.S)
 	text = re.sub(r'\s+---\s+', ' &mdash; ', text, flags = re.S)
+	# text = re.sub(r'"([^"\r\n]+)"="([^"\r\n]+?)"', r'<abbr title="\2">\1</abbr>', text, flags = re.S)
+	text = re.sub(r'"([^"\r\n]+)"\(\(([^)\r\n]+?)\)\)', r'<details open><summary>\1</summary>\2</details>', text, flags = re.S)
+	text = re.sub(r'"([^"\r\n]+)"\(([^)\r\n]+?)\)', r'<details><summary>\1</summary>\2</details>', text, flags = re.S)
 	file.write(text)
 
 
