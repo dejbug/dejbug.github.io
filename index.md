@@ -54,7 +54,7 @@ So this is a way to do it by hand. Just regex through the XML and then replace i
 
 # XSLT
 
-The more elegant but far less powerful way would be to use XSLT.
+The more elegant but ~~far~~ less powerful way would be to use XSLT.
 
 Now I've tried simply rewriting the root ...
 
@@ -218,6 +218,6 @@ There is a nasty edge-case here where the previous title overlays the current ti
 
 # Carnival Dogs Consume The Lines
 
-Men don't get tired. Men get exhausted. But I think I've done enough today. I was close to crying at one point. But no, men don't cry, men weep. I was close to weeping. Today, I guess, I was built too close to water as the germans say. Don't mention the war. What else. I binged through season three of Lower Decks because it was going behind Prime's paywall soon. I didn't find a single flaw with it. I really enjoyed it and also the fact that I had caught it just in time. Oh! And. I got a text from a stranger today. It was either a phishing attempt or it was somebody of substance who was to get me out of my solipsistic/idiotic funk and into a grand new future life of purpose and reward. But do go ahead and guess.
+Men don't get tired. Men get exhausted. But I think I've done enough today. I was close to crying at one point. But no, men don't cry, men weep. I was close to weeping. Today, I guess, I was built too close to water as the Germans say. Don't mention the war. What else. I binged through season three of Lower Decks because it was going behind Prime's paywall soon. I didn't find a single flaw with it. I really enjoyed it and also the fact that I had caught it just in time. Oh! And. I got a text from a stranger today. It was either a phishing attempt or it was somebody of substance who was to get me out of my solipsistic/idiotic funk and into a grand new future life of purpose and reward. But do go ahead and guess.
 
 ! header = block
