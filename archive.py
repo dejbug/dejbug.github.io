@@ -287,6 +287,33 @@ def make_brand_new(args):
 		pass
 	return os.path.isfile(args.ipath)
 
+def parse_simple_date(text):
+	now = datetime.now()
+	d = { 'y': now.year, 'm': now.month, 'd': now.day }
+	def match(pattern, d = d):
+		m = re.match(pattern, text)
+		if m: d.update(dict((k, int(v)) for k, v in m.groupdict().items() if v))
+		return m
+	if '/' in text and match(r'(?P<m>\d+)/(?P<d>\d+)(?:/(?P<y>\d+))?'): return d # print(3, d)
+	elif '.' in text and match(r'(?P<d>\d+)(?:\.(?P<m>\d+)(?:\.(?P<y>\d+))?)?'): return d # print(2, d)
+	elif match(r'(?:(?:(?P<y>\d+)-)?(?P<m>\d+)-)?(?P<d>\d+)'): return d # print(1, d)
+
+def explain(args):
+	text = args.explain.strip()
+	if text == '#':
+		aa = ArchiveItem.sorted(ArchiveItem.iter())
+		print(len(aa))
+		return
+	try:
+		i = int(text)
+		aa = ArchiveItem.sorted(ArchiveItem.iter())
+		print(aa[i].path)
+		return
+	except: pass
+	text = text.lower()
+	d = parse_simple_date(text)
+	if d: print(f'archive/{d["y"]:04}-{d["m"]:02}-{d["d"]:02}.md')
+
 def print_dry_run_info(args):
 	cur = make_current_archive_item(args)
 	qdiff = get_quickdiff(args.ipath, cur.path, colorize = not args.plain)
@@ -308,13 +335,19 @@ Try `python archive.py -d | less -R` to see the the diff.''')
 		print(f'Archiving will succeeed because the current blog page\'s archive slot is {green("free")}.')
 
 def parse_args(args = sys.argv[1:]):
-	parser = argparse.ArgumentParser()
+	notes = '''QUERY is either of the form [[Y-]M-]D or D[.M[.Y]] or M/D[/Y],
+		or it is a negative integer, -1 being the most recently archived page, etc.
+		The special value -0 (or just 0) will print the oldest archived page.
+		The special value # will print the number of archived pages. Note that #
+		must be escaped: -x '#'. But -x=# and -x# will also work.'''
+	parser = argparse.ArgumentParser(epilog = notes)
 	parser.add_argument('-a', '--archive', action='store_true', help='archive current blog file')
 	parser.add_argument('-b', '--backref', action='store_true', help='find backref for ipath')
 	parser.add_argument('-d', '--diff', action='store_true', help='show diff of current blog and top archive file')
 	parser.add_argument('-f', '--force', action='store_true', help='force irreversible operations (with -a and -n)')
 	parser.add_argument('-m', '--mtime', action='store_true', help='use modified time to generate archive path (else current time)')
 	parser.add_argument('-n', '--new', action='store_true', help='make a brand new index.md')
+	parser.add_argument('-x', '--explain', metavar='QUERY', help='print archive path for date')
 	parser.add_argument('-v', '--verbose', action='store_true', help='don\'t be shy')
 	parser.add_argument('-p', '--plain', action='store_true', help='no rainbows')
 	parser.add_argument('--colors' , action='store_true', help='just rainbows')
@@ -333,6 +366,8 @@ def main(args = sys.argv[1:]):
 	elif args.archive: archive_current(args)
 
 	elif args.new: make_brand_new(args)
+
+	elif args.explain: explain(args)
 
 	else: print_dry_run_info(args)
 

@@ -36,8 +36,8 @@ def runGnuHighlighter(lang, text):
 		p = subprocess.run(['source-highlight', '-t 4', '--style-file=./syntax.style', '--src-lang=%s' % lang, '--no-doc'], input = bytes(text, 'utf8'), capture_output = True)
 		return p.stdout.decode('utf8')
 	except Exception as e:
-		# text = str(e)
-		pass
+		text = str(e)
+		# pass
 	return f'<pre>{text}</pre>'
 
 
