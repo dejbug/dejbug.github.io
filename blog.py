@@ -59,6 +59,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'\[:copyleft:]', '&#x1F12F', text, flags = re.S)
 	text = re.sub(r'\[:heart:]', '<span class="red emoji">&#x2764</span>', text, flags = re.S)
 	text = re.sub(r'\[:butterfly:]', '<span class="emoji">&#x1F98B</span>', text, flags = re.S)
+	text = re.sub(r'\[:rainbow:]', '<span class="emoji">&#x1F308</span>', text, flags = re.S)
 	text = re.sub(r'\[:rocket:]', '<span class="emoji">&#x1F680</span>', text, flags = re.S)
 	text = re.sub(r'(\s+)(#[A-Za-z][-_.0-9A-Za-z]*[0-9A-Za-z]+)', r'\1<i>\2</i>', text, re.S)
 	text = re.sub(r'(\s+)[*]{2}(.+?)[*]{2}', r'\1<b>\2</b>', text, flags = re.S)
@@ -76,7 +77,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'/a>\s+([.:,;!?])', r'/a>\1', text, flags = re.S)
 	text = re.sub(r'///', '<br>', text, flags = re.S)
 	text = re.sub(r'\s+---\s+', ' &mdash; ', text, flags = re.S)
-	# text = re.sub(r'"([^"\r\n]+)"="([^"\r\n]+?)"', r'<abbr title="\2">\1</abbr>', text, flags = re.S)
+	text = re.sub(r'"([^"\r\n]+)"="([^"\r\n]+?)"', r'<abbr title="\2">\1</abbr>', text, flags = re.S)
 	text = re.sub(r'"([^"\r\n]+)"\(\(([^)\r\n]+?)\)\)', r'<details open><summary>\1</summary>\2</details>', text, flags = re.S)
 	text = re.sub(r'"([^"\r\n]+)"\(([^)\r\n]+?)\)', r'<details><summary>\1</summary>\2</details>', text, flags = re.S)
 	file.write(text)
@@ -99,6 +100,7 @@ def parseArgs(args = sys.argv[1:]):
 	parser.add_argument('-t', '--title', action='store_true')
 	parser.add_argument('-b', '--backref', action='store_true')
 	parser.add_argument('-v', '--variable')
+	parser.add_argument('--default')
 	parser.add_argument('-o', '--opath', default = DEFAULT_OUTPUT_FILEPATH)
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
 	args = parser.parse_args(args)
@@ -123,7 +125,7 @@ def main(args = sys.argv[1:]):
 			if backref:
 				source = f'archive/{backref}.md'
 				if os.path.isfile(source):
-					rendered = f'/archive/{backref}.html'
+					rendered = f'/{backref}.html'
 					print(f'<strong><a href="{rendered}">[back]</a></strong>')
 
 	elif args.date:
@@ -135,6 +137,7 @@ def main(args = sys.argv[1:]):
 		with open(args.ipath) as ifile:
 			m = re.search(r'^![ \t]*' + args.variable + r'[ \t]*=[ \t]*(.+?)[ \t]*$', ifile.read(), re.S|re.M)
 			if m: print(m.group(1))
+			elif args.default: print(args.default)
 
 	elif args.title:
 		with open(args.ipath) as ifile:

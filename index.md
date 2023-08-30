@@ -1,6 +1,6 @@
 # TOC
 
-I'm obsessing with my `toc.js`. Which reminds me that I need a new repo for this. But what is it? Part of a web extension? Part of my blog? Putting it inside this blog's repo would be simplest but I really dislike the idea of adding JS to the page. Because I **will** get carried away. With this new avenue for madness. Let's keep this channeled; simple, nice, and tight.
+I'm "obsessing"="compulsorily!" with my `toc.js`. https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API Which reminds me that I need a new repo for this. But what is it? Part of a web extension? Part of my blog? Putting it inside this blog's repo would be simplest but I really dislike the idea of adding JS to the page. Because I **will** get carried away. With this new avenue for madness. Let's keep this channeled; simple, nice, and tight.
 
 # The Time is Now
 
@@ -8,15 +8,22 @@ That's right, Moloko. Let me ask you this, my fellow chellovecks. **When** is ti
 
 I had to load the past archive page and I thought, now's the time to make this easy. So I'm adding a new flag to `archive.py`.
 
-""" I choose not to run! --- Seinfeld """
+""" "I choose not to run!" --- Seinfeld """
 
 Well, apparently I choose to run in smaller and smaller circles.
 
-""" When a man cannot choose, he ceases to be a man. --- A Clockwork Orange """
+""" "When a man cannot choose, he ceases to be a man." --- A Clockwork Orange """
 
 Ok. Done. `subl $(./archive.py -x -1)` now opens the most recently archived blog page.
 
 # Big Long Now
+
+^^^
+Why can't ///
+I hear ///
+The call ///
+Of life ?
+^^^
 
 I've watched the new Batman a couple nights ago. https://www.imdb.com/title/tt1877830/ Well, had to watch it in two installments because I fell asleep half-way. Which by the way is not a negative criticism, not coming from me. It was exactly the movie I had to be watching that night. It was calming. It was perfect. They played a Nirvana song from their B sides and I was happy for a second. Then I thought, they are using this for that? Have they no respect, no decency? But then, well, I had to say, it was a good fit. And it was the only song they stole. Rather than create something of their own "they" go for the quick and easy fix and just rob us of the irreplacable masterworks of our shared cultural heritage in order to elevate a throwaway culture --- is what I always think. In my mind they've basically reduced a classic to a marketing jingle. But it turns out the flick wasn't too shabby. Although here this also means that there wasn't much they could have possibly done wrong. They used a standard plot schematic. The film was all about mood and style. For what it was, I liked it.
 
@@ -26,10 +33,76 @@ Nirvana was the music of my youth. It depresses me now. I'm getting used to Dub.
 
 # TOC #2
 
-There's a problem I forgot about, though I anticipated it yesterday. This latter is a real problem for me. The fact that I don't even read my own comments when I'm in a flow. But hey how, that's a problem I can't solve. The smaller problem at hand has to do with wrong assumptions and fixing it involves rewriting `toc.js`. Which is okay. https://en.wikipedia.org/wiki/List_of_proposed_etymologies_of_OK The whole thing was just exploratory code. Let's do this and then move on to something more urgent.
+There's a problem I forgot about, though I anticipated it yesterday. This latter is a real problem for me. The fact that I don't even read my own comments when I'm in a flow. But hey how, that's a problem I can't solve. The smaller problem at hand has to do with wrong assumptions and fixing it involves rewriting `toc.js`. Which is okay. https://en.wikipedia.org/wiki/List_of_proposed_etymologies_of_OK The whole thing was just exploratory coding. Let's do this and then move on to something more urgent.
 
 # TODO
 
 It's Tuesday already and on Friday we'll be having a smaller one-day tournament. We might be able to do a round-robin but a swiss could be asked for. I would love to have a workable prototype of my swiss pairer. It's really just an interface to a FIDE-approved backend. https://github.com/BieremaBoyzProgramming/bbpPairings It should be finishable by then.
 
-! header = block
+
+# TOC #3
+
+So far, so good. I can tell whether a header scrolled out at the top or at the bottom of the viewport but I can't distinguish whence it scrolled in unless I keep track of where it was last time. Though I don't really need this "extra" info for `toc.js` to work, I'd rather have it in there. For OCD's sake. [:rainbow:]
+
+# TOC #4
+
+Oh shoot (me). Mozilla's Intersection Observer API is dropping events! When scrolling too quickly. But I don't want to hook into `onscroll` for this. It would be so much simpler though. Just find the last `target.offsetTop < document.scrollingElement.scrollTop`. I will do you one better and consider doing this in **idle time** https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback https://developer.mozilla.org/en-US/docs/Web/API/Background_Tasks_API .
+
+# TOC #5
+
+Yes I'm ditching the Observer. https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API I should never have messed around with it. The only thing noteworthy about it is how its apparent usefulness obscured it's utter uselessness. Or: where it was useful obscured where it wasn't --- and this was an all or nothing kind of thing. It works beautifully now. It's arguably even more efficient now. Yes, it uses a timer that fires ten times a second but 99% of the time it will only check to see that `scrollTop` hasn't changed.
+
+# TOC #6
+
+Ok. Anyway. Let's test this in the blog. I think it's making everything too busy. But let's leave it like this for a while.
+
+# Digression #101
+
+Ok, I'm streaming some serious <3 from across the pond https://somafm.com/defcon/ and I found myself looking at the tiny tooltip frequently enough, checking to see what was playing, that I had to write a little window title dumper for my player. Now, with the **Win32 API** I used to be a minor magician but here... I really want to get into Xorg https://www.x.org/wiki/guide/concepts/ and all but there's so much else to do. Also, check this out https://www.gnu.org/software/screen/ .
+
+But hey. There are a couple tools. `wmctrl` relies on https://specifications.freedesktop.org/wm-spec/latest/ . Which my player (**DeadBeef** https://en.wikipedia.org/wiki/DeaDBeeF https://github.com/DeaDBeeF-Player/deadbeef ) doesn't seem to support. But then there's `xwininfo` (part of `xorg-apps`) which does a perfect job. Here: https://gist.github.com/dejbug/8140163f8c3c6e08a08193cd09705148
+
+# JS
+
+I can get behind why people like this little language.
+
+https://en.wikipedia.org/wiki/ECMAScript
+https://www.ecma-international.org/technical-committees/tc39/
+https://tc39.es/ecma262/
+https://tc39.es/ecma402/
+https://tc39.es/process-document/
+https://github.com/tc39/proposals
+
+# Useful
+
+This should really be in the standard https://underscorejs.org/ https://github.com/jashkenas/underscore/blob/master/underscore-min.js . I'll be looking at this next https://backbonejs.org/ https://github.com/jashkenas/backbone/wiki/Backbone,-The-Primer .
+
+# CSS
+
+I want my blog to look nicer in **print mode**, so I'll need to deal with `@page` https://developer.mozilla.org/en-US/docs/Web/CSS/@page .
+
+Creative use of the `:hover` https://www.w3schools.com/css/css_tooltip.asp pseudoclass.
+
+# Elevator Music
+
+I found **xlr8r** while browsing for some titles and will be checking it out soon https://xlr8r.com/ .
+
+# So long!
+
+""" "I particularly enjoy the circumference." --- Nirvana """
+
+Verse Chorus Verse https://www.youtube.com/watch?v=Vs_mhEcO_mQ
+Sappy https://www.youtube.com/watch?v=jOg8IblMNK4
+Serve The Servants https://www.youtube.com/watch?v=GrLUUVfKeUw
+Moist Vagina https://www.youtube.com/watch?v=GPwcy8lUYng
+Old Age https://www.youtube.com/watch?v=Kz57pAf2-ak
+About A Girl https://www.youtube.com/watch?v=tOeVzctPI9E
+Clean Up Before She Comes https://www.youtube.com/watch?v=XhnXpCkpbjc
+Opinon https://www.youtube.com/watch?v=JMvJg8PhRg0
+D7 (Wipers Cover) https://www.youtube.com/watch?v=Y5Ev4e47dao
+Even In His Youth https://www.youtube.com/watch?v=plBMcpRRrVw
+
+! blurb = I must be getting old.
+! header-color = navajowhite
+! gradient-top = #306
+! gradient-bottom = #402

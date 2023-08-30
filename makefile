@@ -20,28 +20,37 @@ GrammarNames := $(GrammarFiles:%.g4=%)
 ParserFiles =
 
 .PHONY : all clean reset run
-all : build/index.html | archive github
+all : build/index.html build/index.css | archive github extra
 clean :
 	rm -f parsers/*/*.interp parsers/*/*.tokens
 	rm -rf build
 reset : | clean ; rm -rf parsers
 run : build/index.html ; cd build && php -S localhost:8000
 
-build/%.html : %.md index.template known.aka.pickle *.py *.style | build/archive/
+build/index.css : index.css ;
+	python render.py -do $@ $<
+
+build/index.html : index.md index.template known.aka.pickle *.py *.style | build/
+	python render.py -do $@ index.template source=$<
+
+build/%.html : archive/%.md index.template known.aka.pickle *.py *.style | build/
 	python render.py -do $@ index.template source=$<
 
 %.aka.pickle : %.aka known.py ; python known.py -o $@ $<
 
 # %/ : ; mkdir -p $@
 build/ : ; mkdir $@
-build/archive/ : ; mkdir -p $@
+
+.PHONY : extra
+extra : build/sticky.js
+build/sticky.js : js/sticky.js ; cp $< $@
 
 ArchiveSources = $(wildcard archive/*.md)
-ArchiveTargets = $(ArchiveSources:archive/%.md=build/archive/%.html)
+ArchiveTargets = $(ArchiveSources:archive/%.md=build/%.html)
 ArchiveTargetNames = $(ArchiveSources:archive/%.md=%)
 
 .PHONY : archive
-archive : $(ArchiveTargets) | build/archive/
+archive : $(ArchiveTargets)
 
 .PHONY : github
 github : build/github.css build/github.svg
