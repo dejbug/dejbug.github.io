@@ -4,11 +4,11 @@ I'm "obsessing"="compulsorily!" with my `toc.js`. https://developer.mozilla.org/
 
 # The Time is Now
 
-That's right, Moloko. Let me ask you this, my fellow chellovecks. **When** is time?
+That's right, Moloko. Let me ask you this, my fellow chellovecks. https://en.wiktionary.org/wiki/Appendix:A_Clockwork_Orange **When** is time?
 
 I had to load the past archive page and I thought, now's the time to make this easy. So I'm adding a new flag to `archive.py`.
 
-""" "I choose not to run!" --- Seinfeld """
+""" "I choose not to run!" --- Seinfeld http://www.seinfeldscripts.com/TheRace.html """
 
 Well, apparently I choose to run in smaller and smaller circles.
 
