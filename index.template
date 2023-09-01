@@ -10,7 +10,7 @@
 		--color-body-bg-top: {{ python blog.py -v gradient-top --default "#14453a" "{source}" }};
 		--color-body-bg-bottom: {{ python blog.py -v gradient-bottom --default "#4b0f44" "{source}" }};
 	}
-	strong {
+	h3 {
 		display: {{ python blog.py -v header --default block "{source}" }};
 		color: {{ python blog.py -v header-color --default tomato "{source}" }};
 	}
@@ -29,8 +29,8 @@
 <span id="copyleft">Copyleft (<span class="petokraka">&#x2605</span>) Dejan Budimir</span>
 <span id="backref">{{ python blog.py -b "{source}" }}</span>
 </footer>
-<!-- <script src="underscore-min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js" integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js" integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src="vendor/underscore/underscore-min.js"></script>
 <script src="sticky.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 :root {
+	--font-size: 24pt;
 	--color-annotation: #fff77f;
 	--color-pubtime: hotpink;
 	--color-body-bg: #14453a; /* aliceblue */
@@ -29,10 +30,20 @@
 	--color-blue: #ccddee;
 	--color-pink: #eecce9;
 }
+@media (max-width: 800px) {
+	:root {
+		--font-size: 12pt;
+	}
+}
+@media (max-width: 640px) {
+	:root {
+		--font-size: 10pt;
+	}
+}
 body {
 	min-height: 42em;
 	font-family: monospace;
-	font-size: 24pt;
+	font-size: var(--font-size);
 	line-height: 200%;
 	background: linear-gradient(to bottom right, var(--color-body-bg-top), var(--color-body-bg-bottom));
 	color: var(--color-body-fg);
@@ -53,14 +64,21 @@ footer {
 	justify-content: space-between;
 	align-items: baseline;
 }
-strong {
+h3 {
+	line-height: 1rem;
 	color: tomato;
 }
-strong ~ strong {
-	margin-top: 1em;
+/*
+// This might only work once I have a contextual parser
+// which wraps naked text into paragraphs.
+h3 + h3:before {
+	content: "+ ";
+	color: tomato;
 }
+*/
 a, a:visited {
 	color: var(--color-link); text-decoration: none;
+	word-break: break-all;
 }
 i {
 	font-style: normal;
@@ -108,7 +126,8 @@ blockquote {
 
 	font-size: 80%;
 	line-height: 150%;
-	margin-bottom: 1.4em;
+	margin: 0;
+	margin-bottom: 2em;
 }
 ruby {
 	ruby-align: center;
@@ -211,14 +230,27 @@ summary {
 }
 #status.version1 {
 	position: fixed;
-	bottom: 0;
-	width: 96vh;
+	contain: paint;
+
+	left: .1em;
+	top: 0;
+
+	width: calc(100svh - 2em);
+	height: var(--font-size);
+	line-height: 100%;
+
 	margin: 0;
 	padding: 0;
+
 	text-align: right;
 	color: var(--color-status-1);
-	transform-origin: bottom left;
-	transform: rotate(270deg);
+
+	transform-origin: top left;
+	transform: rotate(-90deg) translate(calc(-100svh + 1em));
+
+	overflow-wrap: normal;
+	overflow: clip;
+	word-break: break-all;
 }
 #status.version2 {
 	position: fixed;
@@ -237,7 +269,7 @@ summary {
 	body {
 /*			background: hotpink;*/
 /*			font-size: calc(1rem + 100vw / 144);*/
-		font-size: 12pt;
+/*		font-size: 12pt;*/
 		padding: 1em;
 		word-break: break-all;
 		hyphens: manual;
@@ -261,12 +293,6 @@ summary {
 	}
 	.noise {
 		display: none;
-	}
-}
-@media (max-width: 640px) {
-	body {
-/*			background: pink;*/
-		font-size: 10pt;
 	}
 }
 @media print {

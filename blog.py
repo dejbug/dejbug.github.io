@@ -22,7 +22,8 @@ def transuri(m):
 def transtit(m):
 	text = m.group(3).strip()
 	level = len(m.group(2))
-	return f' <strong title-level="{level}">{text}</strong> '
+	# return f' <strong title-level="{level}">{text}</strong> '
+	return f' <h3>{text}</h3> '
 
 def ruby(m):
 	text = m.group(1)

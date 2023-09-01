@@ -41,6 +41,11 @@ function Sticky()
 		window.setInterval(this.timerCallback.bind(this), 100);
 	}
 
+	this.registerQuery = function(query)
+	{
+		this.register(document.querySelectorAll(query));
+	}
+
 	this.unregister = function()
 	{
 		console.assert(this.targets !== null);
@@ -51,10 +56,9 @@ function Sticky()
 
 const status = document.querySelector('#status');
 const sticky = new Sticky();
+sticky.registerQuery('h3');
 sticky.onchange = function(item)
 {
 	const textContent = item ? item.textContent : null;
 	status.textContent = textContent;
 };
-const targets = document.querySelectorAll('strong[title-level]');
-sticky.register(targets);

@@ -36,6 +36,8 @@ build/index.html : index.md index.template known.aka.pickle *.py *.style | build
 build/%.html : archive/%.md index.template known.aka.pickle *.py *.style | build/
 	python render.py -do $@ index.template source=$<
 
+build/vendor/% : vendor/% ; mkdir -p $(dir $@) && cp $< $@
+
 %.aka.pickle : %.aka known.py ; python known.py -o $@ $<
 
 # %/ : ; mkdir -p $@
@@ -43,7 +45,7 @@ build/ : ; mkdir $@
 
 .PHONY : extra
 extra : build/sticky.js
-build/sticky.js : js/sticky.js ; cp $< $@
+build/sticky.js : js/sticky.js build/vendor/underscore/underscore-min.js ; cp $< $@
 
 ArchiveSources = $(wildcard archive/*.md)
 ArchiveTargets = $(ArchiveSources:archive/%.md=build/%.html)
