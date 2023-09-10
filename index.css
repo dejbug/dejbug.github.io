@@ -126,8 +126,7 @@ blockquote {
 
 	font-size: 80%;
 	line-height: 150%;
-	margin: 0;
-	margin-bottom: 2em;
+	margin: 1em 0;
 }
 ruby {
 	ruby-align: center;
@@ -193,7 +192,7 @@ summary {
 	border-left: thin solid hotpink;
 	writing-mode: vertical-lr;
 	text-orientation: upright;
-	height: fit-content;
+	height: max-content;
 	margin: 1em 1em 1em 2em;
 	padding: 1em;
 	color: hotpink;
