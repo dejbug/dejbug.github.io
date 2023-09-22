@@ -25,7 +25,7 @@ clean :
 	rm -f parsers/*/*.interp parsers/*/*.tokens
 	rm -rf build
 reset : | clean ; rm -rf parsers
-run : build/index.html ; cd build && php -S localhost:8000
+run : build/index.html ; cd build && php -S localhost:8001
 
 build/index.css : index.css ;
 	python render.py -do $@ $<
