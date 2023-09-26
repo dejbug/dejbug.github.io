@@ -299,7 +299,7 @@ def parse_simple_date(text):
 	elif match(r'(?:(?:(?P<y>\d+)-)?(?P<m>\d+)-)?(?P<d>\d+)'): return d # print(1, d)
 
 def explain(args):
-	text = args.explain.strip()
+	text = (args.explain or args.extant).strip()
 	if text == '#':
 		aa = ArchiveItem.sorted(ArchiveItem.iter())
 		print(len(aa))
@@ -307,12 +307,82 @@ def explain(args):
 	try:
 		i = int(text)
 		aa = ArchiveItem.sorted(ArchiveItem.iter())
-		print(aa[i].path)
-		return
-	except: pass
-	text = text.lower()
-	d = parse_simple_date(text)
-	if d: print(f'archive/{d["y"]:04}-{d["m"]:02}-{d["d"]:02}.md')
+		path = aa[i].path
+	except:
+		text = text.lower()
+		d = parse_simple_date(text)
+		if not d:
+			return
+		path = f'archive/{d["y"]:04}-{d["m"]:02}-{d["d"]:02}.md'
+	if not args.extant or os.path.isfile(path):
+		print(path)
+
+def iter_archived_days():
+	def is_leap_year(y):
+		return y % 100 == 0 and y % 400 == 0 or y % 4 == 0
+	def get_days_in_month(y, m):
+		if m == 2:
+			return 29 if is_leap_year(y) else 28
+		return [0,31,0,31,30,31,30,31,31,30,31,30,31][m]
+	aa = ArchiveItem.sorted(ArchiveItem.iter())
+	y = 0
+	m = 0
+	d = 0
+	for a in aa:
+		if a.year != y:
+			y = a.year
+			if d == 0:
+				first = False
+				yield 'F', y
+			else:
+				yield 'Y', y
+			m = a.month
+			yield 'M', m
+			for i in range(1, a.day):
+				yield 'd', i
+			d = a.day
+			yield 'D', d
+		elif a.month != m:
+			if m > 0:
+				for i in range(d + 1, get_days_in_month(y, m) + 1):
+					yield 'd', i
+			yield 'Y', y
+			m = a.month
+			yield 'M', m
+			for i in range(1, a.day):
+				yield 'd', i
+			d = a.day
+			yield 'D', d
+		else:
+			for i in range(d + 1, a.day):
+				yield 'd', i
+			d = a.day
+			yield 'D', d
+	if m > 0:
+		for i in range(d + 1, get_days_in_month(y, m) + 1):
+			yield 'd', i
+
+def list_archive(args):
+	# TODO: Make this look like `cal -y`.
+	for t, x in iter_archived_days():
+		if t in 'FY':
+			if t == 'Y':
+				print()
+			print(x, end=' ')
+		elif t == 'M':
+			print(x, end=' ')
+		elif t == 'd':
+			if args.plain:
+				p = '.' * len(str(x))
+				print(p, end=' ')
+			else:
+				print(red(str(x)), end=' ')
+		elif t == 'D':
+			if args.plain:
+				print(x, end=' ')
+			else:
+				print(green(str(x)), end=' ')
+	print()
 
 def print_dry_run_info(args):
 	cur = make_current_archive_item(args)
@@ -348,6 +418,8 @@ def parse_args(args = sys.argv[1:]):
 	parser.add_argument('-m', '--mtime', action='store_true', help='use modified time to generate archive path (else current time)')
 	parser.add_argument('-n', '--new', action='store_true', help='make a brand new index.md')
 	parser.add_argument('-x', '--explain', metavar='QUERY', help='print archive path for date')
+	parser.add_argument('-X', '--extant', metavar='QUERY', help='print archive path for date (if it exists)')
+	parser.add_argument('-l', '--list', action='store_true', help='list archive paths')
 	parser.add_argument('-v', '--verbose', action='store_true', help='don\'t be shy')
 	parser.add_argument('-p', '--plain', action='store_true', help='no rainbows')
 	parser.add_argument('--colors' , action='store_true', help='just rainbows')
@@ -367,7 +439,9 @@ def main(args = sys.argv[1:]):
 
 	elif args.new: make_brand_new(args)
 
-	elif args.explain: explain(args)
+	elif args.explain or args.extant: explain(args)
+
+	elif args.list: list_archive(args)
 
 	else: print_dry_run_info(args)
 
