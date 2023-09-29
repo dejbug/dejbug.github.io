@@ -105,7 +105,8 @@ def getCurrentDateString():
 
 def parseArgs(args = sys.argv[1:]):
 	parser = argparse.ArgumentParser()
-	parser.add_argument('-p', '--purple-haze', action='store_true')
+	parser.add_argument('-P', '--purple-haze', action='store_true')
+	parser.add_argument('-R', '--root-style', action='store_true')
 	parser.add_argument('-d','--date', action='store_true')
 	parser.add_argument('-t', '--title', action='store_true')
 	parser.add_argument('-b', '--backref', action='store_true')
@@ -118,6 +119,32 @@ def parseArgs(args = sys.argv[1:]):
 	if not os.path.isfile(args.ipath):
 		parser.error(f'input file not found: "{args.ipath}"')
 	return parser, args
+
+
+def extractVariables(text):
+	ss = {}
+	vv = {}
+	for m in re.finditer(r'^![ \t]*(--.+?)[ \t]*=[ \t]*(.+?)[ \t]*$', text, re.S|re.M):
+		k, v = m.groups()
+		if k.endswith('-shake'):
+			ss[k] = v
+		else:
+			vv[k] = v
+	for k, v in ss.items():
+		k = k.rstrip('-shake')
+		if k in vv:
+			try:
+				v = int(v)
+				vv[k] = int(vv[k]) + random.randint(-v, v)
+			except:
+				continue
+	return vv
+
+
+def doRootStyle(args):
+	with open(args.ipath) as ifile:
+		for k,v in extractVariables(ifile.read()).items():
+			print(f'{k}: {v};')
 
 
 def extractVariable(text, key):
@@ -189,6 +216,9 @@ def main(args = sys.argv[1:]):
 			if i > 0: haze += ', '
 			haze += f'{x}px {y}px {r}px var({cc[i]})'
 		print(f'text-shadow: {haze};')
+
+	elif args.root_style:
+		doRootStyle(args)
 
 	elif args.ipath:
 		with open(args.ipath) as ifile:

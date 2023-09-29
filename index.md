@@ -118,17 +118,20 @@ Let's fighting, love!
 """
 
 
-! color-status-1=#78ac8f
+! --color-title=#ff1f4c
+! --color-status-1=#78ac8f
 
-! gradient-top=#369
-! gradient-bottom=#392a55
+! --color-body-bg-top=#369
+! --color-body-bg-bottom=#392a55
 
-! purple-haze-text=lightgreen
+! --color-purple-haze-text=lightgreen
 
-! purple-haze-1=#11317d
-! purple-haze-1-x=-8
-! purple-haze-1-r=5
+! --color-purple-haze-1=#11317d
+! --color-purple-haze-1-x=-8
+! --color-purple-haze-1-r=5
 
-! purple-haze-2=#3af
-! purple-haze-2-y=-14
-! purple-haze-2-r=8
+! --color-purple-haze-2=#3af
+! --color-purple-haze-2-y=-14
+! --color-purple-haze-2-r=8
+
+! --color-purple-haze-1-x-shake=20

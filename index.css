@@ -6,7 +6,8 @@
 	--color-body-bg-top: #14453a;
 	--color-body-bg-bottom: #4b0f44;
 	--color-body-fg: #fff016;
-	--color-concent: #dfffa6;
+	--color-title: tomato;
+	--color-concept: #dfffa6;
 	--color-link-known-visited: #a9dfff;
 	--color-link-known: #3affbe; /* teal */
 	--color-link: #1d959b; /* #f3f4f2; */
@@ -22,6 +23,9 @@
 	--color-purple-haze-2-x: 0;
 	--color-purple-haze-2-y: 0;
 	--color-purple-haze-2-r: 0;
+	--color-status-1: #596859;
+	--color-status-2: #447d83;
+	--color-status-3: #7dfb7d;
 	--color-1: #5e8fbb;
 	--color-2: #cb8aa6;
 	--color-3: #ab3e6d;
@@ -31,9 +35,6 @@
 	--color-7: #c3ff87;
 	--color-8: #189dff;
 	--color-9: #e1f4ad;
-	--color-status-1: #596859;
-	--color-status-2: #447d83;
-	--color-status-3: #7dfb7d;
 	--color-blue: #ccddee;
 	--color-pink: #eecce9;
 }
@@ -73,8 +74,14 @@ footer {
 	align-items: baseline;
 }
 h3 {
+	display: inline;
 	line-height: 1rem;
-	color: tomato;
+	color: var(--color-title);
+}
+h3::before {
+	content: "";
+	display: block;
+	margin-top: 1em;
 }
 /*
 // This might only work once I have a contextual parser
@@ -172,7 +179,7 @@ details[open]:after {
 }
 summary {
 	display: inline-block;
-	color: var(--color-concent);
+	color: var(--color-concept);
 	cursor: pointer;
 }
 .known-uri {

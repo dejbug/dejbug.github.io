@@ -7,22 +7,7 @@
 <link rel="stylesheet" href="index.css">
 <style>
 	:root {
-		--color-body-bg-top: {{ python blog.py -v gradient-top --default "#14453a" "{source}" }};
-		--color-body-bg-bottom: {{ python blog.py -v gradient-bottom --default "#4b0f44" "{source}" }};
-		--color-purple-haze-text: {{ python blog.py -v purple-haze-text --default hotpink "{source}" }};
-		--color-purple-haze-1: {{ python blog.py -v purple-haze-1 --default magenta "{source}" }};
-		--color-purple-haze-2: {{ python blog.py -v purple-haze-2 --default cyan "{source}" }};
-		--color-purple-haze-1-x: {{ python blog.py -v purple-haze-1-x --default 0 --shake purple-haze-1-dx "{source}" }};
-		--color-purple-haze-1-y: {{ python blog.py -v purple-haze-1-y --default 0 --shake purple-haze-1-dy "{source}" }};
-		--color-purple-haze-1-r: {{ python blog.py -v purple-haze-1-r --default 0 --shake purple-haze-1-dr "{source}" }};
-		--color-purple-haze-2-x: {{ python blog.py -v purple-haze-2-x --default 0 --shake purple-haze-2-dx "{source}" }};
-		--color-purple-haze-2-y: {{ python blog.py -v purple-haze-2-y --default 0 --shake purple-haze-2-dy "{source}" }};
-		--color-purple-haze-2-r: {{ python blog.py -v purple-haze-2-r --default 0 --shake purple-haze-2-dr "{source}" }};
-		--color-status-1: {{ python blog.py -v color-status-1 --default "#596859" "{source}" }};
-	}
-	h3 {
-		display: {{ python blog.py -v header --default block "{source}" }};
-		color: {{ python blog.py -v header-color --default tomato "{source}" }};
+		{{ python blog.py --root-style "{source}" }}
 	}
 </style>
 <body>
