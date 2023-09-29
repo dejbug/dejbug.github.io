@@ -1,6 +1,6 @@
 # Useless
 
-Don't know why, don't know if it'd make any difference if I did know why, but I just can't get myself to look at all this paperwork I have. I don't want to touch it. I neither wish to feel nor smell the paper. I don't want to read the language. This instrument of bureaucrats. Every year the same routine. Every year nothing whatsoever changes. An unwelcome reminder that I live on borrowed time.
+Don't know why, don't know if it'd make any difference if I did know why, but I just can't get myself to look at all this paperwork I have. http://labs.la.utexas.edu/buss/files/2015/09/Evolution-of-anxiety-and-social-exclusion.pdf I don't want to touch it. I neither wish to feel nor smell the paper. I don't want to read the language. This instrument of bureaucrats. Every year the same routine. Every year nothing whatsoever changes. An unwelcome reminder that I live on borrowed time.
 
 """
 All my hanging around.
@@ -30,15 +30,15 @@ I get glimpses now and then of a parallel universe, an alternate reality, a quan
 
 # Merology
 
-For some reason they even knew that I'm incapable of grinding out a full-time job and had made sure to mention the possibility of a part-time gig. I like that. I almost wrote them back. But I'm hopeless; and I'm devoid of hope. I will not waste their time nor mine. The only thing that keeps me going is that I am free to give it all up on a whim. That nothing, nobody depends on me. It's called falling asleep because you have to give it up. All of it, which is to say your self. It's the only way that I can get a full night's worth of rest. Pretending that I won't wake up. Pretending that not waking up on time won't matter because nothing ever will.
+For some reason they even knew that I'm incapable of grinding out a full-time job and had made sure to mention the possibility of a part-time gig. I like that. I almost wrote them back. But I'm hopeless; and I'm devoid of hope. I will not waste their time nor mine. The only thing that keeps me going is that I am free to give it all up on a whim. That nothing, nobody depends on me. It's called falling asleep because you have to give it all up. All the things you'd rather do. All those interesting thoughts. Giving it all up means giving yourself up. Pretending that I won't wake up is the only way that I can get a full night's worth of rest. Pretending that not waking up on time won't matter because nothing ever again will.
 
 # Integrity
 
-These are the times when I must set up shop in bed, doing nothing in particular, just breathing, just staring at the backside of my lids. Feeling half-forgotten. This last part is important. If I'd keep thinking of deadlines I just wouldn't be able to relax. I might be lying down but I'd be bleeding energy. In any case, you can't write a CV entirely with filler phrases. Stuffing needs something to stuff. There's no chance that anyone would hire me just for showing up. This is not how I assume the world to function.
+These are the times when I must set up shop in bed, doing nothing in particular, just breathing, just staring at the backside of my lids. Feeling half-forgotten. This last part is important. If I'd keep thinking of deadlines I just wouldn't be able to relax. I might be lying down but I'd be wasting energy. In any case, you can't write a CV entirely with filler phrases. Stuffing needs something to stuff. There's no chance that anyone would hire someone just for showing up. This is not how I assume the world to function.
 
 # Occupation
 
-MDD has cut a huge swath out of my allotted time. https://www.youtube.com/watch?v=xP5-iIeKXE8 Coding https://en.wikipedia.org/wiki/Formal_language and, to a lesser extent, chess https://en.wikipedia.org/wiki/Abstract_strategy_game were two of the three obsessions that kept me hoping to wake up again each night. Which reminds me that I need to prepare an opening for tomorrow's match; the second round of our club's championship.
+MDD has cut a huge swath out of my allotted time. https://www.youtube.com/watch?v=xP5-iIeKXE8 Coding https://en.wikipedia.org/wiki/Formal_language and, to a lesser extent, chess https://en.wikipedia.org/wiki/Abstract_strategy_game were two of the three obsessions that kept me hoping to wake up again each night. Which reminds me that I need to prepare an opening for tomorrow's match; the second round of our club's championship is nigh.
 
 # Commitment
 
@@ -60,7 +60,7 @@ Das System ist das Problem.
 
 # Devolution
 
-Why is playing chess so difficult? Because we can't evaluate a future we don't see. Because if we could imagine perfectly, why would we ever try to find a mate? Were not the most successful propagators of our species the ones who needed to surround themselves with what they felt to be desirable? Objects of beauty. Eidetic crutches. Because if closing our eyes would fail extinguishing the light fantastic, how could we ever fall asleep? And is death not just another way of saying psychical exhaustion? Listen to this:
+Why is playing chess so difficult? https://en.wikipedia.org/wiki/Shannon_number Because we can't evaluate a future we don't see. Because if we could imagine perfectly, why would we ever try to find a mate? Were not the most successful propagators of our species the ones who needed to surround themselves with what they felt to be desirable? Objects of beauty. Eidetic crutches. http://labs.la.utexas.edu/buss/files/2015/09/TheEvolutionofHappiness.pdf Because if closing our eyes would fail extinguishing the light fantastic, how could we ever fall asleep? And is death not just another way of saying psychological exhaustion? Listen to this:
 
 """
 Psychical contagion: The transference of disease ... by mere force of example.
@@ -84,7 +84,7 @@ Sir. Her Maty fynding that the lawes of the realm do not cary severity enough to
 --- https://archive.org/details/egertonpaperscol00ellerich/page/116/mode/1up
 """
 
-I've been browsing the archive and chanced upon this book. I opened it up randomly and this is what I read. Her Majesty the Queen of England. First mate of the ship of state. Funny. My timbers are a-shiver. https://en.wikipedia.org/wiki/International_Talk_Like_a_Pirate_Day
+I've been browsing the archive and chanced upon this book. I opened it up randomly and this is what I read. Her Majesty the Queen of England. First "Maty" of the Ship of State. https://en.wikipedia.org/wiki/Ship_of_State Timber me a-shiver. https://en.wikipedia.org/wiki/International_Talk_Like_a_Pirate_Day
 
 """
 Hand me my sentence,
@@ -99,7 +99,7 @@ A galley was a type of ship which relied mostly on oars for propulsion...
 --- https://en.wikipedia.org/wiki/Galley
 """
 
-A fantasy is a type of mental virus which relies mostly on ears for reproduction.
+A fantasy is a type of virus which relies mostly on ears for reproduction.
 
 # Future #2
 
