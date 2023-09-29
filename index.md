@@ -30,15 +30,19 @@ I get glimpses now and then of a parallel universe, an alternate reality, a quan
 
 # Merology
 
-For some reason they even knew that I'm incapable of grinding out a full-time job and had made sure to mention the possibility of a part-time gig. I like that. I almost wrote them back. But I'm hopeless; and I'm devoid of hope. I will not waste their time nor mine. The only thing that keeps me going is that I am free to give it all up on a whim. That nothing, nobody depends on me. It's called falling asleep because you have to give it up. All of it, which is to say your self. It's the only way that I can get a full night's worth of sleep. Pretending that I won't wake up. Pretending that not waking up on time won't matter because nothing ever will.
+For some reason they even knew that I'm incapable of grinding out a full-time job and had made sure to mention the possibility of a part-time gig. I like that. I almost wrote them back. But I'm hopeless; and I'm devoid of hope. I will not waste their time nor mine. The only thing that keeps me going is that I am free to give it all up on a whim. That nothing, nobody depends on me. It's called falling asleep because you have to give it up. All of it, which is to say your self. It's the only way that I can get a full night's worth of rest. Pretending that I won't wake up. Pretending that not waking up on time won't matter because nothing ever will.
 
 # Integrity
 
 These are the times when I must set up shop in bed, doing nothing in particular, just breathing, just staring at the backside of my lids. Feeling half-forgotten. This last part is important. If I'd keep thinking of deadlines I just wouldn't be able to relax. I might be lying down but I'd be bleeding energy. In any case, you can't write a CV entirely with filler phrases. Stuffing needs something to stuff. There's no chance that anyone would hire me just for showing up. This is not how I assume the world to function.
 
+# Occupation
+
+MDD has cut a huge swath out of my allotted time. https://www.youtube.com/watch?v=xP5-iIeKXE8 Coding https://en.wikipedia.org/wiki/Formal_language and, to a lesser extent, chess https://en.wikipedia.org/wiki/Abstract_strategy_game were two of the three obsessions that kept me hoping to wake up again each night. Which reminds me that I need to prepare an opening for tomorrow's match; the second round of our club's championship.
+
 # Commitment
 
-I used to think that this was just the final form of an adolescent fear of commitment. Today I think it's something else entirely. It's some sort of disconnect, of course. Like sitting in the front row of the theater. Proper immersion requires a certain distance to the fantasy. Try watching your favorite movie scenes without the soundtrack. Try watching it dubbed into German. Or try it in Italian, if you happen to be German. It's the sound that sets the mood. That tells you how to feel. About those faces, walls and spaces. It is the invisible that animates the visible. Listen closely, for you are at the threshold of religion. Faith, otherwise known as the suspension of disbelief.
+I used to think that all this procrastination was just the final form of an adolescent fear of commitment. Today I think it's something else entirely. It's some sort of disconnect, of course. Like sitting in the front row of the theater. Proper immersion requires a certain distance to the fantasy. Try watching your favorite movie scenes without the soundtrack. Try watching it dubbed into German. Or try it in Italian, if you happen to be German. It's the sound that sets the mood. That tells you how to feel about those faces, walls, and spaces. It is the invisible that animates the visible. Listen closely, for you are at the threshold of religion here. Faith, otherwise known as the suspension of disbelief.
 
 """
 Will I always be here?
@@ -112,7 +116,6 @@ Priapus is a minor rustic fertility god, protector of livestock, fruit plants, g
 Let's fighting, love!
 --- DVDA https://www.youtube.com/watch?v=nxIG4-ORTIg
 """
-
 
 ! header-color=#ff1f4c
 
