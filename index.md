@@ -117,7 +117,8 @@ Let's fighting, love!
 --- DVDA https://www.youtube.com/watch?v=nxIG4-ORTIg
 """
 
-! header-color=#ff1f4c
+
+! color-status-1=#78ac8f
 
 ! gradient-top=#369
 ! gradient-bottom=#392a55

@@ -18,6 +18,7 @@
 		--color-purple-haze-2-x: {{ python blog.py -v purple-haze-2-x --default 0 --shake purple-haze-2-dx "{source}" }};
 		--color-purple-haze-2-y: {{ python blog.py -v purple-haze-2-y --default 0 --shake purple-haze-2-dy "{source}" }};
 		--color-purple-haze-2-r: {{ python blog.py -v purple-haze-2-r --default 0 --shake purple-haze-2-dr "{source}" }};
+		--color-status-1: {{ python blog.py -v color-status-1 --default "#596859" "{source}" }};
 	}
 	h3 {
 		display: {{ python blog.py -v header --default block "{source}" }};

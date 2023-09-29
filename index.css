@@ -60,6 +60,7 @@ body {
 	hyphens: auto;
 	overflow-wrap: break-word;
 	font-variant-numeric: slashed-zero;
+	margin-left: 1em;
 }
 article {
 }
