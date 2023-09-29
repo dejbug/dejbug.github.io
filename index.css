@@ -13,8 +13,15 @@
 	--color-meta: #b76e93; /* hotpink; */
 	--color-code-fg: #50ff00;
 	--color-code-br: #03d0ff;
+	--color-purple-haze-text: hotpink;
 	--color-purple-haze-1: magenta;
 	--color-purple-haze-2: cyan;
+	--color-purple-haze-1-x: 0;
+	--color-purple-haze-1-y: 0;
+	--color-purple-haze-1-r: 0;
+	--color-purple-haze-2-x: 0;
+	--color-purple-haze-2-y: 0;
+	--color-purple-haze-2-r: 0;
 	--color-1: #5e8fbb;
 	--color-2: #cb8aa6;
 	--color-3: #ab3e6d;
@@ -128,6 +135,10 @@ blockquote {
 	line-height: 150%;
 	margin: 1em 0 2em 0;
 }
+blockquote cite {
+	font-style: normal;
+	opacity: .8;
+}
 ruby {
 	ruby-align: center;
 }
@@ -195,9 +206,18 @@ summary {
 	height: max-content;
 	margin: 1em 1em 1em 2em;
 	padding: 1em;
-	color: hotpink;
+	color: var(--color-purple-haze-text);
 	font-family: mono;
-	{{ python blog.py --purple-haze }}
+	/* {{ python blog.py --purple-haze }} */
+	text-shadow:
+		calc(var(--color-purple-haze-1-x) * 1px)
+		calc(var(--color-purple-haze-1-y) * 1px)
+		calc(var(--color-purple-haze-1-r) * 1px)
+		var(--color-purple-haze-1),
+		calc(var(--color-purple-haze-2-x) * 1px)
+		calc(var(--color-purple-haze-2-y) * 1px)
+		calc(var(--color-purple-haze-2-r) * 1px)
+		var(--color-purple-haze-2);
 }
 .columns {
 	margin: 2em 0;

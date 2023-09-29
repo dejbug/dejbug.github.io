@@ -25,6 +25,15 @@ def transtit(m):
 	# return f' <strong title-level="{level}">{text}</strong> '
 	return f' <h3>{text}</h3> '
 
+
+def transquote(m):
+	text = m.group(1)
+	ref = m.group(2)
+	if ref:
+		text += fr'<cite> &mdash; {ref} </cite>'
+	return fr'<blockquote>{text}</blockquote>'
+
+
 def ruby(m):
 	text = m.group(1)
 	note = m.group(2)
@@ -71,7 +80,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'\^{3}(.+?)\^{3}', r'<div class="upright">\1</div>', text, flags = re.S)
 	text = re.sub(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', highlight, text, flags = re.S)
 	text = re.sub(r'`([^`\r\n]+)`', r'<code>\1</code>', text, flags = re.S)
-	text = re.sub(r'"""(.+?)"""', r'<blockquote>\1</blockquote>', text, flags = re.S)
+	text = re.sub(r'"""(.+?)(?:\s*---\s*(.+?)\s*)?"""', transquote, text, flags = re.S)
 	text = re.sub(r'""(.+?)""', r'<q>\1</q>', text, flags = re.S)
 	text = re.sub(r'^((#+)[ \t]+([^\r\n]+))\s*', transtit, text, flags = re.S|re.M)
 	text = re.sub(r'(?<=\s)<?(https?://' + LINKCC + '+)>?(?=\s)', transuri, text, flags = re.S|re.M)
@@ -102,12 +111,39 @@ def parseArgs(args = sys.argv[1:]):
 	parser.add_argument('-b', '--backref', action='store_true')
 	parser.add_argument('-v', '--variable')
 	parser.add_argument('--default')
+	parser.add_argument('--shake')
 	parser.add_argument('-o', '--opath', default = DEFAULT_OUTPUT_FILEPATH)
 	parser.add_argument('ipath', nargs='?', default = DEFAULT_INPUT_FILEPATH)
 	args = parser.parse_args(args)
 	if not os.path.isfile(args.ipath):
 		parser.error(f'input file not found: "{args.ipath}"')
 	return parser, args
+
+
+def extractVariable(text, key):
+	m = re.search(
+		r'^![ \t]*' + key + r'[ \t]*=[ \t]*(.+?)[ \t]*$',
+		text, re.S|re.M)
+	if m: return m.group(1)
+
+
+def doVariable(args):
+	with open(args.ipath) as ifile:
+		text = ifile.read()
+
+	v = extractVariable(text, args.variable)
+	if v is None:
+		v = args.default
+
+	if args.shake:
+		d = extractVariable(text, args.shake)
+		try:
+			d = int(d)
+			v = 0 if v is None else int(v)
+			return v + random.randint(-d, d)
+		except: pass
+
+	return v
 
 
 def main(args = sys.argv[1:]):
@@ -135,10 +171,8 @@ def main(args = sys.argv[1:]):
 		print(d)
 
 	elif args.variable:
-		with open(args.ipath) as ifile:
-			m = re.search(r'^![ \t]*' + args.variable + r'[ \t]*=[ \t]*(.+?)[ \t]*$', ifile.read(), re.S|re.M)
-			if m: print(m.group(1))
-			elif args.default: print(args.default)
+		v = doVariable(args)
+		if v is not None: print(v)
 
 	elif args.title:
 		with open(args.ipath) as ifile:
