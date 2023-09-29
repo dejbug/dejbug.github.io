@@ -45,6 +45,15 @@ Will I always be here?
 --- DM "In Your Room"
 """
 
+# Design
+
+The storyteller's technique supports the emergent fantasy only insofar as it fails to draw attention to itself. https://en.wikipedia.org/wiki/2023_Writers_Guild_of_America_strike If the world were intelligently designed, everywhere you looked would only God be shining through. https://github.com/SimHacker/micropolis/blob/wiki/History.md
+
+"""
+Das System ist das Problem.
+--- HGich.T https://www.youtube.com/watch?v=-IQLk-LF1JY
+"""
+
 # Devolution
 
 Why is playing chess so difficult? Because we can't evaluate a future we don't see. Because if we could imagine perfectly, why would we ever try to find a mate? Were not the most successful propagators of our species the ones who needed to surround themselves with what they felt to be desirable? Objects of beauty. Eidetic crutches. Because if closing our eyes would fail extinguishing the light fantastic, how could we ever fall asleep? And is death not just another way of saying psychical exhaustion? Listen to this:
@@ -71,7 +80,7 @@ Sir. Her Maty fynding that the lawes of the realm do not cary severity enough to
 --- https://archive.org/details/egertonpaperscol00ellerich/page/116/mode/1up
 """
 
-I've been browsing the archive and chanced upon this book. I opened it up randomly and this is what I read. Her Majesty the Queen of England. First mate. Funny.
+I've been browsing the archive and chanced upon this book. I opened it up randomly and this is what I read. Her Majesty the Queen of England. First mate of the ship of state. Funny. My timbers are a-shiver. https://en.wikipedia.org/wiki/International_Talk_Like_a_Pirate_Day
 
 """
 Hand me my sentence,
@@ -79,9 +88,18 @@ I'll show no repentance ///
 --- DM "Condemnation"
 """
 
+# Tendentious
+
+"""
+A galley was a type of ship which relied mostly on oars for propulsion...
+--- https://en.wikipedia.org/wiki/Galley
+"""
+
+A fantasy is a type of mental virus which relies mostly on ears for reproduction.
+
 # Future #2
 
-Had to renew my Letsencrypt certificates this morning. It's been a couple months since I've leased a bit of dedicated server time for cheap. Other things have happened and I've already half-forgotten everything I'd learned while setting it all up from scratch. I need to write things down. Tutorials for future selves.
+Had to renew my Letsencrypt certificates this morning. https://letsencrypt.org/ It's been a couple months since I've leased a bit of dedicated server time for cheap. Other things have happened and I've already half-forgotten everything I'd learned while setting it all up from scratch. I need to write things down. Tutorials for future selves.
 
 # Precipitous
 
