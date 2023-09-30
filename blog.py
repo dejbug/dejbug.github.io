@@ -72,7 +72,7 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'\[:rainbow:]', '<span class="emoji">&#x1F308</span>', text, flags = re.S)
 	text = re.sub(r'\[:rocket:]', '<span class="emoji">&#x1F680</span>', text, flags = re.S)
 	text = re.sub(r'(\s+)(#[A-Za-z][-_.0-9A-Za-z]*[0-9A-Za-z]+)', r'\1<i>\2</i>', text, re.S)
-	text = re.sub(r'(\s+)[*]{2}(.+?)[*]{2}', r'\1<b>\2</b>', text, flags = re.S)
+	text = re.sub(r'(?<=\W)([*]{2})(.+?)\1', r'<b>\2</b>', text, flags = re.S)
 	text = re.sub(r'\\\\(.+?)\\\\(.+?)\\\\', ruby, text, flags = re.S)
 	text = re.sub(r'____(.+?)____', r'<u>\1</u>', text, flags = re.S)
 	text = re.sub(r'~~(.+?)~~', r'<del>\1</del>', text, flags = re.S)
