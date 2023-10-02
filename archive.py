@@ -370,7 +370,7 @@ def list_archive(args):
 				print()
 			print(x, end=' ')
 		elif t == 'M':
-			print(x, end=' ')
+			print('%2d' % x, end=' ')
 		elif t == 'd':
 			if args.plain:
 				p = '.' * len(str(x))
