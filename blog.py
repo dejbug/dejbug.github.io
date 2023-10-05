@@ -61,7 +61,17 @@ def highlight(m):
 	return f'{text}'
 
 
-def parse(text, file = sys.stdout):
+def iterBlocks(pattern, text):
+	# yields: (blockBegin, blockEnd, matchObject?)
+	offset = 0
+	for m in re.finditer(pattern, text, re.S):
+		yield offset, m.start(0), None
+		yield m.start(0), m.end(0), m
+		offset = m.end(0)
+	yield offset, len(text), None
+
+
+def translate(text):
 	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 	text = re.sub(r'^!.*$', '', text, flags = re.S|re.M)
 	text = re.sub(r'<3', '[:heart:]', text, flags = re.S)
@@ -78,7 +88,6 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'~~(.+?)~~', r'<del>\1</del>', text, flags = re.S)
 	text = re.sub(r'\${3}(.+?)\${3}', r'<div class="columns">\1</div>', text, flags = re.S)
 	text = re.sub(r'\^{3}(.+?)\^{3}', r'<div class="upright">\1</div>', text, flags = re.S)
-	text = re.sub(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', highlight, text, flags = re.S)
 	text = re.sub(r'`([^`\r\n]+)`', r'<code>\1</code>', text, flags = re.S)
 	text = re.sub(r'"""(.+?)(?:\s*---\s*(.+?)\s*)?"""', transquote, text, flags = re.S)
 	text = re.sub(r'""(.+?)""', r'<q>\1</q>', text, flags = re.S)
@@ -90,7 +99,16 @@ def parse(text, file = sys.stdout):
 	text = re.sub(r'"([^"\r\n]+)"="([^"\r\n]+?)"', r'<abbr title="\2">\1</abbr>', text, flags = re.S)
 	text = re.sub(r'"([^"\r\n]+)"\(\(([^)\r\n]+?)\)\)', r'<details open><summary>\1</summary>\2</details>', text, flags = re.S)
 	text = re.sub(r'"([^"\r\n]+)"\(([^)\r\n]+?)\)', r'<details><summary>\1</summary>\2</details>', text, flags = re.S)
-	file.write(text)
+	return text
+
+
+def parse(text, file = sys.stdout):
+	for b, e, m in iterBlocks(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', text):
+		if m:
+			file.write(highlight(m))
+		else:
+			file.write(translate(text[b:e]))
+		file.write('\n')
 
 
 def getDateStringFromPath(path):
