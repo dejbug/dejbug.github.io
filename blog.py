@@ -3,11 +3,12 @@
 import sys, os, re, io, random
 import argparse, urllib.parse, html, subprocess, datetime
 
-import known
+import known, emoji
 
 DEFAULT_INPUT_FILEPATH = "index.md"
 DEFAULT_OUTPUT_FILEPATH = None
 
+LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 
 def transuri(m):
 	name = uri = m.group(1)
@@ -70,17 +71,13 @@ def iterBlocks(pattern, text):
 		offset = m.end(0)
 	yield offset, len(text), None
 
-
 def translate(text):
-	LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 	text = re.sub(r'^!.*$', '', text, flags = re.S|re.M)
-	text = re.sub(r'<3', '[:heart:]', text, flags = re.S)
+
+	text = emoji.translateShortcuts(text)
 	text = html.escape(text, quote = False)
-	text = re.sub(r'\[:copyleft:]', '&#x1F12F', text, flags = re.S)
-	text = re.sub(r'\[:heart:]', '<span class="red emoji">&#x2764</span>', text, flags = re.S)
-	text = re.sub(r'\[:butterfly:]', '<span class="emoji">&#x1F98B</span>', text, flags = re.S)
-	text = re.sub(r'\[:rainbow:]', '<span class="emoji">&#x1F308</span>', text, flags = re.S)
-	text = re.sub(r'\[:rocket:]', '<span class="emoji">&#x1F680</span>', text, flags = re.S)
+	text = emoji.translate(text)
+
 	text = re.sub(r'(\s+)(#[A-Za-z][-_.0-9A-Za-z]*[0-9A-Za-z]+)', r'\1<i>\2</i>', text, re.S)
 	text = re.sub(r'(?<=\W)([*]{2})(.+?)\1', r'<b>\2</b>', text, flags = re.S)
 	text = re.sub(r'\\\\(.+?)\\\\(.+?)\\\\', ruby, text, flags = re.S)
@@ -103,6 +100,8 @@ def translate(text):
 
 
 def parse(text, file = sys.stdout):
+	emoji.load()
+
 	for b, e, m in iterBlocks(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', text):
 		if m:
 			file.write(highlight(m))

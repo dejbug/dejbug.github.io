@@ -1,0 +1,95 @@
+# Don't work in upright mode: copyleft, intersection.
+
+copyleft		1F12F
+copyright		00A9
+
+keyboard		2328
+return			23CE
+enter			23CE
+
+nerd			1F913
+ninja			1F977
+keikogi			1F94B
+noseglasses		1F978
+thinking		1F914
+
+heart			2764
+
+victory			270C
+
+blackflag		2691
+whiteflag		2690
+
+bat				1F987
+butterfly		1F98B
+
+coconut			1F965
+broccoli		1F966
+
+tent			26FA
+rainbow			1F308
+rocket			1F680
+
+K				2654
+Q				2655
+R				2656
+B				2657
+N				2658
+P				2659
+k				265A
+
+whitehex		2B21
+blackhex		2B22
+
+dharma			2638
+
+shamrock		2618
+wilted			1F940
+
+atom			269B
+radioactive		2622
+biohazard		2623
+warning			26A0
+caduceus		2624
+aesculapius		2695
+hermes			269A
+peace			262E
+yinyang			262F
+tao				262F
+orthodox		2626
+
+Earth			2637 # 000
+Thunder			2633 # 001
+Water			2635 # 010
+Lake			2631 # 011
+Mountain		2636 # 100
+Fire			2632 # 101
+Wind			2634 # 110
+Heaven			2630 # 111
+
+000				2637 # Earth
+001				2633 # Thunder
+010				2635 # Water
+011				2631 # Lake
+100				2636 # Mountain
+101				2632 # Fire
+110				2634 # Wind
+111				2630 # Heaven
+
+1				2680
+2				2681
+3				2682
+4				2683
+5				2684
+6				2685
+
+fisheye			25C9
+eject			23CF
+
+shield			1F6E1
+
+ballot			2610
+ballot-yes		2611
+ballot-x		2612
+
+intersection	23E7

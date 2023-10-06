@@ -5,11 +5,6 @@ Thus to foresee the modification of the hierarchy of strategic factors is nothin
 --- Iossif Dorfman
 """
 
-"""
-If for one of the players the static balance is negative, he must without hesitation employ dynamic means and be ready to go in for extreme measures.
---- Iossif Dorfman
-"""
-
 # Lichess
 
 Put this into the URL field of a bookmark and put the bookmark on the toolbar. Click it when you're playing/watching games on Lichess.
@@ -34,7 +29,7 @@ javascript:(() => {
 
 # Profiles
 
-Instead of their names, I wanted to show a little photo of each player in the seatings view of the still #todo swiss pairer. Since we don't really do photos at our club, I decided to finally jump on the generative AI bandwagon and try to talk up a couple profile pictures in lieu of the actual facial facsimiles. But writing prompts is a minor artform. https://en.wikipedia.org/wiki/Prompt_engineering https://arxiv.org/abs/2309.16797 One of our players has a Santa beard so I started with this low hanging fruit. To varying results.
+Instead of their names, I wanted to show a little photo of each player in the seatings view of the still #todo swiss pairer. Since we don't really do photos at our club, I decided to finally jump on the generative AI bandwagon and try to talk up a couple visual approximations in lieu of the actual facial facsimiles. https://deepai.org But writing prompts is a minor artform. https://en.wikipedia.org/wiki/Prompt_engineering https://arxiv.org/abs/2309.16797 One of our players has a Santa beard so I started with this low hanging fruit. Alas, to sobering results. Once you've said "Santa" it's difficult to get him to wear anything but Santa clothes. "Santa in plaids..." got me nowhere. "Homeless Santa..."? Zilch. It's the full Santa or bust. Could be Santa is a package deal?
 
 https://stablehorde.net/
 https://github.com/Haidra-Org/AI-Horde/blob/main/FAQ.md
@@ -104,22 +99,16 @@ Here's a snapshot of my .gitconfig. Writing comments is the difficult part. So I
 	staged-      = "! git s- --porcelain | sed -En '/^[^ ?]./s/.*? (.*)$/\\1/p'"
 	not-staged   = "! git s  --porcelain | sed -En '/^[ ?]./s/.*? (.*)$/\\1/p'"
 	not-staged-  = "! git s- --porcelain | sed -En '/^[ ?]./s/.*? (.*)$/\\1/p'"
-	mod-staged   = "! git s  --porcelain | sed -En '/^[^ ?][^ ?]/s/.*? (.*)$/\\1/p'"
-	mod-staged-  = "! git s- --porcelain | sed -En '/^[^ ?][^ ?]/s/.*? (.*)$/\\1/p'"
 	su           = untracked    # not tracked, not ignored
-	su-          = untracked-   # not tracked, not ignored
+	su-          = untracked-   # not tracked, not ignored (compact folder)
 	sm           = modified     # modified, not staged
-	sm-          = modified-    # modified, not staged
-	sr           = re-modified  # modified, not staged
-	sr-          = re-modified- # modified, not staged
-	sms          = mod-staged   # staged, modified since
-	sms-         = mod-staged-  # staged, modified since
+	sm-          = modified-    # modified, not staged (compact folder)
 	ss           = staged       # staged, not modified since
-	ss-          = staged-      # staged, not modified since
-	ssm          = sms          # synonym of "sms"
-	ssm-         = sms-         # synonym of "sms"
+	ss-          = staged-      # staged, not modified since (compact folder)
+	sr           = re-modified  # staged, modified since
+	sr-          = re-modified- # staged, modified since (compact folder)
 	sn           = not-staged   # inverse of "ss"
-	sn-          = not-staged-  # inverse of "ss"
+	sn-          = not-staged-  # inverse of "ss-"
 # Unstage staged files.
 	unstage = "! for f in `git staged`; do git restore --staged -- $f; done"
 # Stage all tracked but modified files.
@@ -133,22 +122,6 @@ Here's a snapshot of my .gitconfig. Writing comments is the difficult part. So I
 Please, please!  No more!  We shall find a shrubbery.
 --- MPatHG https://sacred-texts.com/neu/mphg/mphg.htm
 """
-
-# Synthaera
-
-```
-Bop - Lucid Dreaming (feat. Elsa Esmeralda)
-Lapalux - Flower
-Shiny Objects - Outerlimits
-Kodak To Graph - Zagroz
-Machinedrum - Infinite Us
-Audiokonstrukte - Dusty Atmosphere
-Trentemoller & Trentemoller - Silver Surfer, Ghost Rider Go !!! (Andrew Weatherall Prinz Mix)
-Martin Sturtzer - Third Planet
-Ascendant - Radiance
-One Arc Degree - Jellyfish Ballet - The Glow Beneath
-Spinnet - Centroid
-```
 
 # Porphyrian Tree
 
@@ -168,10 +141,14 @@ https://en.wikipedia.org/wiki/Porphyrian_tree
                       re-modified
 ```
 
-A #stream of bits your life compiles ///
-Substrings of which you call your #files ///
-Subsets of #which you'll #track with git ///
-The world's a stage #you can't commit ///
+^^^
+[:wilted!:]
+^^^
+
+A #stream of bits your life compiles /
+Substrings of which you call your #files /
+Subsets of #which you'll #track with git /
+The world's a stage #you can't commit
 
 # bbpPairings-wagi
 
@@ -241,3 +218,37 @@ https://appimage.github.io/apps/
 
 https://github.com/libsdl-org/highway
 
+
+# Synthaera
+
+""Bop - Lucid Dreaming (feat. Elsa Esmeralda)""
+https://www.youtube.com/watch?v=fBWB6YTrdjM
+""Lapalux - Flower""
+https://www.youtube.com/watch?v=xbWBHKjHzuk
+""Shiny Objects - Outerlimits""
+https://www.youtube.com/watch?v=hhN0QmGQiFY
+""Kodak To Graph - Zagroz""
+https://www.youtube.com/watch?v=41N2F_h6hsk
+""Machinedrum - Infinite Us""
+https://www.youtube.com/watch?v=u5BPgKB58Xs
+""Audiokonstrukte - Dusty Atmosphere""
+https://www.youtube.com/watch?v=F6yWqQ1qLBM
+""Trentemoller & Trentemoller - Silver Surfer, Ghost Rider Go !!! (Andrew Weatherall Prinz Mix)""
+https://www.youtube.com/watch?v=PLORIXoBSrU
+""Martin Sturtzer - Third Planet""
+https://www.youtube.com/watch?v=UeLTpCgraC0
+""Ascendant - Radiance""
+https://www.youtube.com/watch?v=8eqO61wqF48
+""One Arc Degree - Jellyfish Ballet - The Glow Beneath""
+https://www.youtube.com/watch?v=ctxrmk_7vl8
+""Spinnet - Centroid""
+https://www.youtube.com/watch?v=zEnUwpCfas0
+
+"""
+If for one of the players the static balance is negative, he must without hesitation employ dynamic means and be ready to go in for extreme measures.
+--- Iossif Dorfman
+"""
+
+! --color-title=#afe
+! --color-status-1=#58cc8f
+! --color-purple-haze-text=navajowhite
