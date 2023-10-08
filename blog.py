@@ -61,16 +61,23 @@ def runGnuHighlighter(lang, text):
 
 
 def highlight(m):
+	def pre(text, error = None, source = False):
+		error = f'<pre class="error">{error}</pre>' if error else ''
+		return error + f'<pre>{text}</pre>'
+	def source(text):
+		return f'<pre class="source">{text}</pre>'
+	def scrollable(pre):
+		return f'<div class="source-wrapper">{pre}</div>'
 	lang = m.group(1)
 	text = m.group(2)
 	text = html.unescape(text)
 	if not lang:
-		return f'<pre>{text}</pre>'
+		return scrollable(pre(text))
 	stdout, stderr, throw = runGnuHighlighter(lang, text)
 	err = stderr or throw
 	if err:
-		return f'<pre class="error">{err}</pre><pre>{text}</pre>'
-	return f'<pre class="source">{stdout}</pre>'
+		return scrollable(pre(text, err))
+	return scrollable(source(stdout))
 
 
 def iterBlocks(pattern, text, flags = 0):
