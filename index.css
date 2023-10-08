@@ -95,6 +95,10 @@ a, a:visited {
 	color: var(--color-link); text-decoration: none;
 	word-break: break-all;
 }
+article > b {
+	color: snow;
+	font-weight: normal;
+}
 i {
 	font-style: normal;
 	color: hotpink;
@@ -104,11 +108,17 @@ u {
 	border-bottom: thin solid orchid;
 	padding-bottom: .17em;
 }
+em {
+	text-decoration-color: hotpink;
+	text-decoration-line: underline;
+	text-decoration-style: wavy;
+}
 code {
 	color: var(--color-code-fg);
 	border: thin solid var(--color-code-br);
 	border-radius: 8px;
 	padding: 0 .2em;
+	word-break: break-all;
 }
 pre {
 	background-color: #333;
@@ -120,7 +130,15 @@ pre {
 	padding: 1em;
 	overflow: auto;
 	scrollbar-color: black gray;
-		scrollbar-width: thin;
+	scrollbar-width: thin;
+}
+pre.source {
+	color: ghostwhite;
+}
+pre.error {
+	background: darkblue;
+	color: crimson;
+	font-weight: bold;
 }
 q {
 	color: #b4e0ad;

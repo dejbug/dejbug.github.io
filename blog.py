@@ -10,6 +10,7 @@ DEFAULT_OUTPUT_FILEPATH = None
 
 LINKCC = r"[-A-Za-z0-9._~:/?#[\]@!$&()+*,;=%']"
 
+
 def transuri(m):
 	name = uri = m.group(1)
 	# x = urllib.parse.urlparse(uri)
@@ -42,14 +43,21 @@ def ruby(m):
 
 
 def runGnuHighlighter(lang, text):
+	stdout, stderr, throw = '', '', ''
 	try:
-		assert os.path.isfile('syntax.style')
-		p = subprocess.run(['source-highlight', '-t 4', '--style-file=./syntax.style', '--src-lang=%s' % lang, '--no-doc'], input = bytes(text, 'utf8'), capture_output = True)
-		return p.stdout.decode('utf8')
+		p = subprocess.run(
+			[	'source-highlight',
+				'-t 4',
+				'--style-file=conf/default.style',
+				'--outlang-def=conf/html_common.outlang',
+				'--src-lang=%s' % lang,
+				'--no-doc'
+			], input = bytes(text, 'utf8'), capture_output = True)
+		if p.stdout: stdout = p.stdout.decode('utf8')
+		if p.stderr: stderr = p.stderr.decode('utf8')
 	except Exception as e:
-		text = str(e)
-		# pass
-	return f'<pre>{text}</pre>'
+		throw = str(e)
+	return stdout, stderr, throw
 
 
 def highlight(m):
@@ -58,14 +66,17 @@ def highlight(m):
 	text = html.unescape(text)
 	if not lang:
 		return f'<pre>{text}</pre>'
-	text = runGnuHighlighter(lang, text)
-	return f'{text}'
+	stdout, stderr, throw = runGnuHighlighter(lang, text)
+	err = stderr or throw
+	if err:
+		return f'<pre class="error">{err}</pre><pre>{text}</pre>'
+	return f'<pre class="source">{stdout}</pre>'
 
 
-def iterBlocks(pattern, text):
+def iterBlocks(pattern, text, flags = 0):
 	# yields: (blockBegin, blockEnd, matchObject?)
 	offset = 0
-	for m in re.finditer(pattern, text, re.S):
+	for m in re.finditer(pattern, text, flags):
 		yield offset, m.start(0), None
 		yield m.start(0), m.end(0), m
 		offset = m.end(0)
@@ -102,7 +113,8 @@ def translate(text):
 def parse(text, file = sys.stdout):
 	emoji.load()
 
-	for b, e, m in iterBlocks(r'```(?:([^\r\n]+?)[\r\n]+)?(.+?)```', text):
+	pattern = r'^```(?:([^\r\n]+?)[\r\n]+)?(.+?)^```'
+	for b, e, m in iterBlocks(pattern, text, re.S | re.M):
 		if m:
 			file.write(highlight(m))
 		else:

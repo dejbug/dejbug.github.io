@@ -1,34 +1,17 @@
-// b = bold
-// i = italics
-// u = underline
-// f = fixed
-// nf = not fixed
-// noref = no reference information is generated for these elements
-
-// black gray white
-// darkred/brown red
-// darkgreen green brightgreen teal
-// darkblue blue
-// purple pink
-// orange brightorange
-// cyan yellow
-
+bgcolor "white"; // the background color for documents
 context gray; // the color for context lines (when specified with line ranges)
 
-comment gray i, noref; // for comments
-keyword yellow ; // for language keywords
-string cyan ; // for strings and chars
-number brightorange ;	// for literal numbers
-
-symbol red ; // for simbols (e.g. <, >, +)
-function white; // for function calls and declarations
-
-
-type pink ; // for basic types
+keyword blue b ; // for language keywords
+type darkgreen ; // for basic types
 usertype teal ; // for user defined types
+string red f ; // for strings and chars
 regexp orange f ; // for strings and chars
 specialchar pink f ; // for special chars, e.g., \n, \t, \\
+comment gray i, noref; // for comments // ORIGINAL: comment brown i, noref
+number purple ;	// for literal numbers
 preproc darkblue b ; // for preproc directives (e.g. #include, import)
+symbol darkred ; // for simbols (e.g. <, >, +)
+function black b; // for function calls and declarations
 cbracket red; // for block brackets (e.g. {, })
 todo bg:cyan b;	// for TODO and FIXME
 code bg:brightgreen b; // for code snippets
@@ -72,7 +55,7 @@ difflines blue;
 // for css
 selector purple;
 property blue;
-value darkgreen i;
+value black i;		// ORIGINAL: darkgreen i;
 
 // for oz
 atom orange;
