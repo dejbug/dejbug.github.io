@@ -96,7 +96,7 @@ def translate(text):
 	text = html.escape(text, quote = False)
 	text = emoji.translate(text)
 
-	text = re.sub(r'(\s+)(#[A-Za-z][-_.0-9A-Za-z]*[0-9A-Za-z]+)', r'\1<i>\2</i>', text, re.S)
+	text = re.sub(r'(?<=\s)(#[A-Za-z][-_.0-9A-Za-z]*[0-9A-Za-z]+)', r'<i>\1</i>', text, flags = re.S)
 	text = re.sub(r'(?<=\W)([*]{2})(.+?)\1', r'<b>\2</b>', text, flags = re.S)
 	text = re.sub(r'\\\\(.+?)\\\\(.+?)\\\\', ruby, text, flags = re.S)
 	text = re.sub(r'____(.+?)____', r'<u>\1</u>', text, flags = re.S)

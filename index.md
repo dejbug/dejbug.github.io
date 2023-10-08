@@ -173,7 +173,9 @@ grep-cpp-h() {
 #define FAIL(x, m) EXIT(x, m, EXIT_FAILURE)
 ```
 
-/// #current-nesting-level `3` #pairer-wasi. Was about to build it in WASM but it gives me an error I didn't get before:
+Anyway. Done.
+
+/// #current-nesting-level `2` #pairer-wasi. Was about to build it in WASM but it gives me an error I didn't get before:
 
 ```
 [wasm-validator error in function 1971] unexpected false: Bulk memory operations require bulk memory [--enable-bulk-memory], on
@@ -204,10 +206,11 @@ https://github.com/llvm/llvm-project/issues/64909
 https://github.com/wasm3/wasm3/issues/20
 / https://github.com/wasm3/wasm3/issues/20#issuecomment-1181675980
 
-/// #current-nesting-level `4` #blog-3. The code listings with (horizontal) scrolling have strange right-padding behavior. Had to wrap them inside a div. It's messy HTML/CSS stuff. Web development is really bad for your OCD.
+/// #current-nesting-level `3` #blog-3. The code listings with (horizontal) scrolling have strange right-padding behavior. Had to wrap them inside a div. It's messy HTML/CSS stuff. Web development is really bad for your OCD.
 
-/// #current-nesting-level `3` #pairer-wasi. I have no idea what is going on here. It used to work in my initial tests. Let me check why my first quick hack and slash compiled and this much more careful evisceration won't. Ok, so this thread https://github.com/WebAssembly/wasi-sdk/issues/254 pointed out that it has to do with stripping the binary of meta before `wasm-opt` had a chance to do its thing. This guy https://github.com/WebAssembly/wasi-sdk/issues/254#issuecomment-1260809684 pointed out the existence of a lesser strip: instead of `--strip-all` I tried `--strip-debug` and `wasm-opt` worked fine. I had to invoke the linker separately though. Used the `-v` flag as the error message suggested. Now, how do I tell `clang` directly to do it? `-Wl,--strip-debug` doesn't hack it. `-Wl,--no-strip-all` does nothing (though it seems to be a valid flag, since there's no error either). So we need to modify the Makefile even more. For some reason I was entertaining the idea of keeping as much as possible of my rewrites external to the `bbpPairings` distribution, but why bother? A patch is "totally external", too. Ok. Got it to work. The WTF level is acceptable. Tomorrow it is going to go up into the cloudy cloud. If everything works as expected, you'd do a `curl https:/url.to -T sample.trf` and get your pairings.
+/// #current-nesting-level `2` #pairer-wasi. I have no idea what is going on here. It used to work in my initial tests. Let me check why my first quick hack and slash compiled and this much more careful evisceration won't. Ok, so this thread https://github.com/WebAssembly/wasi-sdk/issues/254 pointed out that it has to do with stripping the binary of meta before `wasm-opt` had a chance to do its thing. This guy https://github.com/WebAssembly/wasi-sdk/issues/254#issuecomment-1260809684 pointed out the existence of a lesser strip: instead of `--strip-all` I tried `--strip-debug` and `wasm-opt` worked fine. I had to invoke the linker separately though. Used the `-v` flag as the error message suggested. Now, how do I tell `clang` directly to do it? `-Wl,--strip-debug` doesn't hack it. `-Wl,--no-strip-all` does nothing (though it seems to be a valid flag, since there's no error either). So we need to modify the Makefile even more. For some reason I was entertaining the idea of keeping as much as possible of my rewrites external to the `bbpPairings` distribution, but why bother? A patch is "totally external", too. Ok. Got it to work. The WTF level is acceptable. Tomorrow it is going to go up into the cloudy cloud. If everything works as expected, you'd do a `curl https:/url.to -T sample.trf` and get your pairings. Done.
+
+/// #current-nesting-level `2` #blog-4. Some tags aren't formatted. Ah, it was the quirk with the flags. `re.sub`'s signature differs from `re.match` and `re.finditer` etc. I forgot to specify the keyword. Done.
 
 ! --color-title=#afe
 ! --color-status-1=#58cc8f
-! --color-purple-haze-text=navajowhite
