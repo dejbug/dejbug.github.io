@@ -30,10 +30,10 @@ run : build/index.html ; cd build && php -S localhost:8001
 build/index.css : index.css ;
 	python render.py -do $@ $<
 
-build/index.html : index.md index.template known.aka.pickle *.py *.style | build/
+build/index.html : index.md index.template known.aka.pickle *.py conf/* | build/
 	python render.py -do $@ index.template source=$<
 
-build/%.html : archive/%.md index.template known.aka.pickle *.py *.style | build/
+build/%.html : archive/%.md index.template known.aka.pickle *.py conf/* | build/
 	python render.py -do $@ index.template source=$<
 
 build/vendor/% : vendor/% ; mkdir -p $(dir $@) && cp $< $@
